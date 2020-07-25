@@ -1,3 +1,5 @@
+// DO NOT USE THIS ONE
+
 class General {
     constructor(name, x, y, width, height, sprite, health, alive) {
         this.name = name;
@@ -20,7 +22,7 @@ class General {
     }
 
     drawCharacter = (ctx) => {
-        ctx.fillStyle = "rgba(20, 70, 10, 1)";
+        ctx.fillStyle = "rgba(0, 0, 0, 1)";
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // const characterSprite = new Image();
