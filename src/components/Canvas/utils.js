@@ -52,36 +52,36 @@ export const moveCharacters = () => {
       switch(player.sprite){
           case 'A':
             if(Keys.up){
-                player.y -= 6;
+                player.y -= 3;
               }
             
               if(Keys.down){
-                player.y += 6;
+                player.y += 3;
               }
             
               if(Keys.left) {
-                player.x -= 6;
+                player.x -= 3;
               }
             
               if(Keys.right){
-                player.x += 6;
+                player.x += 3;
               }
               break;
           case 'B':
             if(secondKeys.up){
-                player.y -= 6;
+                player.y -= 3;
               }
             
               if(secondKeys.down){
-                player.y += 6;
+                player.y += 3;
               }
             
               if(secondKeys.left) {
-                player.x -= 6;
+                player.x -= 3;
               }
             
               if(secondKeys.right){
-                player.x += 6;
+                player.x += 3;
               }
               break;  
             default:

@@ -1,14 +1,14 @@
 // DO NOT USE THIS ONE
 
 class General {
-    constructor(name, x, y, width, height, sprite, health, alive) {
+    constructor(name, x, y, width, height, sprite, color, alive) {
         this.name = name;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.sprite = sprite;
-        this.health = health;
+        this.color = color;
         this.alive = alive;
     }
 
@@ -22,7 +22,7 @@ class General {
     }
 
     drawCharacter = (ctx) => {
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // const characterSprite = new Image();
@@ -32,24 +32,23 @@ class General {
 
 }
 
-export class Basic extends General {
-    
+class Basic extends General {
     move(key){
         console.log(this.name + ' MOVED!')
         switch(key.toLowerCase()){
             // RIGHT
             case 'd':
-                this.x = this.x + 10;
+                this.x = this.x + 5;
                 break;
             // LEFT 
             case 'a':
-                this.x = this.x - 10;
+                this.x = this.x - 5;
                 break;
             case 's':
-                this.y = this.y + 10;
+                this.y = this.y + 5;
                 break;
             case 'w':
-                this.y = this.y - 10;
+                this.y = this.y - 5;
                 break;    
             default:
                 return;
@@ -66,6 +65,7 @@ export class Basic extends General {
 }
 
 class Soldier extends General {
+
     attack(){
         return 1;
     }
@@ -75,7 +75,7 @@ class Soldier extends General {
     }
 }
 
-class King extends General {
+export class King extends General {
     attack(){
         return 1;
     }
@@ -86,18 +86,25 @@ class King extends General {
 }
 
 
-class Angel extends Basic {
+export class Angel extends Basic {
+    constructor(name, x, y, width, height, sprite, color, alive) {
+        super(name,x, y, width, height, sprite, alive);
+        this.color = 'blue';
+    }
 
 }
 
-class AngelSoldier extends Soldier {
+export class AngelSoldier extends Soldier {
 
 }
 
-class Demon extends Basic {
-
+export class Demon extends Basic {
+    constructor(name, x, y, width, height, sprite, color, alive) {
+        super(name,x, y, width, height, sprite, alive);
+        this.color = 'red';
+    }
 }
 
-class DemonSoldier extends Soldier {
+export class DemonSoldier extends Soldier {
 
 }
