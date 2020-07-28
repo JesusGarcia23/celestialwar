@@ -15,7 +15,7 @@ const Battlefield = (props) => {
   const [players, setPlayers ] = useState([firstPlayer, secondPlayer]);
   const [mapLevel, setmapLevel] = useState([]);
   const canvasRef = React.useRef(null);
-
+console.log(mapLevel)
 
   useEffect(() => {
     
@@ -47,7 +47,7 @@ const Battlefield = (props) => {
       drawMap(context);
 
       players.map(player => {
-        handleMovement(player);
+        handleMovement(player, mapLevel);
         player.drawCharacter(context);
       })
       

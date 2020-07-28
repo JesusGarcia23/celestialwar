@@ -47,45 +47,84 @@ export const moveCharacters = () => {
     };
   }
 
-  export function handleMovement(player){
-
-      switch(player.sprite){
-          case 'A':
-            if(Keys.up){
-                player.y -= 3;
-              }
-            
-              if(Keys.down){
-                player.y += 3;
-              }
-            
-              if(Keys.left) {
-                player.x -= 3;
-              }
-            
-              if(Keys.right){
-                player.x += 3;
-              }
-              break;
-          case 'B':
-            if(secondKeys.up){
-                player.y -= 3;
-              }
-            
-              if(secondKeys.down){
-                player.y += 3;
-              }
-            
-              if(secondKeys.left) {
-                player.x -= 3;
-              }
-            
-              if(secondKeys.right){
-                player.x += 3;
-              }
-              break;  
-            default:
-                break;  
-      }
+  export function handleMovement(player, mapLevel){
+    let touched = null;
+      if(mapLevel.length > 0){
       
+        switch(player.sprite){
+            case 'A':
+              if(Keys.up){
+                touched = mapLevel.map(resource => {
+                  return player.checkCollision(resource);
+                })
+                if(touched.indexOf(true) >= 0){
+                  player.y += 6;
+                }
+                  player.y -= 6;
+                }
+              
+                if(Keys.down){
+                  touched = mapLevel.map(resource => {
+                      return player.checkCollision(resource);
+                    })
+                    if(touched.indexOf(true) >= 0){
+                      player.y -= 6;
+                    }
+                  player.y += 6;
+                }
+              
+                if(Keys.left) {
+                  touched = mapLevel.map(resource => {
+                    return player.checkCollision(resource);
+                  })
+                  console.log(touched)
+                  if(touched.indexOf(true) >= 0){
+                    player.x += 6;
+                  }
+                  player.x -= 6;
+                }
+              
+                if(Keys.right){
+                  touched = mapLevel.map(resource => {
+                    return player.checkCollision(resource);
+                  })
+                  if(touched.indexOf(true) >= 0){
+                    player.x -= 6;
+                  }
+                  player.x += 6;
+                }
+                break;
+            case 'B':
+              if(secondKeys.up){
+                mapLevel.map(resource => {
+                  player.checkCollision(resource);
+                })
+                  player.y -= 6;
+                }
+              
+                if(secondKeys.down){
+                  mapLevel.map(resource => {
+                    player.checkCollision(resource);
+                  })
+                  player.y += 6;
+                }
+              
+                if(secondKeys.left) {
+                  mapLevel.map(resource => {
+                    player.checkCollision(resource);
+                  })
+                  player.x -= 6;
+                }
+              
+                if(secondKeys.right){
+                  mapLevel.map(resource => {
+                    player.checkCollision(resource);
+                  })
+                  player.x += 6;
+                }
+                break;  
+              default:
+                  break;  
+        }
+    }
   }

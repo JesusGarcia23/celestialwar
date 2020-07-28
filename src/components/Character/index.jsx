@@ -13,8 +13,27 @@ class General {
     }
 
     
-    collision = (space) => {
-
+    checkCollision = (obj) => {
+        console.log("character Y position: ", this.y)
+        console.log("character Y position + height: ", this.y + this.height);
+        console.log(`object ${obj.name} Y position: `, obj.y);
+        if(this.x + this.width + 2 > obj.x && this.x < obj.x && this.y + this.height > obj.y &&  this.y < obj.y + obj.height){
+            console.log("TOUCHED RIGHT")
+            return true;
+        //LEFT
+        }else if(this.x < obj.x + obj.width + 2 && this.x > obj.x && this.y + this.height > obj.y && this.y < obj.y + obj.height){
+            console.log("TOUCHED LEFT")
+            return true;
+        //UP
+        }else if(this.y < obj.y + obj.height + 2 && this.y > obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width){
+            console.log("TOUCHED UP")
+            return true;
+        //BOTTOM
+        }else if(this.y + this.height + 2 > obj.y && this.y < obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width){
+            console.log("TOUCHED BOTTOM")
+            return true;
+        }
+        return false;
     }
     
     receiveDamage = (damage) => {
