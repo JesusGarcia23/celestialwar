@@ -54,6 +54,7 @@ export const moveCharacters = () => {
         switch(player.sprite){
             case 'A':
               if(Keys.up){
+                player.direction = "UP";
                 touched = mapLevel.map(resource => {
                   return player.checkCollision(resource);
                 })
@@ -64,6 +65,7 @@ export const moveCharacters = () => {
                 }
               
                 if(Keys.down){
+                  player.direction = "DOWN";
                   touched = mapLevel.map(resource => {
                       return player.checkCollision(resource);
                     })
@@ -74,10 +76,10 @@ export const moveCharacters = () => {
                 }
               
                 if(Keys.left) {
+                  player.direction = "LEFT";
                   touched = mapLevel.map(resource => {
                     return player.checkCollision(resource);
                   })
-                  console.log(touched)
                   if(touched.indexOf(true) >= 0){
                     player.x += 6;
                   }
@@ -85,6 +87,7 @@ export const moveCharacters = () => {
                 }
               
                 if(Keys.right){
+                  player.direction = "RIGHT";
                   touched = mapLevel.map(resource => {
                     return player.checkCollision(resource);
                   })

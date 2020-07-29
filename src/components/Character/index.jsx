@@ -1,7 +1,7 @@
 // DO NOT USE THIS ONE
 
 class General {
-    constructor(name, x, y, width, height, sprite, color, alive) {
+    constructor(name, x, y, width, height, sprite, color, alive, direction) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -10,31 +10,53 @@ class General {
         this.sprite = sprite;
         this.color = color;
         this.alive = alive;
+        this.direction = direction;
     }
 
     
     checkCollision = (obj) => {
-        console.log("character Y position: ", this.y)
-        console.log("character Y position + height: ", this.y + this.height);
-        console.log(`object ${obj.name} Y position: `, obj.y);
-        if(this.x + this.width + 2 > obj.x && this.x < obj.x && this.y + this.height > obj.y &&  this.y < obj.y + obj.height){
+        console.log(this.direction)
+        // RIGHT
+        if(( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
+            console.log("character Y position: ", this.y, ", Height: ", this.height, ", X Position: ", this.x, ", Width: ", this.width);
+            console.log("Object: ", obj.name, " TOUCHED: Y position: ", obj.y, ", Height: ", obj.height, ", X Position: ", obj.x, ", Width: ", obj.width);
             console.log("TOUCHED RIGHT")
             return true;
         //LEFT
-        }else if(this.x < obj.x + obj.width + 2 && this.x > obj.x && this.y + this.height > obj.y && this.y < obj.y + obj.height){
+        }else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
+            console.log("character Y position: ", this.y, ", Height: ", this.height, ", X Position: ", this.x, ", Width: ", this.width);
+            console.log("Object: ", obj.name, " TOUCHED: Y position: ", obj.y, ", Height: ", obj.height, ", X Position: ", obj.x, ", Width: ", obj.width);
             console.log("TOUCHED LEFT")
             return true;
         //UP
-        }else if(this.y < obj.y + obj.height + 2 && this.y > obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width){
+        }else if( (this.y < obj.y + obj.height + 2) && this.y > obj.y && (this.x + this.width > obj.x + 4) && (this.x + 4 < obj.x + obj.width) && this.direction === 'UP'){
             console.log("TOUCHED UP")
             return true;
         //BOTTOM
-        }else if(this.y + this.height + 2 > obj.y && this.y < obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width){
+        }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
+            console.log("character Y position: ", this.y, ", Height: ", this.height, ", X Position: ", this.x, ", Width: ", this.width);
+            console.log("Object: ", obj.name, " TOUCHED: Y position: ", obj.y, ", Height: ", obj.height, ", X Position: ", obj.x, ", Width: ", obj.width);
             console.log("TOUCHED BOTTOM")
             return true;
         }
         return false;
     }
+
+
+    // OLD RIGHT
+    // if(this.x + this.width + 8 > obj.x && this.x < obj.x && this.y + this.height > obj.y &&  this.y < obj.y + obj.height && this.direction === 'RIGHT'){
+    //     console.log("TOUCHED RIGHT")
+    //     return true;
+    // }
+    // OLD LEFT
+    // else if(this.y < obj.y + obj.height + 2 && this.y > obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width && this.direction === 'UP'){
+    //     console.log("TOUCHED UP")
+    //     return true;
+    // //BOTTOM
+    // }
+
+    // OLD BOTTOM
+    // this.y + this.height + 2 > obj.y && this.y < obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width
     
     receiveDamage = (damage) => {
         this.health -= damage;

@@ -4,12 +4,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Angel, Demon } from '../Character'
 import { moveCharacters, handleMovement } from './utils';
 import {forest} from '../levels/Forest'
+import { resizeDimension , resizeCoor} from '../../utils/resizer';
 import './style.css';
 
-let firstPlayer = new Angel('jesus', 20, 20, window.innerWidth * 0.015, window.innerHeight * 0.06, 'A');
-let secondPlayer = new Demon('miguel', 60, 60, window.innerWidth * 0.015, window.innerHeight * 0.06, 'B');
 
 const Battlefield = (props) => {
+
+  let firstPlayer = new Angel('jesus', 20, 20, window.innerWidth * 0.015, window.innerHeight * 0.06, 'A');
+  let secondPlayer = new Demon('miguel', 60, 60, window.innerWidth * 0.015, window.innerHeight * 0.06, 'B');
 
   const [ gameOn, setGameOn ] = useState(false);
   const [players, setPlayers ] = useState([firstPlayer, secondPlayer]);
@@ -47,7 +49,7 @@ console.log(mapLevel)
       drawMap(context);
 
       players.map(player => {
-        handleMovement(player, mapLevel);
+        handleMovement(player, mapLevel, canvasRef.current);
         player.drawCharacter(context);
       })
       

@@ -1,20 +1,10 @@
 
 import { Resource } from '../Resource';
-
+import { resizeDimension , resizeCoor} from '../../utils/resizer';
 // SIZES: 
 // - platforms 3% of Canvas height
 
 // Resource CLass = (canvas, name, id, width, height, x, y, color, xPreference, yPreference)
-
-const resizeDimension  = (objectDimension, canvasDimension) => {
-    const transformedSize = canvasDimension * ((objectDimension / 100));
-    return transformedSize
-}
-
-const resizeCoor = (objectPosition, canvasDimension) => {
-    const transformedCoordinate = canvasDimension * ((objectPosition / 100));
-    return transformedCoordinate;
-}
 
 export const generatePlatforms = (canvas, listOfPlatforms) => {
     console.log(listOfPlatforms);

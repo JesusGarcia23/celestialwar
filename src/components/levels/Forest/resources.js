@@ -17,7 +17,7 @@ export let listOfPlatforms = [
         height: 3,
         x: 0,
         y: 20,
-        color: 'yellow',
+        color: 'green',
         xPreference: 'center',
         yPreference: null
     },
