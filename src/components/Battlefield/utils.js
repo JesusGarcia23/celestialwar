@@ -15,13 +15,12 @@
 
 export const moveCharacters = () => {
     window.onkeydown = function(e){
-      console.log(e)
+      
       var kc = e.keyCode;
       e.preventDefault();
       console.log(kc)
-    
       if(kc === 65) Keys.left = true;
-      if(kc === 87) Keys.up = true;
+      if(kc === 74) Keys.up = true;
       if(kc === 68) Keys.right = true;
       if(kc === 83) Keys.down = true;
 
@@ -36,7 +35,7 @@ export const moveCharacters = () => {
       e.preventDefault();
     
       if(kc === 65) Keys.left = false;
-      if(kc === 87) Keys.up = false;
+      if(kc === 74) Keys.up = false;
       if(kc === 68) Keys.right = false;
       if(kc === 83) Keys.down = false;
 

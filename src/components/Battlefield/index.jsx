@@ -4,17 +4,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Angel, Demon } from '../Character'
 import { moveCharacters, handleMovement } from './utils';
 import {forest} from '../levels/Forest'
+import { listPlayers } from '../players';
+import { playersCreator } from '../Character/playerGenerator';
 import { resizeDimension , resizeCoor} from '../../utils/resizer';
 import './style.css';
 
+// let firstPlayer = new Angel('jesus', 20, 20, window.innerWidth * 0.015, window.innerHeight * 0.06, 'A');
+// let secondPlayer = new Demon('miguel', 60, 60, window.innerWidth * 0.015, window.innerHeight * 0.06, 'B');
 
 const Battlefield = (props) => {
 
-  let firstPlayer = new Angel('jesus', 20, 20, window.innerWidth * 0.015, window.innerHeight * 0.06, 'A');
-  let secondPlayer = new Demon('miguel', 60, 60, window.innerWidth * 0.015, window.innerHeight * 0.06, 'B');
-
   const [ gameOn, setGameOn ] = useState(false);
-  const [players, setPlayers ] = useState([firstPlayer, secondPlayer]);
+  const [players, setPlayers ] = useState([]);
   const [mapLevel, setmapLevel] = useState([]);
   const canvasRef = React.useRef(null);
 console.log(mapLevel)
@@ -23,10 +24,11 @@ console.log(mapLevel)
     
     canvasRef.current.width = window.innerWidth - 50;
     canvasRef.current.height = window.innerHeight - 50;
+    
     if(gameOn){
       setmapLevel(forest(canvasRef.current));
+      setPlayers(playersCreator(canvasRef.current, listPlayers));
     }
-    
     //update();
   },[gameOn])
 
@@ -47,7 +49,6 @@ console.log(mapLevel)
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
       drawMap(context);
-
       players.map(player => {
         handleMovement(player, mapLevel, canvasRef.current);
         player.drawCharacter(context);

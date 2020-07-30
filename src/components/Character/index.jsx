@@ -15,7 +15,6 @@ class General {
 
     
     checkCollision = (obj) => {
-        console.log(this.direction)
         // RIGHT
         if(( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
             console.log("character Y position: ", this.y, ", Height: ", this.height, ", X Position: ", this.x, ", Width: ", this.width);
@@ -42,22 +41,6 @@ class General {
         return false;
     }
 
-
-    // OLD RIGHT
-    // if(this.x + this.width + 8 > obj.x && this.x < obj.x && this.y + this.height > obj.y &&  this.y < obj.y + obj.height && this.direction === 'RIGHT'){
-    //     console.log("TOUCHED RIGHT")
-    //     return true;
-    // }
-    // OLD LEFT
-    // else if(this.y < obj.y + obj.height + 2 && this.y > obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width && this.direction === 'UP'){
-    //     console.log("TOUCHED UP")
-    //     return true;
-    // //BOTTOM
-    // }
-
-    // OLD BOTTOM
-    // this.y + this.height + 2 > obj.y && this.y < obj.y && this.x + this.width > obj.x && this.x < obj.x + obj.width
-    
     receiveDamage = (damage) => {
         this.health -= damage;
     }
@@ -74,6 +57,11 @@ class General {
 }
 
 class Basic extends General {
+    constructor(name, x, y, width, height, sprite, color, alive, direction){
+        super(name, x, y, width, height, sprite, color, alive, direction);
+        this.modeWarrior = false;
+    }
+
     move(key){
         console.log(this.name + ' MOVED!')
         switch(key.toLowerCase()){
@@ -88,7 +76,7 @@ class Basic extends General {
             case 's':
                 this.y = this.y + 5;
                 break;
-            case 'w':
+            case 'j':
                 this.y = this.y - 5;
                 break;    
             default:
@@ -103,16 +91,26 @@ class Basic extends General {
     jump(){
 
     }
-}
-
-class Soldier extends General {
-
-    attack(){
-        return 1;
-    }
 
     fly(){
+        if(this.modeWarrior){
 
+        } 
+    }
+}
+
+export class Angel extends Basic {
+    constructor(name, x, y, width, height, sprite, color, alive, modeWarrior) {
+        super(name,x, y, width, height, sprite, alive, modeWarrior);
+        this.color = 'blue';
+    }
+
+}
+
+export class Demon extends Basic {
+    constructor(name, x, y, width, height, sprite, color, alive, modeWarrior) {
+        super(name,x, y, width, height, sprite, alive, modeWarrior);
+        this.color = 'red';
     }
 }
 
@@ -124,28 +122,4 @@ export class King extends General {
     fly(){
         
     }
-}
-
-
-export class Angel extends Basic {
-    constructor(name, x, y, width, height, sprite, color, alive) {
-        super(name,x, y, width, height, sprite, alive);
-        this.color = 'blue';
-    }
-
-}
-
-export class AngelSoldier extends Soldier {
-
-}
-
-export class Demon extends Basic {
-    constructor(name, x, y, width, height, sprite, color, alive) {
-        super(name,x, y, width, height, sprite, alive);
-        this.color = 'red';
-    }
-}
-
-export class DemonSoldier extends Soldier {
-
 }
