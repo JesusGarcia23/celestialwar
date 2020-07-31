@@ -11,8 +11,10 @@ class General {
         this.color = color;
         this.alive = alive;
         this.direction = direction;
+        this.powerJump = 5;
+        this.jumped = 0;
+        this.onFloor = false;
     }
-
     
     checkCollision = (obj) => {
         // RIGHT
@@ -28,15 +30,26 @@ class General {
             console.log("TOUCHED LEFT")
             return true;
         //UP
-        }else if( (this.y < obj.y + obj.height + 2) && this.y > obj.y && (this.x + this.width > obj.x + 4) && (this.x + 4 < obj.x + obj.width) && this.direction === 'UP'){
+        }else if( (this.y < obj.y + obj.height + 12) && this.y > obj.y && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
             console.log("TOUCHED UP")
             return true;
         //BOTTOM
         }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
             console.log("character Y position: ", this.y, ", Height: ", this.height, ", X Position: ", this.x, ", Width: ", this.width);
             console.log("Object: ", obj.name, " TOUCHED: Y position: ", obj.y, ", Height: ", obj.height, ", X Position: ", obj.x, ", Width: ", obj.width);
-            console.log("TOUCHED BOTTOM")
             return true;
+        }
+        
+        return false;
+    }
+
+    hitBottom = (obj) => {
+         if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width)){
+            this.jumped = 0;
+            this.onFloor = true;
+            return true;
+        }else{
+            this.onFloor = false;
         }
         return false;
     }

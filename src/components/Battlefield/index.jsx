@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Angel, Demon } from '../Character'
-import { moveCharacters, handleMovement } from './utils';
+import { moveCharacters, handleMovement, handleGravity } from './playerControllers';
 import {forest} from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
@@ -49,7 +49,9 @@ console.log(mapLevel)
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
       drawMap(context);
+
       players.map(player => {
+        handleGravity(player, mapLevel);
         handleMovement(player, mapLevel, canvasRef.current);
         player.drawCharacter(context);
       })

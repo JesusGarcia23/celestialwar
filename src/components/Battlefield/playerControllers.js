@@ -46,21 +46,42 @@ export const moveCharacters = () => {
     };
   }
 
-  export function handleMovement(player, mapLevel){
+  export function handleGravity(player, mapLevel){
+    let touched = null;
+    if(!player.onFloor && mapLevel.length > 0){
+      touched = mapLevel.map(resource => {
+        return player.hitBottom(resource);
+      })
+      console.log(touched)
+      if(touched !== null && touched.indexOf(true) < 0){
+        player.y += 8;
+      }else{
+        player.onFloor = false;
+      }
+    }
+  
+  }
+
+  export function handleMovement(player, mapLevel, canvas){
     let touched = null;
       if(mapLevel.length > 0){
       
         switch(player.sprite){
             case 'A':
-              if(Keys.up){
+              if(Keys.up && (player.y > 0)){
                 player.direction = "UP";
+                player.onFloor = false;
                 touched = mapLevel.map(resource => {
                   return player.checkCollision(resource);
                 })
                 if(touched.indexOf(true) >= 0){
                   player.y += 6;
                 }
-                  player.y -= 6;
+                if(player.jumped <= player.powerJump){
+                      player.y -= 27;
+                      player.jumped += 0.5;
+                }
+              
                 }
               
                 if(Keys.down){
@@ -74,7 +95,7 @@ export const moveCharacters = () => {
                   player.y += 6;
                 }
               
-                if(Keys.left) {
+                if(Keys.left && (player.x > 4)) {
                   player.direction = "LEFT";
                   touched = mapLevel.map(resource => {
                     return player.checkCollision(resource);
@@ -85,7 +106,7 @@ export const moveCharacters = () => {
                   player.x -= 6;
                 }
               
-                if(Keys.right){
+                if(Keys.right && (player.x + player.width + 4 < canvas.width)){
                   player.direction = "RIGHT";
                   touched = mapLevel.map(resource => {
                     return player.checkCollision(resource);
