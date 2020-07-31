@@ -1,23 +1,19 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Angel, Demon } from '../Character'
 import { moveCharacters, handleMovement, handleGravity } from './playerControllers';
 import {forest} from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
-import { resizeDimension , resizeCoor} from '../../utils/resizer';
 import './style.css';
 
-// let firstPlayer = new Angel('jesus', 20, 20, window.innerWidth * 0.015, window.innerHeight * 0.06, 'A');
-// let secondPlayer = new Demon('miguel', 60, 60, window.innerWidth * 0.015, window.innerHeight * 0.06, 'B');
 
 const Battlefield = (props) => {
 
   const [ gameOn, setGameOn ] = useState(false);
   const [players, setPlayers ] = useState([]);
   const [mapLevel, setmapLevel] = useState([]);
-  const canvasRef = React.useRef(null);
+  const canvasRef = useRef(null);
 console.log(mapLevel)
 
   useEffect(() => {
