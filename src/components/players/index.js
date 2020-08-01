@@ -6,7 +6,9 @@ export const listPlayers = [
         y: 20,
         width: 1.2,
         height: 5,
-        sprite: 'A'
+        sprite: 'A',
+        deployX: 20,
+        deployY: 20,
     },
     {
         type: 'Demon',
@@ -15,6 +17,8 @@ export const listPlayers = [
         y: 20,
         width: 1.2,
         height: 5,
-        sprite: 'B'
+        sprite: 'B',
+        deployX: 20,
+        deployY: 20,
     },
 ]

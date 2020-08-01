@@ -137,19 +137,27 @@ export const moveCharacters = () => {
                   player.y += 6;
                 }
               
-                if(secondKeys.left) {
+                if(secondKeys.left && (player.x > 4)) {
                   player.direction = "LEFT";
-                  globalMap.map(resource => {
-                    player.checkCollision(resource);
+                  touched = globalMap.map(resource => {
+                    return player.checkCollision(resource);
                   })
+
+                  if(touched.indexOf(true) >= 0){
+                    player.x += 6;
+                  }
                   player.x -= 6;
                 }
               
-                if(secondKeys.right){
+                if(secondKeys.right && (player.x + player.width + 4 < canvas.width)){
                   player.direction = "RIGHT";
-                  globalMap.map(resource => {
-                    player.checkCollision(resource);
+                  touched = globalMap.map(resource => {
+                    return player.checkCollision(resource);
                   })
+
+                  if(touched.indexOf(true) >= 0){
+                    player.x -= 6;
+                  }
                   player.x += 6;
                 }
                 break;  

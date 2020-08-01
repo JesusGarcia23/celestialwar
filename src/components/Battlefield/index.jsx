@@ -6,7 +6,7 @@ import {forest} from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
 import './style.css';
-
+console.log(listPlayers);
 
 const Battlefield = (props) => {
 
@@ -43,7 +43,7 @@ console.log(mapLevel)
       let context = myCanvas.getContext('2d');
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
+      console.log(players);
       drawMap(context);
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
