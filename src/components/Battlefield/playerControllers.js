@@ -52,7 +52,6 @@ export const moveCharacters = () => {
       touched = mapLevel.map(resource => {
         return player.hitBottom(resource);
       })
-      console.log(touched)
       if(touched !== null && touched.indexOf(true) < 0){
         player.y += 8;
       }else{
@@ -62,8 +61,10 @@ export const moveCharacters = () => {
   
   }
 
-  export function handleMovement(player, mapLevel, canvas){
+  export function handleMovement(player, mapLevel, otherPlayers, canvas){
+    const globalMap = [...mapLevel, ...otherPlayers]
     let touched = null;
+
       if(mapLevel.length > 0){
       
         switch(player.sprite){
@@ -71,9 +72,10 @@ export const moveCharacters = () => {
               if(Keys.up && (player.y > 0)){
                 player.direction = "UP";
                 player.onFloor = false;
-                touched = mapLevel.map(resource => {
+                touched = globalMap.map(resource => {
                   return player.checkCollision(resource);
                 })
+
                 if(touched.indexOf(true) >= 0){
                   player.y += 6;
                 }
@@ -86,7 +88,7 @@ export const moveCharacters = () => {
               
                 if(Keys.down){
                   player.direction = "DOWN";
-                  touched = mapLevel.map(resource => {
+                  touched = globalMap.map(resource => {
                       return player.checkCollision(resource);
                     })
                     if(touched.indexOf(true) >= 0){
@@ -97,9 +99,10 @@ export const moveCharacters = () => {
               
                 if(Keys.left && (player.x > 4)) {
                   player.direction = "LEFT";
-                  touched = mapLevel.map(resource => {
+                  touched = globalMap.map(resource => {
                     return player.checkCollision(resource);
                   })
+
                   if(touched.indexOf(true) >= 0){
                     player.x += 6;
                   }
@@ -108,39 +111,43 @@ export const moveCharacters = () => {
               
                 if(Keys.right && (player.x + player.width + 4 < canvas.width)){
                   player.direction = "RIGHT";
-                  touched = mapLevel.map(resource => {
+                  touched = globalMap.map(resource => {
                     return player.checkCollision(resource);
                   })
+
                   if(touched.indexOf(true) >= 0){
                     player.x -= 6;
                   }
                   player.x += 6;
                 }
                 break;
+
             case 'B':
               if(secondKeys.up){
-                mapLevel.map(resource => {
+                globalMap.map(resource => {
                   player.checkCollision(resource);
                 })
                   player.y -= 6;
                 }
               
                 if(secondKeys.down){
-                  mapLevel.map(resource => {
+                  globalMap.map(resource => {
                     player.checkCollision(resource);
                   })
                   player.y += 6;
                 }
               
                 if(secondKeys.left) {
-                  mapLevel.map(resource => {
+                  player.direction = "LEFT";
+                  globalMap.map(resource => {
                     player.checkCollision(resource);
                   })
                   player.x -= 6;
                 }
               
                 if(secondKeys.right){
-                  mapLevel.map(resource => {
+                  player.direction = "RIGHT";
+                  globalMap.map(resource => {
                     player.checkCollision(resource);
                   })
                   player.x += 6;

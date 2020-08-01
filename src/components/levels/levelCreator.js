@@ -8,7 +8,7 @@ import { resizeDimension , resizeCoor } from '../../utils/resizer';
 
 export const generatePlatforms = (canvas, listOfPlatforms) => {
     return listOfPlatforms.map(platform => {
-       return new Resource(canvas, platform.name, platform.id, 
+       return new Resource(canvas, platform.name, platform.type, platform.id, 
         resizeDimension(platform.width, canvas.width), resizeDimension(platform.height, canvas.height), resizeCoor(platform.x, canvas.width), resizeCoor(platform.y, canvas.height), platform.color, platform.xPreference, platform.yPreference);
     })
 }

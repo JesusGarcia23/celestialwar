@@ -1,7 +1,8 @@
 export class Resource {
-    constructor(canvas, name, id, width, height, x, y, color, xPreference, yPreference){
+    constructor(canvas, name, type, id , width, height, x, y, color, xPreference, yPreference){
         this.canvas = canvas;
         this.name = name;
+        this.type = type;
         this.id = id;
         this.width = width;
         this.height = height;
@@ -13,10 +14,8 @@ export class Resource {
     }
 
     setPosition(position, objectDimension, canvasDimension, fixedPosition){
-        console.log(objectDimension);
         switch(fixedPosition){
             case 'center': {
-                console.log(objectDimension)
                 return (canvasDimension / 2) - (objectDimension / 2);
             }
             case 'start': {

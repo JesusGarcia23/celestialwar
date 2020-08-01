@@ -22,10 +22,10 @@ console.log(mapLevel)
     canvasRef.current.height = window.innerHeight - 50;
     
     if(gameOn){
-      setmapLevel(forest(canvasRef.current));
       setPlayers(playersCreator(canvasRef.current, listPlayers));
+      setmapLevel([...forest(canvasRef.current)]);
     }
-    //update();
+    update();
   },[gameOn])
 
 
@@ -45,10 +45,9 @@ console.log(mapLevel)
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
       drawMap(context);
-
-      players.map(player => {
+      players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
-        handleMovement(player, mapLevel, canvasRef.current);
+        handleMovement(player, mapLevel,players, canvasRef.current);
         player.drawCharacter(context);
       })
       

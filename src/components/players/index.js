@@ -4,8 +4,8 @@ export const listPlayers = [
         name: 'jesus',
         x: 20,
         y: 20,
-        width: 1.7,
-        height: 7,
+        width: 1.2,
+        height: 5,
         sprite: 'A'
     },
     {
@@ -13,8 +13,8 @@ export const listPlayers = [
         name: 'miguel',
         x: 20,
         y: 20,
-        width: 1.7,
-        height: 7,
+        width: 1.2,
+        height: 5,
         sprite: 'B'
     },
 ]

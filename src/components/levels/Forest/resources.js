@@ -1,6 +1,7 @@
 export let listOfPlatforms = [
     {
         name: 'base',
+        type: 'platform',
         id: 1,
         width: 100,
         height: 10,
@@ -12,6 +13,7 @@ export let listOfPlatforms = [
     },
     {
         name: 'collector-base',
+        type: 'platform',
         id: 2,
         width: 30,
         height: 3,
@@ -21,4 +23,9 @@ export let listOfPlatforms = [
         xPreference: 'center',
         yPreference: null
     },
+    {
+        name: 'regular-platform',
+
+
+    }
 ]
