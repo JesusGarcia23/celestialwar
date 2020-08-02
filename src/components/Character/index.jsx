@@ -17,6 +17,7 @@ class General {
         this.jumped = 0;
         this.modeWarrior = false;
         this.onFloor = false;
+        this.kills = 0;
     }
 
     touchingCheck(obj){
@@ -25,9 +26,11 @@ class General {
             if(this.modeWarrior){
                 console.log("PLAYER TOUCHED")
                 return this.attack(obj);
+            }else if(obj.modeWarrior === true){
+                this.receiveDamage();
             }
         }
-        return true;
+        return false;
     }
     
     checkCollision = (obj) => {
@@ -114,7 +117,7 @@ export class Angel extends Basic {
         super(name,x, y, width, height, sprite, modeWarrior);
         this.deployX = deployX;
         this.deployY = deployY;
-        this.modeWarrior = true;
+        this.modeWarrior = false;
         this.color = 'blue';
     }
 
