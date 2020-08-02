@@ -61,6 +61,20 @@ export const moveCharacters = () => {
   
   }
 
+  export function handleJumpLimit(player, mapLevel){
+    let touched = null;
+    if(!player.onFloor && mapLevel.length > 0){
+      touched = mapLevel.map(resource => {
+        return player.hitTop(resource);
+      })
+      console.log(touched)
+      if(touched !== null && touched.indexOf(true) < 0){
+        player.y -= 8;
+      }
+    }
+  
+  }
+
   export function handleMovement(player, mapLevel, otherPlayers, canvas){
     const globalMap = [...mapLevel, ...otherPlayers]
     let touched = null;
@@ -80,7 +94,7 @@ export const moveCharacters = () => {
                   player.y += 6;
                 }
                 if(player.jumped <= player.powerJump){
-                      player.y -= 27;
+                      player.y -= 40;
                       player.jumped += 0.5;
                 }
               

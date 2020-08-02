@@ -1,7 +1,7 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { moveCharacters, handleMovement, handleGravity } from './playerControllers';
+import { moveCharacters, handleMovement, handleGravity, handleJumpLimit } from './playerControllers';
 import {forest} from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
@@ -47,6 +47,7 @@ console.log(mapLevel)
       drawMap(context);
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
+        // handleJumpLimit(player, mapLevel);
         handleMovement(player, mapLevel,players, canvasRef.current);
         player.drawCharacter(context);
       })

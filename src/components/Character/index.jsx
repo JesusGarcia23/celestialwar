@@ -24,13 +24,12 @@ class General {
 
         if(!obj.type){
             if(this.modeWarrior){
-                console.log("PLAYER TOUCHED")
                 return this.attack(obj);
             }else if(obj.modeWarrior === true){
                 this.receiveDamage();
             }
         }
-        return false;
+        return true;
     }
     
     checkCollision = (obj) => {
@@ -41,7 +40,7 @@ class General {
         }else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
             return this.touchingCheck(obj);
         //UP
-        }else if( (this.y < obj.y + obj.height + 12) && this.y > obj.y && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
+        }else if( (this.y - 12 < obj.y + obj.height + 12) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
             return this.touchingCheck(obj);
         //BOTTOM
         }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
