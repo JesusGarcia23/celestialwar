@@ -86,7 +86,7 @@ export const moveCharacters = () => {
       if(touched !== null && touched.indexOf(true) < 0){
         player.y -= 15;
       }else{
-        player.direction = 'DOWN'
+        player.direction = 'DOWN';
       }
     }
   }

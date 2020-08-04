@@ -36,26 +36,24 @@ class General {
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
             return this.touchingCheck(obj);
-        //LEFT
-        }else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
+        }// LEFT
+        else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
+            return this.touchingCheck(obj);
+        }// UP      
+        else if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
+            return this.touchingCheck(obj);
+        }// BOTTOM
+        else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
             return this.touchingCheck(obj);
         }
-        
         return false;
     }
-        //UP
-    // else if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
-    //     return this.touchingCheck(obj);
-    // //BOTTOM
-    // }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
-    //     return this.touchingCheck(obj);
-    // }
 
     hitTop = (obj) => {
         if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && (this.y > obj.y)){
             return true;
         }
-        return false
+        return false;
     }
 
     hitBottom = (obj) => {
@@ -76,7 +74,7 @@ class General {
             this.y = this.deployY;
             this.alive = true;
         }, 2500)
-    }
+    };
 
     
     attack = (otherPlayer) => {
@@ -92,7 +90,7 @@ class General {
                 otherPlayer.receiveDamage();
             }
         } 
-    }
+    };
 
     drawCharacter = (ctx) => {
         ctx.fillStyle = this.color;
@@ -101,7 +99,7 @@ class General {
         // const characterSprite = new Image();
         // characterSprite.src = this.sprite;
         // createContext.drawImage(characterSprite, this.x, this.y, this.width, this.height)
-    }
+    };
 
 
 }
