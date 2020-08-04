@@ -39,19 +39,27 @@ class General {
         //LEFT
         }else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
             return this.touchingCheck(obj);
-        //UP
-        }else if( (this.y - 12 < obj.y + obj.height + 12) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
-            return this.touchingCheck(obj);
-        //BOTTOM
-        }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
-            return this.touchingCheck(obj);
         }
         
         return false;
     }
+        //UP
+    // else if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
+    //     return this.touchingCheck(obj);
+    // //BOTTOM
+    // }else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
+    //     return this.touchingCheck(obj);
+    // }
+
+    hitTop = (obj) => {
+        if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && (this.y > obj.y)){
+            return true;
+        }
+        return false
+    }
 
     hitBottom = (obj) => {
-         if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width)){
+         if((this.y + this.height + 3 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
             this.jumped = 0;
             this.onFloor = true;
             return true;
