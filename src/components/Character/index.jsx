@@ -13,8 +13,9 @@ class General {
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
-        this.powerJump = 5;
-        this.jumped = 0;
+        this.jumped = false;
+        this.powerJump = 20;
+        this.totalJumped = 0;
         this.modeWarrior = false;
         this.onFloor = false;
         this.kills = 0;
@@ -58,8 +59,8 @@ class General {
 
     hitBottom = (obj) => {
          if((this.y + this.height + 3 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
-            this.jumped = 0;
             this.onFloor = true;
+            this.totalJumped = 0;
             return true;
         }else{
             this.onFloor = false;
@@ -120,6 +121,7 @@ class Basic extends General {
 export class Angel extends Basic {
     constructor(name, x, y, width, height, sprite, deployX, deployY, modeWarrior) {
         super(name,x, y, width, height, sprite, modeWarrior);
+        this.jumped = false;
         this.deployX = deployX;
         this.deployY = deployY;
         this.modeWarrior = false;

@@ -53,7 +53,7 @@ export const moveCharacters = () => {
         return player.hitBottom(resource);
       })
       if(touched !== null && touched.indexOf(true) < 0){
-        player.y += 8;
+        player.y += 10;
       }else{
         player.onFloor = false;
       }
@@ -78,15 +78,18 @@ export const moveCharacters = () => {
   export function handleJumping(player, mapLevel){
     let touched = null;
     player.onFloor = false;
-    if(player.direction === 'UP' && mapLevel.length > 0){
+    console.log(player)
+    if(player.jumped && mapLevel.length > 0){
+      console.log("JUMPED");
       touched = mapLevel.map(resource => {
         return player.hitTop(resource);
       })
       console.log(touched);
-      if(touched !== null && touched.indexOf(true) < 0){
-        player.y -= 15;
+      if(touched !== null && touched.indexOf(true) < 0 && player.totalJumped <= player.powerJump){
+        player.totalJumped += 1;
+        player.y -= 20;
       }else{
-        player.direction = 'DOWN';
+        player.jumped = false;
       }
     }
   }
@@ -100,7 +103,9 @@ export const moveCharacters = () => {
         switch(player.sprite){
             case 'A':
               if(Keys.up && (player.y > 0)){
-                player.direction = "UP";
+                console.log("JUMPING")
+                player.direction = 'UP';
+                player.jumped = true;
                 // touched = globalMap.map(resource => {
                 //   return player.checkCollision(resource);
                 // })
