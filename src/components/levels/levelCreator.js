@@ -13,7 +13,10 @@ export const generatePlatforms = (canvas, listOfPlatforms) => {
     })
 }
 
-export const levelCreator = (canvas, listPlatforms) => {
+// export const generateSpheres = (listOfSpheres) => {
+//     return generate
+// }
 
+export const levelCreator = (canvas, listPlatforms) => {
     return generatePlatforms(canvas, listPlatforms);
 }
