@@ -13,3 +13,24 @@ export class Sphere {
         ctx.stroke();
     }
 }
+
+export class SphereContainer {
+    constructor(canvas, name, type, x, y){
+        this.canvas = canvas;
+        this.name = name;
+        this.type = type;
+        this.x = x;
+        this.y = y;
+        this.counter = 6;
+    }
+
+    drawContainer = (ctx) => {
+        ctx.fillStyle = 'purple';
+        ctx.fillRect(this.x, this.y, 40, 40);
+    }
+
+    refillContainer = (ctx) => {
+
+    }
+
+}

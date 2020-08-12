@@ -2,17 +2,17 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { moveCharacters, handleMovement, handleGravity, handleJumpLimit, handleJumping } from './playerControllers';
-import {forest} from '../levels/Forest'
+import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
 import './style.css';
-console.log(listPlayers);
 
 const Battlefield = (props) => {
 
   const [ gameOn, setGameOn ] = useState(false);
-  const [players, setPlayers ] = useState([]);
-  const [mapLevel, setmapLevel] = useState([]);
+  const [ players, setPlayers ] = useState([]);
+  const [ mapLevel, setmapLevel ] = useState([]);
+  const [ spheres , setSpheres ] = useState([]);
   const canvasRef = useRef(null);
 console.log(mapLevel)
 
@@ -31,8 +31,18 @@ console.log(mapLevel)
 
   const drawMap = (context) => {
     if(mapLevel.length > 0){
-      return mapLevel.map(platform => {
-        return platform.drawObject(context);
+      return mapLevel.map(resource => {
+        switch(resource.type){
+          case 'platform': {
+            return resource.drawPlatform(context);
+          }
+          case 'sphere-generator': {
+            return resource.drawContainer(context);
+          }
+          default:
+            return null;
+        }
+      
       })
     }
   }
@@ -43,12 +53,11 @@ console.log(mapLevel)
       let context = myCanvas.getContext('2d');
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      console.log(players);
+      console.log(mapLevel);
       drawMap(context);
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
         handleJumping(player, mapLevel);
-        // handleJumpLimit(player, mapLevel);
         handleMovement(player, mapLevel,players, canvasRef.current);
         player.drawCharacter(context);
       })

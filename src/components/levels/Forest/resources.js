@@ -218,4 +218,35 @@ export let listOfPlatforms = [
         y: 22,
         color: 'green'
     },
-]
+    {
+        name: 'sphere container generator 1',
+        type: 'sphere-generator',
+        x: 1.5,
+        y: 55.5,
+    },
+    {
+        name: 'sphere container generator 2',
+        type: 'sphere-generator',
+        x: 96.5,
+        y: 55.5,
+    },
+    {
+        name: 'sphere container generator 3',
+        type: 'sphere-generator',
+        x: 48.5,
+        y: 70.5,
+    },
+    {
+        name: 'sphere container generator 4',
+        type: 'sphere-generator',
+        x: 3,
+        y: 85.5,
+    },
+    {
+        name: 'sphere container generator 4',
+        type: 'sphere-generator',
+        x: 95,
+        y: 85.5,
+    },
+    
+];
