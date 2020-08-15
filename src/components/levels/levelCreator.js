@@ -8,7 +8,7 @@ import { resizeDimension , resizeCoor } from '../../utils/resizer';
 
 // Resource CLass = (canvas, name, id, width, height, x, y, color, xPreference, yPreference)
 
-export const generatePlatforms = (canvas, listOfResources) => {
+export const generateResources = (canvas, listOfResources) => {
     return listOfResources.map(resource => {
         switch(resource.type){
             case 'platform': {
@@ -28,6 +28,6 @@ export const generateSphere = (listOfSpheres) => {
     return new Sphere()
 }
 
-export const levelCreator = (canvas, listPlatforms) => {
-    return generatePlatforms(canvas, listPlatforms);
+export const levelCreator = (canvas, resourcesList) => {
+    return generateResources(canvas, resourcesList);
 }

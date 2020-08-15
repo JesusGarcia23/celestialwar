@@ -1,11 +1,14 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { moveCharacters, handleMovement, handleGravity, handleJumpLimit, handleJumping } from './playerControllers';
+import { moveCharacters, handleMovement, handleGravity, RectCircleColliding, handleJumping } from './playerControllers';
 import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
+import { Sphere } from '../Sphere'
 import './style.css';
+
+const testSphere = new Sphere(5, 100, 280, 'cyan');
 
 const Battlefield = (props) => {
 
@@ -14,7 +17,6 @@ const Battlefield = (props) => {
   const [ mapLevel, setmapLevel ] = useState([]);
   const [ spheres , setSpheres ] = useState([]);
   const canvasRef = useRef(null);
-console.log(mapLevel)
 
   useEffect(() => {
     
@@ -51,14 +53,16 @@ console.log(mapLevel)
     if(gameOn) {
       const myCanvas = canvasRef.current;
       let context = myCanvas.getContext('2d');
+
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-      console.log(mapLevel);
       drawMap(context);
+      testSphere.drawSphere(context);
+      RectCircleColliding(testSphere, mapLevel)
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
         handleJumping(player, mapLevel);
-        handleMovement(player, mapLevel,players, canvasRef.current);
+        handleMovement(player, mapLevel, players, canvasRef.current);
         player.drawCharacter(context);
       })
       

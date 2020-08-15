@@ -1,16 +1,18 @@
 export class Sphere {
-    constructor(canvas, radius, x, y, color){
-        this.canvas = canvas;
+    constructor(radius, x, y){
         this.radius = radius;
         this.x = x;
         this.y = y;
-        this.color = color;
     }
 
     drawSphere = (ctx) => {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        ctx.stroke();
+    ctx.beginPath();
+      ctx.arc(this.x, this.y,this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = '#42c5f5';
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#2f9cc4';
+      ctx.closePath();
     }
 }
 
@@ -25,7 +27,7 @@ export class SphereContainer {
     }
 
     drawContainer = (ctx) => {
-        ctx.fillStyle = 'purple';
+        ctx.fillStyle = 'grey';
         ctx.fillRect(this.x, this.y, 40, 40);
     }
 

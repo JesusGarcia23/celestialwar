@@ -60,7 +60,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 4,
+        id: 5,
         width: 15,
         height: 3,
         x:0,
@@ -71,7 +71,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 4,
+        id: 6,
         width: 12,
         height: 3,
         x: 68,
@@ -81,7 +81,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 5,
+        id: 7,
         width: 12,
         height: 3,
         x: 22,
@@ -92,7 +92,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 6,
+        id: 8,
         width: 5,
         height: 3,
         x: 40,
@@ -103,7 +103,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 7,
+        id: 9,
         width: 5,
         height: 3,
         x: 40,
@@ -113,7 +113,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 7,
+        id: 10,
         width: 5,
         height: 3,
         x: 55,
@@ -123,7 +123,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 7,
+        id: 11,
         width: 5,
         height: 3,
         x: 5,
@@ -136,7 +136,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 12,
         width: 10,
         height: 3,
         x: 10,
@@ -146,7 +146,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 13,
         width: 10,
         height: 3,
         x: 80,
@@ -157,7 +157,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 14,
         width: 10,
         height: 3,
         x: 63,
@@ -167,7 +167,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 15,
         width: 10,
         height: 3,
         x: 28,
@@ -178,7 +178,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 16,
         width: 7,
         height: 3,
         x: 80,
@@ -189,19 +189,19 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 17,
         width: 7,
         height: 3,
         x: 80,
         y: 30,
         xPreference: 'start',
-        color: 'green'
+        color: 'purple'
     },
     //SEVENTH ROW
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 18,
         width: 12,
         height: 3,
         x: 14,
@@ -211,7 +211,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 19,
         width: 12,
         height: 3,
         x: 74,
