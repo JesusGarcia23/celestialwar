@@ -12,7 +12,7 @@ export class Sphere {
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.strokeStyle = '#2f9cc4';
-      ctx.closePath();
+      ctx.stroke();
     }
 }
 

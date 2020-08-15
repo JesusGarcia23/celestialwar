@@ -51,23 +51,24 @@ export const moveCharacters = () => {
 
     if(mapLevel.length > 0){
       touched = mapLevel.map(rect => {
-        var distX = Math.abs(circle.x - (rect.x - rect.width / 2));
-        var distY = Math.abs(circle.y - (rect.y - rect.height / 2));
+        let distX = Math.abs(circle.x - rect.x - rect.width / 2);
+        let distY = Math.abs(circle.y - rect.y - rect.height / 2);
         if(rect.id === 17){
+          console.log(circle);
           console.log(rect);
           console.log("distX: ", distX);
           console.log("distY: ", distY);
         }
 
-        if (distX > ((rect.width / 2) + circle.radius)) { return false; }
-        if (distY > ((rect.height / 2) + circle.radius)) { return false; }
+        if (distX > (rect.width / 2 + circle.radius)) { return false; }
+        if (distY > (rect.height / 2 + circle.radius)) { return false; }
     
-        if (distX <= (rect.width/2)) { return true; } 
-        if (distY <= (rect.height/2)) { return true; }
+        if (distX <= (rect.width / 2 )) { return true; } 
+        if (distY <= (rect.height /2 )) { return true; }
     
-        var dx= distX - (rect.width / 2);
-        var dy= distY - (rect.height / 2);
-        return ( (dx*dx) + (dy*dy) <= (circle.radius*circle.radius));
+        let dx= distX - rect.width / 2;
+        let dy= distY - rect.height / 2;
+        return ( dx*dx+dy*dy <= (circle.radius*circle.radius));
       })
     }
     console.log(touched);
