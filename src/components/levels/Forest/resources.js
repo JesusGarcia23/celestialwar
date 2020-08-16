@@ -26,7 +26,7 @@ export let listOfPlatforms = [
     {
         name: 'collector-base-separator',
         type: 'platform',
-        id: 2,
+        id: 3,
         width: 1,
         height: 20,
         x: 0,
@@ -38,7 +38,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 3,
+        id: 4,
         width: 12,
         height: 3,
         x:0,
@@ -49,7 +49,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 4,
+        id: 5,
         width: 12,
         height: 3,
         x:0,
@@ -60,7 +60,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 5,
+        id: 6,
         width: 15,
         height: 3,
         x:0,
@@ -71,7 +71,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 6,
+        id: 7,
         width: 12,
         height: 3,
         x: 68,
@@ -81,7 +81,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 7,
+        id: 8,
         width: 12,
         height: 3,
         x: 22,
@@ -92,7 +92,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 8,
+        id: 9,
         width: 5,
         height: 3,
         x: 40,
@@ -103,7 +103,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 9,
+        id: 10,
         width: 5,
         height: 3,
         x: 40,
@@ -113,7 +113,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 10,
+        id: 11,
         width: 5,
         height: 3,
         x: 55,
@@ -123,7 +123,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 11,
+        id: 12,
         width: 5,
         height: 3,
         x: 5,
@@ -136,7 +136,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 12,
+        id: 13,
         width: 10,
         height: 3,
         x: 10,
@@ -146,7 +146,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 13,
+        id: 14,
         width: 10,
         height: 3,
         x: 80,
@@ -157,7 +157,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 14,
+        id: 15,
         width: 10,
         height: 3,
         x: 63,
@@ -167,7 +167,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 15,
+        id: 16,
         width: 10,
         height: 3,
         x: 28,
@@ -178,7 +178,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 16,
+        id: 17,
         width: 7,
         height: 3,
         x: 80,
@@ -189,7 +189,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 17,
+        id: 18,
         width: 7,
         height: 3,
         x: 80,
@@ -201,7 +201,7 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 18,
+        id: 19,
         width: 9,
         height: 3,
         x: 14,
@@ -211,12 +211,12 @@ export let listOfPlatforms = [
     {
         name: 'regular-platform',
         type: 'platform',
-        id: 19,
+        id: 20,
         width: 9,
         height: 3,
         x: 77,
         y: 22,
-        color: 'yellow'
+        color: 'green'
     },
     {
         name: 'sphere container generator 1',

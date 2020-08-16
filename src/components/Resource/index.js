@@ -30,8 +30,13 @@ export class Resource {
         
     }
 
-    drawPlatform = (ctx) => {
+    drawPlatform = (ctx, modeDevelop) => {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        if(modeDevelop){
+            ctx.fillStyle = 'orange';
+            ctx.font = 'bold 12px serif';
+            ctx.fillText(`ID: ${this.id}`, this.x + 10, this.y + 15);
+        }
     }
 }

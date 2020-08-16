@@ -12,6 +12,7 @@ const testSphere = new Sphere(5, 100, 101, 'cyan');
 
 const Battlefield = (props) => {
 
+  const modeDevelop = true;
   const [ gameOn, setGameOn ] = useState(false);
   const [ players, setPlayers ] = useState([]);
   const [ mapLevel, setmapLevel ] = useState([]);
@@ -36,7 +37,7 @@ const Battlefield = (props) => {
       return mapLevel.map(resource => {
         switch(resource.type){
           case 'platform': {
-            return resource.drawPlatform(context);
+            return resource.drawPlatform(context, modeDevelop);
           }
           case 'sphere-generator': {
             return resource.drawContainer(context);

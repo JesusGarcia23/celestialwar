@@ -9,10 +9,10 @@ import { resizeDimension , resizeCoor } from '../../utils/resizer';
 // Resource CLass = (canvas, name, id, width, height, x, y, color, xPreference, yPreference)
 
 export const generateResources = (canvas, listOfResources) => {
-    return listOfResources.map(resource => {
+    return listOfResources.map((resource, index) => {
         switch(resource.type){
             case 'platform': {
-                return new Resource(canvas, resource.name, resource.type, resource.id, 
+                return new Resource(canvas, resource.name, resource.type, index + 1, 
                     resizeDimension(resource.width, canvas.width), resizeDimension(resource.height, canvas.height), resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height), resource.color, resource.xPreference, resource.yPreference);
             }
             case 'sphere-generator': {
