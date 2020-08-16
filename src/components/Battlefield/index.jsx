@@ -1,14 +1,14 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { moveCharacters, handleMovement, handleGravity, RectCircleColliding, handleJumping } from './playerControllers';
+import { moveCharacters, handleMovement, handleGravity, handleSphereGravity, RectCircleColliding,  handleJumping } from './playerControllers';
 import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
 import { Sphere } from '../Sphere'
 import './style.css';
 
-const testSphere = new Sphere(5, 100, 280, 'cyan');
+const testSphere = new Sphere(5, 100, 101, 'cyan');
 
 const Battlefield = (props) => {
 
@@ -58,9 +58,9 @@ const Battlefield = (props) => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
       testSphere.drawSphere(context);
-      RectCircleColliding(testSphere, mapLevel)
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
+        handleSphereGravity(testSphere, mapLevel);
         handleJumping(player, mapLevel);
         handleMovement(player, mapLevel, players, canvasRef.current);
         player.drawCharacter(context);

@@ -3,6 +3,7 @@ export class Sphere {
         this.radius = radius;
         this.x = x;
         this.y = y;
+        this.hide = false;
     }
 
     drawSphere = (ctx) => {

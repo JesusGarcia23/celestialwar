@@ -15,7 +15,7 @@ export let listOfPlatforms = [
         name: 'collector-base',
         type: 'platform',
         id: 2,
-        width: 30,
+        width: 35,
         height: 3,
         x: 0,
         y: 20,
@@ -202,7 +202,7 @@ export let listOfPlatforms = [
         name: 'regular-platform',
         type: 'platform',
         id: 18,
-        width: 12,
+        width: 9,
         height: 3,
         x: 14,
         y: 22,
@@ -212,11 +212,11 @@ export let listOfPlatforms = [
         name: 'regular-platform',
         type: 'platform',
         id: 19,
-        width: 12,
+        width: 9,
         height: 3,
-        x: 74,
+        x: 77,
         y: 22,
-        color: 'green'
+        color: 'yellow'
     },
     {
         name: 'sphere container generator 1',

@@ -61,7 +61,7 @@ export const moveCharacters = () => {
         }
 
         if (distX > (rect.width / 2 + circle.radius)) { return false; }
-        if (distY > (rect.height / 2 + circle.radius)) { return false; }
+        if (distY - 1 > (rect.height / 2 + circle.radius)) { return false; }
     
         if (distX <= (rect.width / 2 )) { return true; } 
         if (distY <= (rect.height /2 )) { return true; }
@@ -90,6 +90,16 @@ export const moveCharacters = () => {
   
   }
 
+  export function handleSphereGravity(sphere, mapLevel){
+        let touched = null;
+    if(mapLevel.length > 0){
+      touched = RectCircleColliding(sphere, mapLevel);
+      if(touched !== null && touched.indexOf(true) < 0){
+        sphere.y += 10;
+      }
+    }
+  };
+
   export function handleJumpLimit(player, mapLevel){
     let touched = null;
     if(!player.onFloor && mapLevel.length > 0){
@@ -114,7 +124,7 @@ export const moveCharacters = () => {
         player.totalJumped += 1;
         player.y -= 20;
       }else{
-        player.jumped = false;
+        player.totalJumped = 100;
       }
     }
   }
