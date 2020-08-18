@@ -8,7 +8,7 @@ import { playersCreator } from '../Character/playerGenerator';
 import { Sphere } from '../Sphere'
 import './style.css';
 
-const testSphere = new Sphere(5, 100, 101, 'cyan');
+const testSphere = new Sphere(5, 750, 0, 'cyan');
 
 const Battlefield = (props) => {
 
@@ -26,7 +26,7 @@ const Battlefield = (props) => {
     
     if(gameOn){
       setPlayers(playersCreator(canvasRef.current, listPlayers));
-      setmapLevel([...forest(canvasRef.current)]);
+      setmapLevel([...forest(canvasRef.current), testSphere]);
     }
     update();
   },[gameOn])
@@ -63,7 +63,7 @@ const Battlefield = (props) => {
         handleGravity(player, mapLevel);
         handleSphereGravity(testSphere, mapLevel);
         handleJumping(player, mapLevel);
-        handleMovement(player, mapLevel, players, canvasRef.current);
+        handleMovement(player, mapLevel, players, testSphere, canvasRef.current);
         player.drawCharacter(context);
       })
       

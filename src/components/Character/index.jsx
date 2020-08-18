@@ -23,6 +23,9 @@ class General {
 
     touchingCheck(obj){
 
+        console.log("SPHERE TOUCHED");
+        console.log(obj);
+
         if(!obj.type){
             if(this.modeWarrior){
                 return this.attack(obj);
@@ -32,8 +35,42 @@ class General {
         }
         return true;
     }
+
+    sphereCollision(circle){
+            let distX = Math.abs(circle.x - this.x - this.width / 2);
+            let distY = Math.abs(circle.y - this.y - this.height / 2);
+    
+            if (distX > (this.width / 2 + circle.radius)) { return false; }
+            if (distY - 10 > (this.height / 2 + circle.radius)) { return false; }
+        
+            if (distX <= (this.width / 2 )) { return true; } 
+            if (distY <= (this.height /2 )) { return true; }
+        
+            let dx= distX - this.width / 2;
+            let dy= distY - this.height / 2;
+            return ( dx*dx+dy*dy <= (circle.radius*circle.radius));
+    }
     
     checkCollision = (obj) => {
+        if(obj.radius !== null && obj.type === 'sphere'){
+            let touched = this.sphereCollision(obj);
+            if(touched){
+                console.log(obj.color)
+                switch(obj.color){
+                    case 'blue': {
+                        obj.color = 'red'
+                        break;
+                    }
+                    case 'red': {
+                        obj.color = 'blue'
+                        break;
+                    }
+                    default: {
+                        return;
+                    }
+                }
+            }
+        }
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
             return this.touchingCheck(obj);
@@ -58,7 +95,7 @@ class General {
     }
 
     hitBottom = (obj) => {
-         if((this.y + this.height + 3 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
+         if((this.y + this.height + 4 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
             this.onFloor = true;
             this.totalJumped = 0;
             return true;

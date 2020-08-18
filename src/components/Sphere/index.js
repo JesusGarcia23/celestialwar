@@ -4,12 +4,14 @@ export class Sphere {
         this.x = x;
         this.y = y;
         this.hide = false;
+        this.type = "sphere";
+        this.color = "blue";
     }
 
     drawSphere = (ctx) => {
     ctx.beginPath();
       ctx.arc(this.x, this.y,this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#42c5f5';
+      ctx.fillStyle = this.color;
       ctx.fill();
       ctx.lineWidth = 3;
       ctx.strokeStyle = '#2f9cc4';

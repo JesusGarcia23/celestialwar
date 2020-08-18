@@ -3,7 +3,7 @@ export const listPlayers = [
         type: 'Angel',
         name: 'jesus',
         x: 40,
-        y: 10,
+        y: 0,
         width: 1.2,
         height: 5,
         sprite: 'A',

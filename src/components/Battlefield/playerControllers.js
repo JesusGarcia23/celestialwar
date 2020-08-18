@@ -53,15 +53,9 @@ export const moveCharacters = () => {
       touched = mapLevel.map(rect => {
         let distX = Math.abs(circle.x - rect.x - rect.width / 2);
         let distY = Math.abs(circle.y - rect.y - rect.height / 2);
-        if(rect.id === 17){
-          console.log(circle);
-          console.log(rect);
-          console.log("distX: ", distX);
-          console.log("distY: ", distY);
-        }
 
         if (distX > (rect.width / 2 + circle.radius)) { return false; }
-        if (distY - 1 > (rect.height / 2 + circle.radius)) { return false; }
+        if (distY - 10 > (rect.height / 2 + circle.radius)) { return false; }
     
         if (distX <= (rect.width / 2 )) { return true; } 
         if (distY <= (rect.height /2 )) { return true; }
@@ -71,7 +65,6 @@ export const moveCharacters = () => {
         return ( dx*dx+dy*dy <= (circle.radius*circle.radius));
       })
     }
-    console.log(touched);
     return touched;
 }
 
@@ -129,8 +122,8 @@ export const moveCharacters = () => {
     }
   }
 
-  export function handleMovement(player, mapLevel, otherPlayers, canvas){
-    const globalMap = [...mapLevel, ...otherPlayers]
+  export function handleMovement(player, mapLevel, otherPlayers, spheres, canvas){
+    const globalMap = [...mapLevel, ...otherPlayers, spheres];
     let touched = null;
 
       if(mapLevel.length > 0){
@@ -138,7 +131,6 @@ export const moveCharacters = () => {
         switch(player.sprite){
             case 'A':
               if(Keys.up && (player.y > 0)){
-                console.log("JUMPING")
                 player.direction = 'UP';
                 player.jumped = true;              
                 }
@@ -173,6 +165,7 @@ export const moveCharacters = () => {
                   })
 
                   if(touched.indexOf(true) >= 0){
+                    console.log(touched)
                     player.x -= 6;
                   }
                   player.x += 6;
