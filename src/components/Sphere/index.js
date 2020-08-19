@@ -1,5 +1,5 @@
 export class Sphere {
-    constructor(radius, x, y){
+    constructor(radius, x, y, color){
         this.radius = radius;
         this.x = x;
         this.y = y;
@@ -14,8 +14,14 @@ export class Sphere {
       ctx.fillStyle = this.color;
       ctx.fill();
       ctx.lineWidth = 3;
-      ctx.strokeStyle = '#2f9cc4';
+      ctx.strokeStyle = this.color;
       ctx.stroke();
+    }
+
+    beGrabbed = () => {
+        console.log("CHANGING COLOR")
+        this.hide = true;
+
     }
 }
 

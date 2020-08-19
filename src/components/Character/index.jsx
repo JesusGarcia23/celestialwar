@@ -10,6 +10,7 @@ class General {
         this.sprite = sprite;
         this.color = color;
         this.alive = true;
+        this.sphereGrabbed = false;
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
@@ -22,9 +23,6 @@ class General {
     }
 
     touchingCheck(obj){
-
-        console.log("SPHERE TOUCHED");
-        console.log(obj);
 
         if(!obj.type){
             if(this.modeWarrior){
@@ -54,22 +52,12 @@ class General {
     checkCollision = (obj) => {
         if(obj.radius !== null && obj.type === 'sphere'){
             let touched = this.sphereCollision(obj);
-            if(touched){
-                console.log(obj.color)
-                switch(obj.color){
-                    case 'blue': {
-                        obj.color = 'red'
-                        break;
-                    }
-                    case 'red': {
-                        obj.color = 'blue'
-                        break;
-                    }
-                    default: {
-                        return;
-                    }
-                }
+            if(touched && !this.sphereGrabbed){
+                console.log("GRABBED!")
+                obj.beGrabbed();
+                this.sphereGrabbed = true;
             }
+
         }
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){

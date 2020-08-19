@@ -58,7 +58,9 @@ const Battlefield = (props) => {
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
-      testSphere.drawSphere(context);
+      if(!testSphere.hide){
+        testSphere.drawSphere(context);
+      }
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
         handleSphereGravity(testSphere, mapLevel);
