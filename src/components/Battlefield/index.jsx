@@ -8,7 +8,7 @@ import { playersCreator } from '../Character/playerGenerator';
 import { Sphere } from '../Sphere'
 import './style.css';
 
-const testSphere = new Sphere(5, 750, 0, 'cyan');
+const testSphere = new Sphere(5, 700, 0, 'cyan');
 
 const Battlefield = (props) => {
 
@@ -58,9 +58,7 @@ const Battlefield = (props) => {
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
-      if(!testSphere.hide){
-        testSphere.drawSphere(context);
-      }
+        testSphere.drawSphere(context, players);
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
         handleSphereGravity(testSphere, mapLevel);

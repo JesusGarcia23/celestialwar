@@ -52,9 +52,9 @@ class General {
     checkCollision = (obj) => {
         if(obj.radius !== null && obj.type === 'sphere'){
             let touched = this.sphereCollision(obj);
-            if(touched && !this.sphereGrabbed){
-                console.log("GRABBED!")
-                obj.beGrabbed();
+            if(touched && !this.sphereGrabbed && !this.modeWarrior){
+                console.log("GRABBED!");
+                obj.beGrabbed(this.name);
                 this.sphereGrabbed = true;
             }
 

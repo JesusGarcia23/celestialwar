@@ -4,11 +4,25 @@ export class Sphere {
         this.x = x;
         this.y = y;
         this.hide = false;
+        this.grabbedBy = '';
         this.type = "sphere";
         this.color = "blue";
     }
 
-    drawSphere = (ctx) => {
+    drawSphere = (ctx, players) => {
+  
+    if(this.grabbedBy !== '' && players.length > 0) {
+        console.log("TOUCHING")
+        const ownerIndex = players.findIndex(player => player.name === this.grabbedBy)
+        const owner = players[ownerIndex];
+        if(owner.alive){
+            this.x = owner.x;
+            this.y = owner.y;
+            this.color = 'transparent';
+        }else{
+            this.color = 'blue';
+        }
+    }
     ctx.beginPath();
       ctx.arc(this.x, this.y,this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
@@ -18,10 +32,9 @@ export class Sphere {
       ctx.stroke();
     }
 
-    beGrabbed = () => {
-        console.log("CHANGING COLOR")
+    beGrabbed = (playerName) => {
+        this.grabbedBy = playerName;
         this.hide = true;
-
     }
 }
 
