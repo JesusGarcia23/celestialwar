@@ -95,6 +95,7 @@ class General {
 
     receiveDamage = () => {
         this.alive = false;
+        this.sphereGrabbed = false;
         setTimeout(() => {
             this.x = this.deployX;
             this.y = this.deployY;

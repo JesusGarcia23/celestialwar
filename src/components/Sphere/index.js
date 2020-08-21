@@ -20,6 +20,7 @@ export class Sphere {
             this.y = owner.y;
             this.color = 'transparent';
         }else{
+            this.grabbedBy ='';
             this.color = 'blue';
         }
     }

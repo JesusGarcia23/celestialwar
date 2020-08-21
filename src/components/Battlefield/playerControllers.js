@@ -173,17 +173,19 @@ export const moveCharacters = () => {
                 break;
 
             case 'B':
-              if(secondKeys.up){
-                globalMap.map(resource => {
-                  player.checkCollision(resource);
-                })
-                  player.y -= 6;
+              if(secondKeys.up && (player.y > 0)){
+                player.direction = 'UP';
+                player.jumped = true;              
                 }
               
                 if(secondKeys.down){
-                  globalMap.map(resource => {
-                    player.checkCollision(resource);
-                  })
+                  player.direction = "DOWN";
+                  touched = globalMap.map(resource => {
+                      return player.checkCollision(resource);
+                    })
+                    if(touched.indexOf(true) >= 0){
+                      player.y -= 6;
+                    }
                   player.y += 6;
                 }
               
@@ -206,11 +208,12 @@ export const moveCharacters = () => {
                   })
 
                   if(touched.indexOf(true) >= 0){
+                    console.log(touched)
                     player.x -= 6;
                   }
                   player.x += 6;
                 }
-                break;  
+                break; 
               default:
                   break;  
         }
