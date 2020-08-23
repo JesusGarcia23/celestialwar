@@ -12,7 +12,6 @@ export class Sphere {
     drawSphere = (ctx, players) => {
   
     if(this.grabbedBy !== '' && players.length > 0) {
-        console.log("TOUCHING")
         const ownerIndex = players.findIndex(player => player.name === this.grabbedBy)
         const owner = players[ownerIndex];
         if(owner.alive){

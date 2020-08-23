@@ -3,7 +3,8 @@
     up: false,
     down: false,
     left: false,
-    right: false
+    right: false,
+    action: false
   };
 
   var secondKeys = {
@@ -17,7 +18,9 @@ export const moveCharacters = () => {
     window.onkeydown = function(e){
       
       var kc = e.keyCode;
+      console.log(kc)
       e.preventDefault();
+      if(kc === 87) Keys.action = true;
       if(kc === 65) Keys.left = true;
       if(kc === 74) Keys.up = true;
       if(kc === 68) Keys.right = true;
@@ -32,7 +35,7 @@ export const moveCharacters = () => {
     window.onkeyup = function(e){
       var kc = e.keyCode;
       e.preventDefault();
-    
+      if(kc === 87) Keys.action = false;
       if(kc === 65) Keys.left = false;
       if(kc === 74) Keys.up = false;
       if(kc === 68) Keys.right = false;
@@ -144,6 +147,13 @@ export const moveCharacters = () => {
                       player.y -= 6;
                     }
                   player.y += 6;
+                }
+
+                if(Keys.action){
+                 touched = globalMap.filter(resource => resource.type === 'warrior-pedestal').map(pedestal => {
+                  return player.checkPedestal(pedestal);
+                 });
+                 console.log(touched);
                 }
               
                 if(Keys.left && (player.x > 4)) {

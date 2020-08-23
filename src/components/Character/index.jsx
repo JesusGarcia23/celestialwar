@@ -33,7 +33,7 @@ class General {
             }
         }
         // CHECK FOR WARRIOR PEDESTALS
-        if(obj.type === 'warrior-pedestal'){
+        if(obj.type === 'warrior-pedestal' && this.sphereGrabbed){
             return false;
         }
         return true;
@@ -99,6 +99,16 @@ class General {
             return true;
         }else{
             this.onFloor = false;
+        }
+        return false;
+    }
+
+    checkPedestal = (obj) => {
+        if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height)){
+            return true;
+        }// LEFT
+        else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height)){
+            return true;
         }
         return false;
     }
