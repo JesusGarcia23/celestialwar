@@ -14,6 +14,16 @@
     right: false
   };
 
+const handlePedestal = (pedestal, player) => {
+  if(!pedestal.activated && player.sphereGrabbed){
+    console.log("ACTIVATED!")
+    pedestal.side = player.side;
+    pedestal.activated = true;
+    pedestal.color = 'yellow';
+    player.sphereGrabbed = false;
+  }
+}
+
 export const moveCharacters = () => {
     window.onkeydown = function(e){
       
@@ -153,7 +163,10 @@ export const moveCharacters = () => {
                  touched = globalMap.filter(resource => resource.type === 'warrior-pedestal').map(pedestal => {
                   return player.checkPedestal(pedestal);
                  });
-                 console.log(touched);
+                 if(touched.findIndex(pedestal => pedestal.touched) >= 0){
+                   let index = touched.findIndex(pedestal => pedestal.touched);
+                   handlePedestal(touched[index].obj, player);
+                 }
                 }
               
                 if(Keys.left && (player.x > 4)) {
@@ -175,7 +188,6 @@ export const moveCharacters = () => {
                   })
 
                   if(touched.indexOf(true) >= 0){
-                    console.log(touched)
                     player.x -= 6;
                   }
                   player.x += 6;

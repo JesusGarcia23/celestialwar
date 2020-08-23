@@ -10,6 +10,7 @@ class General {
         this.sprite = sprite;
         this.color = color;
         this.alive = true;
+        this.side = '';
         this.sphereGrabbed = false;
         this.direction = direction;
         this.deployX = deployX;
@@ -33,7 +34,7 @@ class General {
             }
         }
         // CHECK FOR WARRIOR PEDESTALS
-        if(obj.type === 'warrior-pedestal' && this.sphereGrabbed){
+        if(obj.type === 'warrior-pedestal'){
             return false;
         }
         return true;
@@ -105,16 +106,17 @@ class General {
 
     checkPedestal = (obj) => {
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height)){
-            return true;
+            return {touched: true, obj};
         }// LEFT
         else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height)){
-            return true;
+            return {touched: true, obj};
         }
-        return false;
+        return {touched: false, obj};
     }
 
     receiveDamage = () => {
         this.alive = false;
+        this.modeWarrior = false;
         this.sphereGrabbed = false;
         setTimeout(() => {
             this.x = this.deployX;
@@ -168,6 +170,7 @@ export class Angel extends Basic {
     constructor(name, x, y, width, height, sprite, deployX, deployY, modeWarrior) {
         super(name,x, y, width, height, sprite, modeWarrior);
         this.jumped = false;
+        this.side = 'Angel';
         this.deployX = deployX;
         this.deployY = deployY;
         this.modeWarrior = false;
@@ -179,6 +182,8 @@ export class Angel extends Basic {
 export class Demon extends Basic {
     constructor(name, x, y, width, height, sprite, deployX, deployY, modeWarrior) {
         super(name,x, y, width, height, sprite, modeWarrior);
+        this.jumped = false;
+        this.side = 'Demon';
         this.deployX = deployX;
         this.deployY = deployY;
         this.modeWarrior = true;

@@ -7,10 +7,11 @@ export class WarriorPedestal {
         this.y = y;
         this.activated = false;
         this.side = null;
+        this.color = 'brown'
     }
 
     drawPedestal = (ctx) => {
-        ctx.fillStyle = 'brown';
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 }
