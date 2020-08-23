@@ -248,5 +248,21 @@ export let listOfPlatforms = [
         x: 95,
         y: 85.5,
     },
+    {
+        name: 'Warrior pedesta; 1',
+        type: 'warrior-pedestal',
+        width: 2,
+        height: 7.5,
+        x: 32,
+        y: 32.5,
+    },
+    {
+        name: 'Warrior pedesta; 1',
+        type: 'warrior-pedestal',
+        width: 2,
+        height: 7.5,
+        x: 67,
+        y: 32.5,
+    },
     
 ];

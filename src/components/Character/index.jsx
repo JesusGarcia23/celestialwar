@@ -24,12 +24,17 @@ class General {
 
     touchingCheck(obj){
 
+        // CHECK TOUCHING OTHER PLAYERS
         if(!obj.type){
             if(this.modeWarrior){
                 return this.attack(obj);
             }else if(obj.modeWarrior === true){
                 this.receiveDamage();
             }
+        }
+        // CHECK FOR WARRIOR PEDESTALS
+        if(obj.type === 'warrior-pedestal'){
+            return false;
         }
         return true;
     }
@@ -59,6 +64,7 @@ class General {
             }
 
         }
+        
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
             return this.touchingCheck(obj);
@@ -83,6 +89,10 @@ class General {
     }
 
     hitBottom = (obj) => {
+        if(obj.type === 'warrior-pedestal'){
+            return false;
+        }
+        
          if((this.y + this.height + 4 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
             this.onFloor = true;
             this.totalJumped = 0;

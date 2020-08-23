@@ -42,6 +42,9 @@ const Battlefield = (props) => {
           case 'sphere-generator': {
             return resource.drawContainer(context);
           }
+          case 'warrior-pedestal': {
+            return resource.drawPedestal(context);
+          }
           default:
             return null;
         }
