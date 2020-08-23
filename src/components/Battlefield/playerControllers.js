@@ -63,7 +63,7 @@ export const moveCharacters = () => {
     let touched = null;
 
     if(mapLevel.length > 0){
-      touched = mapLevel.map(rect => {
+      touched = mapLevel.filter(resource => resource.type !== 'warrior-pedestal').map(rect => {
         let distX = Math.abs(circle.x - rect.x - rect.width / 2);
         let distY = Math.abs(circle.y - rect.y - rect.height / 2);
 
@@ -136,7 +136,7 @@ export const moveCharacters = () => {
   }
 
   export function handleMovement(player, mapLevel, otherPlayers, spheres, canvas){
-    const globalMap = [...mapLevel, ...otherPlayers, spheres];
+    const globalMap = [...mapLevel, ...otherPlayers, ...spheres];
     let touched = null;
 
       if(mapLevel.length > 0){
