@@ -64,16 +64,16 @@ const Battlefield = (props) => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
 
-      spheres.length > 0 && spheres.map(sphere => {
-        sphere.drawSphere(context, players);
-        handleSphereGravity(sphere, mapLevel);
-      })
-
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
         handleJumping(player, mapLevel);
         handleMovement(player, mapLevel, players, spheres, canvasRef.current);
         player.drawCharacter(context);
+      })
+
+      spheres.length > 0 && spheres.map(sphere => {
+        sphere.drawSphere(context, players);
+        handleSphereGravity(sphere, mapLevel);
       })
 
       requestAnimationFrame(loop);

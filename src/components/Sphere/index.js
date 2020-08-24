@@ -11,7 +11,7 @@ export class Sphere {
 
     drawSphere = (ctx, players) => {
         
-    if(this.hide && players.length > 0) {
+    if(this.grabbedBy !== '' && players.length > 0) {
         const ownerIndex = players.findIndex(player => player.name === this.grabbedBy)
         const owner = players[ownerIndex];
         if(owner.alive){

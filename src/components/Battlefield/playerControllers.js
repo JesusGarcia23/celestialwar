@@ -22,9 +22,12 @@ const handlePedestal = (pedestal, player, spheres) => {
     pedestal.activated = true;
     pedestal.color = 'yellow';
     spheres[sphereIndex].hide = true;
+    spheres[sphereIndex].grabbedBy = '';
     player.sphereGrabbed = false;
-    console.log(spheres[sphereIndex])
-    console.log(player)
+    player.modeWarrior = true;
+  }
+  if(pedestal.activated) {
+    player.modeWarrior = true;
   }
 }
 

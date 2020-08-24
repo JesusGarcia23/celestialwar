@@ -142,7 +142,7 @@ class General {
     };
 
     drawCharacter = (ctx) => {
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = !this.modeWarrior ? this.color : 'purple';
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // const characterSprite = new Image();
