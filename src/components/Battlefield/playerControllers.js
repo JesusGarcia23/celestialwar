@@ -14,13 +14,17 @@
     right: false
   };
 
-const handlePedestal = (pedestal, player) => {
-  if(!pedestal.activated && player.sphereGrabbed){
-    console.log("ACTIVATED!")
+const handlePedestal = (pedestal, player, spheres) => {
+  let sphereIndex = spheres.findIndex(sphere => sphere.grabbedBy === player.name);
+  console.log(player)
+  if(!pedestal.activated && sphereIndex >= 0){
     pedestal.side = player.side;
     pedestal.activated = true;
     pedestal.color = 'yellow';
+    spheres[sphereIndex].hide = true;
     player.sphereGrabbed = false;
+    console.log(spheres[sphereIndex])
+    console.log(player)
   }
 }
 
@@ -28,7 +32,6 @@ export const moveCharacters = () => {
     window.onkeydown = function(e){
       
       var kc = e.keyCode;
-      console.log(kc)
       e.preventDefault();
       if(kc === 87) Keys.action = true;
       if(kc === 65) Keys.left = true;
@@ -165,7 +168,7 @@ export const moveCharacters = () => {
                  });
                  if(touched.findIndex(pedestal => pedestal.touched) >= 0){
                    let index = touched.findIndex(pedestal => pedestal.touched);
-                   handlePedestal(touched[index].obj, player);
+                   handlePedestal(touched[index].obj, player, spheres);
                  }
                 }
               

@@ -9,7 +9,7 @@ import { Sphere } from '../Sphere'
 import './style.css';
 
 const testSphere = new Sphere(5, 700, 0, 'cyan');
-const testSphere2 = new Sphere(5, 700, 25, 'cyan');
+const testSphere2 = new Sphere(5, 680, 0, 'cyan');
 const Battlefield = (props) => {
 
   const modeDevelop = true;
@@ -26,7 +26,7 @@ const Battlefield = (props) => {
     
     if(gameOn){
       setPlayers(playersCreator(canvasRef.current, listPlayers));
-      setSpheres([testSphere]);
+      setSpheres([testSphere, testSphere2]);
       setmapLevel([...forest(canvasRef.current), testSphere]);
     }
     update();
@@ -64,15 +64,13 @@ const Battlefield = (props) => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
 
-      console.log(spheres)
-
       spheres.length > 0 && spheres.map(sphere => {
         sphere.drawSphere(context, players);
+        handleSphereGravity(sphere, mapLevel);
       })
 
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
-        handleSphereGravity(testSphere, mapLevel);
         handleJumping(player, mapLevel);
         handleMovement(player, mapLevel, players, spheres, canvasRef.current);
         player.drawCharacter(context);
