@@ -26,7 +26,7 @@ const handlePedestal = (pedestal, player, spheres) => {
     player.sphereGrabbed = false;
     player.modeWarrior = true;
   }
-  if(pedestal.activated) {
+  if(pedestal.activated && player.sphereGrabbed) {
     player.modeWarrior = true;
   }
 }
