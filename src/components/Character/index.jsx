@@ -16,10 +16,10 @@ class General {
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
+        this.modeWarrior = false;
         this.jumped = false;
         this.powerJump = 20;
         this.totalJumped = 0;
-        this.modeWarrior = false;
         this.onFloor = false;
         this.kills = 0;
     }
@@ -167,13 +167,12 @@ class Basic extends General {
 }
 
 export class Angel extends Basic {
-    constructor(name, x, y, width, height, sprite, deployX, deployY, modeWarrior) {
-        super(name,x, y, width, height, sprite, modeWarrior);
+    constructor(name, x, y, width, height, sprite, deployX, deployY) {
+        super(name,x, y, width, height, sprite);
         this.jumped = false;
         this.side = 'Angel';
         this.deployX = deployX;
         this.deployY = deployY;
-        this.modeWarrior = false;
         this.color = 'blue';
     }
 

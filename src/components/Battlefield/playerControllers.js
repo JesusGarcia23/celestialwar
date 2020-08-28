@@ -94,9 +94,11 @@ export const moveCharacters = () => {
         return player.hitBottom(resource);
       })
       if(touched !== null && touched.indexOf(true) < 0){
+        player.onFloor = false;
         player.y += 10;
       }else{
-        player.onFloor = false;
+        player.onFloor = true;
+        player.totalJumped = 0;
       }
     }
   
@@ -120,21 +122,26 @@ export const moveCharacters = () => {
       })
       if(touched !== null && touched.indexOf(true) < 0){
         player.y -= 8;
+      }else if(touched.indexOf(true) >= 0){
+        player.totalJumped = 100;
       }
     }
-  
   }
 
   export function handleJumping(player, mapLevel){
     let touched = null;
     player.onFloor = false;
     if(player.jumped && mapLevel.length > 0){
-      touched = mapLevel.map(resource => {
+      touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
         return player.hitTop(resource);
       })
-      if(touched !== null && touched.indexOf(true) < 0 && player.totalJumped <= player.powerJump && Keys.up){
-        player.totalJumped += 1;
-        player.y -= 20;
+      if(touched !== null && touched.indexOf(true) < 0 && Keys.up){
+        if(player.modeWarrior){
+          player.y -= 15;
+        }else if(!player.modeWarrior && player.totalJumped <= player.powerJump){
+          player.totalJumped += 1;
+          player.y -= 20;
+        }
       }else{
         player.totalJumped = 100;
       }
@@ -153,52 +160,52 @@ export const moveCharacters = () => {
                 player.direction = 'UP';
                 player.jumped = true;              
                 }
-              
-                if(Keys.down){
-                  player.direction = "DOWN";
-                  touched = globalMap.map(resource => {
-                      return player.checkCollision(resource);
-                    })
-                    if(touched.indexOf(true) >= 0){
-                      player.y -= 6;
-                    }
-                  player.y += 6;
-                }
-
-                if(Keys.action){
-                 touched = globalMap.filter(resource => resource.type === 'warrior-pedestal').map(pedestal => {
-                  return player.checkPedestal(pedestal);
-                 });
-                 if(touched.findIndex(pedestal => pedestal.touched) >= 0){
-                   let index = touched.findIndex(pedestal => pedestal.touched);
-                   handlePedestal(touched[index].obj, player, spheres);
-                 }
-                }
-              
-                if(Keys.left && (player.x > 4)) {
-                  player.direction = "LEFT";
-                  touched = globalMap.map(resource => {
+            
+              if(Keys.down){
+                player.direction = "DOWN";
+                touched = globalMap.map(resource => {
                     return player.checkCollision(resource);
                   })
-
                   if(touched.indexOf(true) >= 0){
-                    player.x += 6;
+                    player.y -= 6;
                   }
-                  player.x -= 6;
+                player.y += 6;
+              }
+
+              if(Keys.action){
+                touched = globalMap.filter(resource => resource.type === 'warrior-pedestal').map(pedestal => {
+                return player.checkPedestal(pedestal);
+                });
+                if(touched.findIndex(pedestal => pedestal.touched) >= 0){
+                  let index = touched.findIndex(pedestal => pedestal.touched);
+                  handlePedestal(touched[index].obj, player, spheres);
                 }
-              
-                if(Keys.right && (player.x + player.width + 4 < canvas.width)){
-                  player.direction = "RIGHT";
-                  touched = globalMap.map(resource => {
-                    return player.checkCollision(resource);
-                  })
+              }
+            
+              if(Keys.left && (player.x > 4)) {
+                player.direction = "LEFT";
+                touched = globalMap.map(resource => {
+                  return player.checkCollision(resource);
+                })
 
-                  if(touched.indexOf(true) >= 0){
-                    player.x -= 6;
-                  }
+                if(touched.indexOf(true) >= 0){
                   player.x += 6;
                 }
-                break;
+                player.x -= 6;
+              }
+            
+              if(Keys.right && (player.x + player.width + 4 < canvas.width)){
+                player.direction = "RIGHT";
+                touched = globalMap.map(resource => {
+                  return player.checkCollision(resource);
+                })
+
+                if(touched.indexOf(true) >= 0){
+                  player.x -= 6;
+                }
+                player.x += 6;
+              }
+              break;
 
             case 'B':
               if(secondKeys.up && (player.y > 0)){
