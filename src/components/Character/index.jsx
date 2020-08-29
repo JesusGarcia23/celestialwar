@@ -117,7 +117,9 @@ class General {
 
     receiveDamage = () => {
         this.alive = false;
-        this.modeWarrior = false;
+        if (!this.king) {
+            this.modeWarrior = false;
+        }
         this.sphereGrabbed = false;
         setTimeout(() => {
             this.x = this.deployX;
@@ -134,9 +136,14 @@ class General {
         if(!otherPlayer.modeWarrior){
             otherPlayer.receiveDamage();
         }else if(otherPlayer.modeWarrior){
+            console.log(otherPlayer)
             if(otherPlayer.direction !== this.direction){
                 return true;
             }else{
+                if(otherPlayer.king){
+                    this.kills += 1;
+                    console.log(this.kills)
+                }
                 otherPlayer.receiveDamage();
             }
         } 
@@ -154,20 +161,7 @@ class General {
 
 }
 
-class Basic extends General {
-
-    grab(){
-
-    }
-
-    fly(){
-        if(this.modeWarrior){
-
-        } 
-    }
-}
-
-export class Angel extends Basic {
+export class Angel extends General {
     constructor(name, x, y, width, height, sprite, direction, deployX, deployY) {
         super(name,x, y, width, height, sprite, direction);
         this.jumped = false;
@@ -179,7 +173,7 @@ export class Angel extends Basic {
 
 }
 
-export class Demon extends Basic {
+export class Demon extends General {
     constructor(name, x, y, width, height, sprite, direction, deployX, deployY, modeWarrior) {
         super(name,x, y, width, height, sprite,direction, modeWarrior);
         this.jumped = false;
@@ -195,6 +189,9 @@ export class Demon extends Basic {
 export class King extends General {
     constructor(name, x, y, width, height, sprite, direction, deployX, deployY){
         super(name, x, y, width, height, sprite, direction, deployX, deployY);
+        this.direction = direction;
+        this.deployX = deployX;
+        this.deployY = deployY;
         this.modeWarrior = true;
         this.color = "yellow";
         this.king = true;

@@ -11,7 +11,7 @@ export const listPlayers = [
     //     deployY: 80,
     // },
     {
-        type: 'Demon',
+        type: 'Archangel',
         name: 'miguel',
         x: 45,
         y: 0,
