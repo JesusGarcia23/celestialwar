@@ -1,7 +1,7 @@
 // DO NOT USE THIS ONE
 
 class General {
-    constructor(name, x, y, width, height, sprite, color, direction, deployX, deployY) {
+    constructor(name, x, y, width, height, sprite, color, direction, deployX, deployY, side) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -10,7 +10,7 @@ class General {
         this.sprite = sprite;
         this.color = color;
         this.alive = true;
-        this.side = '';
+        this.side = side;
         this.sphereGrabbed = false;
         this.sphereInserted = false;
         this.direction = direction;
@@ -34,6 +34,7 @@ class General {
             }else if(obj.modeWarrior === true){
                 this.receiveDamage();
             }
+            return false;
         }
         // CHECK FOR WARRIOR PEDESTALS
         if(obj.type === 'warrior-pedestal'){
@@ -58,6 +59,7 @@ class General {
     }
     
     checkCollision = (obj) => {
+        console.log(obj)
         if(obj.radius !== null && obj.type === 'sphere'){
             let touched = this.sphereCollision(obj);
             if(touched && !this.sphereGrabbed && !this.modeWarrior && !obj.hide){
@@ -136,13 +138,11 @@ class General {
         if(!otherPlayer.modeWarrior){
             otherPlayer.receiveDamage();
         }else if(otherPlayer.modeWarrior){
-            console.log(otherPlayer)
             if(otherPlayer.direction !== this.direction){
                 return true;
             }else{
                 if(otherPlayer.king){
                     this.kills += 1;
-                    console.log(this.kills)
                 }
                 otherPlayer.receiveDamage();
             }
@@ -166,6 +166,7 @@ export class Angel extends General {
         super(name,x, y, width, height, sprite, direction);
         this.jumped = false;
         this.side = 'Angel';
+        this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
         this.color = 'blue';
@@ -174,14 +175,13 @@ export class Angel extends General {
 }
 
 export class Demon extends General {
-    constructor(name, x, y, width, height, sprite, direction, deployX, deployY, modeWarrior) {
-        super(name,x, y, width, height, sprite,direction, modeWarrior);
+    constructor(name, x, y, width, height, sprite, direction, deployX, deployY) {
+        super(name,x, y, width, height, sprite,direction);
         this.jumped = false;
         this.side = 'Demon';
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
-        this.modeWarrior = true;
         this.color = 'red';
     }
 }

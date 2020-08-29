@@ -11,7 +11,7 @@ export const listPlayers = [
     //     deployY: 80,
     // },
     {
-        type: 'Archangel',
+        type: 'Angel',
         name: 'miguel',
         x: 45,
         y: 0,
@@ -21,9 +21,10 @@ export const listPlayers = [
         direction: 'RIGHT',
         deployX: 20,
         deployY: 20,
+        side: 'Demon'
     },
     {
-        type: 'Archangel',
+        type: 'Demon',
         name: 'Jesus',
         x: 40,
         y: 0,
@@ -33,5 +34,6 @@ export const listPlayers = [
         direction: 'RIGHT',
         deployX: 80,
         deployY: 80,
+        side: 'Angel'
     },
 ]

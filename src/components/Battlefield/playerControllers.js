@@ -16,11 +16,10 @@
 
 const handlePedestal = (pedestal, player, spheres) => {
   let sphereIndex = spheres.findIndex(sphere => sphere.grabbedBy === player.name);
-  console.log(player)
   if(!pedestal.activated && sphereIndex >= 0){
     pedestal.side = player.side;
     pedestal.activated = true;
-    pedestal.color = 'yellow';
+    pedestal.color = (player.side === "Angel" ? 'blue' : 'red');
     spheres[sphereIndex].hide = true;
     spheres[sphereIndex].grabbedBy = '';
     player.sphereGrabbed = false;
