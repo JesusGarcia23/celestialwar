@@ -17,6 +17,7 @@ class General {
         this.deployX = deployX;
         this.deployY = deployY;
         this.modeWarrior = false;
+        this.king = false;
         this.jumped = false;
         this.powerJump = 20;
         this.totalJumped = 0;
@@ -142,7 +143,7 @@ class General {
     };
 
     drawCharacter = (ctx) => {
-        ctx.fillStyle = !this.modeWarrior ? this.color : 'purple';
+        ctx.fillStyle = !this.modeWarrior ? this.color : (!this.king ? 'purple' : 'yellow');
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
         // const characterSprite = new Image();
@@ -167,8 +168,8 @@ class Basic extends General {
 }
 
 export class Angel extends Basic {
-    constructor(name, x, y, width, height, sprite, deployX, deployY) {
-        super(name,x, y, width, height, sprite);
+    constructor(name, x, y, width, height, sprite, direction, deployX, deployY) {
+        super(name,x, y, width, height, sprite, direction);
         this.jumped = false;
         this.side = 'Angel';
         this.deployX = deployX;
@@ -179,10 +180,11 @@ export class Angel extends Basic {
 }
 
 export class Demon extends Basic {
-    constructor(name, x, y, width, height, sprite, deployX, deployY, modeWarrior) {
-        super(name,x, y, width, height, sprite, modeWarrior);
+    constructor(name, x, y, width, height, sprite, direction, deployX, deployY, modeWarrior) {
+        super(name,x, y, width, height, sprite,direction, modeWarrior);
         this.jumped = false;
         this.side = 'Demon';
+        this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
         this.modeWarrior = true;
@@ -191,11 +193,10 @@ export class Demon extends Basic {
 }
 
 export class King extends General {
-    attack(){
-        return 1;
-    }
-
-    fly(){
-        
+    constructor(name, x, y, width, height, sprite, direction, deployX, deployY){
+        super(name, x, y, width, height, sprite, direction, deployX, deployY);
+        this.modeWarrior = true;
+        this.color = "yellow";
+        this.king = true;
     }
 }
