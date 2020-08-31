@@ -195,7 +195,7 @@ export let listOfPlatforms = [
         x: 80,
         y: 30,
         xPreference: 'start',
-        color: 'purple'
+        color: 'green'
     },
     //SEVENTH ROW
     {
