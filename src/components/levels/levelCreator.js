@@ -2,6 +2,7 @@
 import { Resource } from '../Resource';
 import { WarriorPedestal } from '../WarriorPedestal';
 import { Sphere, SphereContainer } from '../Sphere';
+import { SphereCollector } from '../SphereCollector';
 import { resizeDimension , resizeCoor } from '../../utils/resizer';
 
 // SIZES: 
@@ -21,6 +22,9 @@ export const generateResources = (canvas, listOfResources) => {
             }
             case 'sphere-generator': {
                 return new SphereContainer(canvas, resource.name, resource.type, resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height));
+            }
+            case 'sphere-collector': {
+                return new SphereCollector(resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height),resizeDimension(resource.width, canvas.width), resizeDimension(resource.height, canvas.height), resource.side)
             }
             default: 
                 return null;

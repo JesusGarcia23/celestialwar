@@ -46,6 +46,9 @@ const Battlefield = (props) => {
           case 'warrior-pedestal': {
             return resource.drawPedestal(context);
           }
+          case 'sphere-collector': {
+            return resource.drawSphereCollector(context);
+          }
           default:
             return null;
         }

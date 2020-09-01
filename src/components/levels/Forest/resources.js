@@ -264,5 +264,23 @@ export let listOfPlatforms = [
         x: 67,
         y: 32.5,
     },
+    {
+        name: 'sphere-collector',
+        type: 'sphere-collector',
+        x: 35.3,
+        y: 0,
+        width: 14,
+        height: 20,
+        side: "Angel"
+    },
+    {
+        name: 'sphere-collector',
+        type: 'sphere-collector',
+        x: 50.7,
+        y: 0,
+        width: 14,
+        height: 20,
+        side: "Demon"
+    }
     
 ];
