@@ -68,6 +68,9 @@ class General {
             }
 
         }
+        if(obj.type === "sphere-collector"){
+            return false;
+        }
         
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){

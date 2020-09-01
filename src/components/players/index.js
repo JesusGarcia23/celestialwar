@@ -11,9 +11,9 @@ export const listPlayers = [
     //     deployY: 80,
     // },
     {
-        type: 'Angel',
+        type: 'Demon',
         name: 'miguel',
-        x: 45,
+        x: 55,
         y: 0,
         width: 1.2,
         height: 5,
@@ -24,7 +24,7 @@ export const listPlayers = [
         side: 'Demon'
     },
     {
-        type: 'Demon',
+        type: 'Angel',
         name: 'Jesus',
         x: 40,
         y: 0,
