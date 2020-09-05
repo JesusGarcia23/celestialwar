@@ -119,6 +119,7 @@ export const moveCharacters = () => {
       touched = mapLevel.map(resource => {
         return player.hitTop(resource);
       })
+
       if(touched !== null && touched.indexOf(true) < 0){
         player.y -= 8;
       }else if(touched.indexOf(true) >= 0){
@@ -130,7 +131,7 @@ export const moveCharacters = () => {
   export function handleJumping(player, mapLevel){
     let touched = null;
     player.onFloor = false;
-    if(player.jumped && mapLevel.length > 0){
+    if(player.jumped && Keys.up && mapLevel.length > 0){
       touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
         return player.hitTop(resource);
       })

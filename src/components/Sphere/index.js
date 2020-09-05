@@ -1,5 +1,5 @@
 export class Sphere {
-    constructor(radius, x, y, color){
+    constructor(radius, x, y){
         this.radius = radius;
         this.x = x;
         this.y = y;
