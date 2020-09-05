@@ -55,16 +55,16 @@ class General {
         
             let dx= distX - this.width / 2;
             let dy= distY - this.height / 2;
-            console.log(( dx*dx+dy*dy <= (circle.radius*circle.radius)))
             return ( dx*dx+dy*dy <= (circle.radius*circle.radius));
     }
 
 
-    insertSphere = (collector) => {
-        let touched = collector.sockets.map(socket => {
-            return this.sphereCollision(socket);
-        })
+    handleInsertSphere = (socket) => {
+        let touched =  this.sphereCollision(socket);
         console.log(touched)
+        if (touched && this.sphereGrabbed && socket.side === this.side) {
+            socket.color = "blue"
+        }
     }
     
     checkCollision = (obj) => {
@@ -77,7 +77,6 @@ class General {
 
         }
         if(obj.type === "sphere-collector"){
-            this.insertSphere(obj)
             return false;
         }
         
@@ -98,8 +97,10 @@ class General {
     }
 
     hitTop = (obj) => {
+        if(obj.type === "sphere-socket") {
+            this.handleInsertSphere(obj)
+        }
         if(obj.type === "sphere-collector") {
-            this.checkCollision(obj);
             return false;
         }
 

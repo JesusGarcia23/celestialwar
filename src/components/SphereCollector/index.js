@@ -15,7 +15,7 @@ export class SphereCollector {
     drawSphereCollector = (ctx) => {
         ctx.fillStyle = this.side === "Angel" ? "purple" : "Orange";
         ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.generateSockets(ctx)
+        // this.generateSockets(ctx)
     }
 
     generateSockets = (ctx) => {
@@ -35,11 +35,12 @@ export class SphereCollector {
 }
 
 export class SphereCollectorSocket {
-    constructor(collector, radius, x, y){
-        this.collector = collector;
-        this.radius = radius;
+    constructor(x, y, radius, side){
+        this.type = "sphere-socket";
         this.x = x;
         this.y = y;
+        this.radius = radius;
+        this.side = side;
         this.color = "darkgray"
     }
 

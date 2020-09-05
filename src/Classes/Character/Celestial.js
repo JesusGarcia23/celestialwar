@@ -33,7 +33,6 @@ class General {
 export class Basic extends General {
     
     move(key){
-        console.log(this.name + ' MOVED!')
         switch(key.toLowerCase()){
             // RIGHT
             case 'd':

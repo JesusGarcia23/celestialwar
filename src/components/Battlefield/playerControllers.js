@@ -243,7 +243,6 @@ export const moveCharacters = () => {
                   })
 
                   if(touched.indexOf(true) >= 0){
-                    console.log(touched)
                     player.x -= 6;
                   }
                   player.x += 6;

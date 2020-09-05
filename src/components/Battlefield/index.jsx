@@ -49,6 +49,9 @@ const Battlefield = (props) => {
           case 'sphere-collector': {
             return resource.drawSphereCollector(context);
           }
+          case 'sphere-socket': {
+            return resource.drawSphereCollectorSocket(context);
+          }
           default:
             return null;
         }

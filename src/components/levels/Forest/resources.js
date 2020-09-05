@@ -281,6 +281,14 @@ export let listOfPlatforms = [
         width: 14,
         height: 20,
         side: "Demon"
+    },
+    {
+        name: 'sphere-socket',
+        type: 'sphere-socket',
+        x: 35.3 + 2,
+        y: 0 + 10,
+        radius: 5,
+        side: "Angel"
     }
     
 ];
