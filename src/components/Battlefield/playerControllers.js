@@ -68,7 +68,7 @@ export const moveCharacters = () => {
     let touched = null;
 
     if(mapLevel.length > 0){
-      touched = mapLevel.filter(resource => resource.type !== 'warrior-pedestal').map(rect => {
+      touched = mapLevel.filter(resource => resource.type !== 'warrior-pedestal' && resource.type !== 'sphere-collector').map(rect => {
         let distX = Math.abs(circle.x - rect.x - rect.width / 2);
         let distY = Math.abs(circle.y - rect.y - rect.height / 2);
 
