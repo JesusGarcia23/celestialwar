@@ -114,6 +114,9 @@ class General {
         if(obj.type === 'warrior-pedestal'){
             return false;
         }
+        if(obj.type === "sphere-collector") {
+            return false;
+        }
         
          if((this.y + this.height + 4 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
             this.onFloor = true;

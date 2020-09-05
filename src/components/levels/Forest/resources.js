@@ -392,7 +392,7 @@ export let listOfPlatforms = [
         x: 50.7  + 3,
         y: 0 + 8,
         radius: 5,
-        side: "Angel"
+        side: "Demon"
     },
     {
         name: 'sphere-socket',
@@ -400,7 +400,7 @@ export let listOfPlatforms = [
         x: 50.7  + 4,
         y: 0 + 10,
         radius: 5,
-        side: "Angel"
+        side: "Demon"
     },
     {
         name: 'sphere-socket',
@@ -408,7 +408,7 @@ export let listOfPlatforms = [
         x: 50.7  + 4,
         y: 0 + 6,
         radius: 5,
-        side: "Angel"
+        side: "Demon"
     },
     {
         name: 'sphere-socket',
@@ -416,7 +416,7 @@ export let listOfPlatforms = [
         x: 50.7  + 5,
         y: 0 + 8,
         radius: 5,
-        side: "Angel"
+        side: "Demon"
     },
     {
         name: 'sphere-socket',
@@ -424,7 +424,7 @@ export let listOfPlatforms = [
         x: 50.7 + 6,
         y: 0 + 10,
         radius: 5,
-        side: "Angel"
+        side: "Demon"
     },
     {
         name: 'sphere-socket',
