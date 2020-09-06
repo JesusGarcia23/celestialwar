@@ -3,7 +3,7 @@ import { Resource } from '../Resource';
 import { WarriorPedestal } from '../WarriorPedestal';
 import { Sphere, SphereContainer } from '../Sphere';
 import { SphereCollector, SphereCollectorSocket } from '../SphereCollector';
-import { resizeDimension , resizeCoor } from '../../utils/resizer';
+import { resizeDimension , resizeRadius, resizeCoor } from '../../utils/resizer';
 
 // SIZES: 
 // - platforms 3% of Canvas height
@@ -27,7 +27,7 @@ export const generateResources = (canvas, listOfResources) => {
                 return new SphereCollector(resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height),resizeDimension(resource.width, canvas.width), resizeDimension(resource.height, canvas.height), resource.side)
             }
             case 'sphere-socket': {
-                return new SphereCollectorSocket(resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height), resource.radius, resource.side)
+                return new SphereCollectorSocket(resizeCoor(resource.x, canvas.width), resizeCoor(resource.y, canvas.height), resizeRadius(resource.radius, canvas), resource.side)
             }
             default: 
                 return null;
