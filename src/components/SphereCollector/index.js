@@ -37,6 +37,7 @@ export class SphereCollector {
 export class SphereCollectorSocket {
     constructor(x, y, radius, side){
         this.type = "sphere-socket";
+        this.empty = true;
         this.x = x;
         this.y = y;
         this.radius = radius;

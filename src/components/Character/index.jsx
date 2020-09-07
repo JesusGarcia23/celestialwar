@@ -59,11 +59,14 @@ class General {
     }
 
 
-    handleInsertSphere = (socket) => {
+    handleInsertSphere = (socket, spheres) => {
+        let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === this.name);
         let touched =  this.sphereCollision(socket);
-        console.log(touched)
-        if (touched && this.sphereGrabbed && socket.side === this.side) {
-            socket.color = "blue"
+        if (touched && this.sphereGrabbed && socket.side === this.side && socket.empty && sphereGrabbed.length > 0) {
+            sphereGrabbed[0].grabbedBy = "";
+            this.sphereGrabbed = false;
+            socket.empty = false;
+            socket.color = "blue";
         }
     }
     
@@ -96,9 +99,9 @@ class General {
         return false;
     }
 
-    hitTop = (obj) => {
+    hitTop = (obj, spheres) => {
         if(obj.type === "sphere-socket") {
-            this.handleInsertSphere(obj)
+            this.handleInsertSphere(obj, spheres)
         }
         if(obj.type === "sphere-collector") {
             return false;

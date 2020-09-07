@@ -72,7 +72,7 @@ const Battlefield = (props) => {
 
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
-        handleJumping(player, mapLevel);
+        handleJumping(player, mapLevel, spheres);
         handleMovement(player, mapLevel, players, spheres, canvasRef.current);
         player.drawCharacter(context);
       })
