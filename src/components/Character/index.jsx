@@ -25,12 +25,12 @@ class General {
         this.kills = 0;
     }
 
-    touchingCheck(obj){
+    touchingCheck(obj, gameStatus){
 
         // CHECK TOUCHING OTHER PLAYERS
         if(!obj.type){
             if(this.modeWarrior){
-                return this.attack(obj);
+                return this.attack(obj, gameStatus);
             }else if(obj.modeWarrior === true){
                 this.receiveDamage();
             }
@@ -59,10 +59,15 @@ class General {
     }
 
 
-    handleInsertSphere = (socket, spheres) => {
+    handleInsertSphere = (socket, spheres, gameStatus) => {
         let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === this.name);
         let touched =  this.sphereCollision(socket);
         if (touched && this.sphereGrabbed && socket.side === this.side && socket.empty && sphereGrabbed.length > 0) {
+            if (this.side === "Angel") {
+                gameStatus.angelSpheresCollected += 1;
+            } else if (this.side === "Demon") {
+                gameStatus.demonSpheresCollected += 1;
+            }
             sphereGrabbed[0].grabbedBy = "";
             this.sphereGrabbed = false;
             socket.empty = false;
@@ -70,7 +75,7 @@ class General {
         }
     }
     
-    checkCollision = (obj) => {
+    checkCollision = (obj, spheres, gameStatus) => {
         if(obj.radius !== null && obj.type === 'sphere'){
             let touched = this.sphereCollision(obj);
             if(touched && !this.sphereGrabbed && !this.modeWarrior && !obj.hide){
@@ -85,23 +90,23 @@ class General {
         
         // RIGHT
         if( ( this.x + this.width + 2 > obj.x) && this.x < obj.x && (this.y + this.height > obj.y) && (this.y < obj.y + obj.height) && this.direction === 'RIGHT'){
-            return this.touchingCheck(obj);
+            return this.touchingCheck(obj, gameStatus);
         }// LEFT
         else if( (this.x < obj.x + obj.width + 2) && this.x > obj.x && (this.y + this.height > obj.y + 8) && (this.y < obj.y + obj.height) && this.direction === 'LEFT'){
-            return this.touchingCheck(obj);
+            return this.touchingCheck(obj, gameStatus);
         }// UP      
         else if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && this.direction === 'UP'){
-            return this.touchingCheck(obj);
+            return this.touchingCheck(obj, gameStatus);
         }// BOTTOM
         else if((this.y + this.height + 2 > obj.y) && (this.x > obj.x) && (this.y < obj.y) && (this.x + this.width < obj.x + obj.width) && this.direction === 'DOWN'){
-            return this.touchingCheck(obj);
+            return this.touchingCheck(obj, gameStatus);
         }
         return false;
     }
 
-    hitTop = (obj, spheres) => {
+    hitTop = (obj, spheres, gameStatus) => {
         if(obj.type === "sphere-socket") {
-            this.handleInsertSphere(obj, spheres)
+            this.handleInsertSphere(obj, spheres, gameStatus)
         }
         if(obj.type === "sphere-collector") {
             return false;
@@ -155,7 +160,7 @@ class General {
     };
 
     
-    attack = (otherPlayer) => {
+    attack = (otherPlayer, gameStatus) => {
         if(!otherPlayer.alive){
             return false;
         }
@@ -166,6 +171,11 @@ class General {
                 return true;
             }else{
                 if(otherPlayer.king){
+                    if(this.side === "Angel") {
+                        gameStatus.demonDeath += 1;
+                    }else if(this.side === "Demon") {
+                        gameStatus.archangelDeath += 1;
+                    }
                     this.kills += 1;
                 }
                 otherPlayer.receiveDamage();
@@ -212,6 +222,7 @@ export class Demon extends General {
         this.deployX = deployX;
         this.deployY = deployY;
         this.color = 'red';
+        this.king = true;
     }
 }
 

@@ -5,11 +5,13 @@ import { moveCharacters, handleMovement, handleGravity, handleSphereGravity, Rec
 import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
+import { GameStatus } from '../GameStatus';
 import { Sphere } from '../Sphere'
 import './style.css';
 
 const testSphere = new Sphere(5, 700, 0, 'cyan');
 const testSphere2 = new Sphere(5, 680, 0, 'cyan');
+const testGameStatus = new GameStatus();
 const Battlefield = (props) => {
 
   const modeDevelop = true;
@@ -65,15 +67,15 @@ const Battlefield = (props) => {
     if(gameOn) {
       const myCanvas = canvasRef.current;
       let context = myCanvas.getContext('2d');
-
+      console.log(testGameStatus);
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
 
       players.filter(player => player.alive === true).map(player => {
         handleGravity(player, mapLevel);
-        handleJumping(player, mapLevel, spheres);
-        handleMovement(player, mapLevel, players, spheres, canvasRef.current);
+        handleJumping(player, mapLevel, spheres, testGameStatus);
+        handleMovement(player, mapLevel, players, spheres, canvasRef.current, testGameStatus);
         player.drawCharacter(context);
       })
 

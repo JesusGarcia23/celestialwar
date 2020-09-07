@@ -30,10 +30,6 @@ const handlePedestal = (pedestal, player, spheres) => {
   }
 }
 
-const handleSphereInsert = (socket, player, spheres) => {
-  let sphereIndex = spheres.findIndex(sphere => sphere.grabbedBy === player.name);
-} 
-
 export const moveCharacters = () => {
     window.onkeydown = function(e){
       
@@ -133,12 +129,12 @@ export const moveCharacters = () => {
     }
   }
 
-  export function handleJumping(player, mapLevel, spheres){
+  export function handleJumping(player, mapLevel, spheres, gameStatus){
     let touched = null;
     player.onFloor = false;
     if(player.jumped && Keys.up && mapLevel.length > 0){
       touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
-        return player.hitTop(resource, spheres);
+        return player.hitTop(resource, spheres, gameStatus);
       })
       if(touched !== null && touched.indexOf(true) < 0 && Keys.up){
         if(player.modeWarrior){
@@ -153,7 +149,7 @@ export const moveCharacters = () => {
     }
   }
 
-  export function handleMovement(player, mapLevel, otherPlayers, spheres, canvas){
+  export function handleMovement(player, mapLevel, otherPlayers, spheres, canvas, gameStatus){
     const globalMap = [...mapLevel, ...otherPlayers, ...spheres];
     let touched = null;
 
@@ -190,7 +186,7 @@ export const moveCharacters = () => {
               if(Keys.left && (player.x > 4)) {
                 player.direction = "LEFT";
                 touched = globalMap.map(resource => {
-                  return player.checkCollision(resource, spheres);
+                  return player.checkCollision(resource, spheres, gameStatus);
                 })
 
                 if(touched.indexOf(true) >= 0){
@@ -202,7 +198,7 @@ export const moveCharacters = () => {
               if(Keys.right && (player.x + player.width + 4 < canvas.width)){
                 player.direction = "RIGHT";
                 touched = globalMap.map(resource => {
-                  return player.checkCollision(resource);
+                  return player.checkCollision(resource, spheres, gameStatus);
                 })
 
                 if(touched.indexOf(true) >= 0){
