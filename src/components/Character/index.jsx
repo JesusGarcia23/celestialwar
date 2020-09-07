@@ -177,6 +177,11 @@ class General {
         ctx.fillStyle = !this.modeWarrior ? this.color : (!this.king ? 'purple' : 'yellow');
         ctx.fillRect(this.x, this.y, this.width, this.height);
 
+        ctx.fillStyle = 'orange';
+        ctx.font = 'bold 12px serif';
+        ctx.fillText(`${this.name}`, this.x + 12, this.y - 10);
+        ctx.textAlign = "center";
+
         // const characterSprite = new Image();
         // characterSprite.src = this.sprite;
         // createContext.drawImage(characterSprite, this.x, this.y, this.width, this.height)
