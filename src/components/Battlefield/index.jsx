@@ -67,7 +67,6 @@ const Battlefield = (props) => {
     if(gameOn) {
       const myCanvas = canvasRef.current;
       let context = myCanvas.getContext('2d');
-      console.log(testGameStatus);
       const loop = () => {
       context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
       drawMap(context);
@@ -83,6 +82,8 @@ const Battlefield = (props) => {
         sphere.drawSphere(context, players);
         handleSphereGravity(sphere, mapLevel);
       })
+
+      testGameStatus.checkStatus();
 
       requestAnimationFrame(loop);
       }
