@@ -1,7 +1,7 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { moveCharacters, handleMovement, handleGravity, handleSphereGravity, RectCircleColliding,  handleJumping } from './playerControllers';
+import { moveCharacters, handleMovement, handleGravity, handleSphereGravity,  handleJumping } from './playerControllers';
 import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';

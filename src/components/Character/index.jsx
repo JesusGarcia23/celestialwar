@@ -16,7 +16,7 @@ class General {
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
-        this.modeWarrior = false;
+        this.modeWarrior = true;
         this.king = false;
         this.jumped = false;
         this.powerJump = 20;
@@ -159,6 +159,18 @@ class General {
         }, 2500)
     };
 
+    bounceEffect = (otherPlayer) => {
+        console.log(otherPlayer)
+        if(otherPlayer.direction === "RIGHT") {
+            otherPlayer.x -= 50;
+            this.x += 50;
+        }
+        else if(otherPlayer.direction === "LEFT") {
+            otherPlayer.x += 50;
+            this.x -= 50;
+        }
+    }
+
     
     attack = (otherPlayer, gameStatus) => {
         if(!otherPlayer.alive){
@@ -168,6 +180,7 @@ class General {
             otherPlayer.receiveDamage();
         }else if(otherPlayer.modeWarrior){
             if(otherPlayer.direction !== this.direction){
+                this.bounceEffect(otherPlayer);
                 return true;
             }else{
                 if(otherPlayer.king){
