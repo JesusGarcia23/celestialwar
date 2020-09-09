@@ -19,6 +19,7 @@ class General {
         this.modeWarrior = true;
         this.king = false;
         this.jumped = false;
+        this.clashing = false;
         this.powerJump = 20;
         this.totalJumped = 0;
         this.onFloor = false;
@@ -159,16 +160,33 @@ class General {
         }, 2500)
     };
 
-    bounceEffect = (otherPlayer) => {
-        console.log(otherPlayer)
-        if(otherPlayer.direction === "RIGHT") {
-            otherPlayer.x -= 50;
-            this.x += 50;
-        }
-        else if(otherPlayer.direction === "LEFT") {
-            otherPlayer.x += 50;
-            this.x -= 50;
-        }
+    bounceEffect = (resources) => {
+        let touched = null;
+
+        touched = resources.map(resource => {
+            return this.checkCollision(resource);
+        })
+
+        if(touched.indexOf(true) < 0){
+            if(this.direction === "RIGHT") {
+                this.x -= 10;
+            }
+            else if(this.direction === "LEFT") {
+                this.x += 10;
+            }
+
+         }else{
+            if(this.direction === "RIGHT") {
+                this.x += 10;
+            }
+            else if(this.direction === "LEFT") {
+                this.x -= 10;
+            }
+         }
+
+        setTimeout(() => {
+            this.clashing = false;
+        },100)
     }
 
     
@@ -180,7 +198,8 @@ class General {
             otherPlayer.receiveDamage();
         }else if(otherPlayer.modeWarrior){
             if(otherPlayer.direction !== this.direction){
-                this.bounceEffect(otherPlayer);
+                otherPlayer.clashing = true;
+                this.clashing = true;
                 return true;
             }else{
                 if(otherPlayer.king){

@@ -129,6 +129,13 @@ export const moveCharacters = () => {
     }
   }
 
+  export function handleClashing(player, mapLevel){
+ 
+    if(player.clashing && mapLevel.length > 0) {
+        player.bounceEffect(mapLevel);
+    }
+  }
+
   export function handleJumping(player, mapLevel, spheres, gameStatus){
     let touched = null;
     player.onFloor = false;

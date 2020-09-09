@@ -1,7 +1,7 @@
 // levelCreator is the function to call to make platforms
 
 import React, { useEffect, useRef, useState } from 'react';
-import { moveCharacters, handleMovement, handleGravity, handleSphereGravity,  handleJumping } from './playerControllers';
+import { moveCharacters, handleMovement, handleGravity, handleSphereGravity,  handleJumping, handleClashing } from './playerControllers';
 import { forest } from '../levels/Forest'
 import { listPlayers } from '../players';
 import { playersCreator } from '../Character/playerGenerator';
@@ -75,6 +75,7 @@ const Battlefield = (props) => {
         handleGravity(player, mapLevel);
         handleJumping(player, mapLevel, spheres, testGameStatus);
         handleMovement(player, mapLevel, players, spheres, canvasRef.current, testGameStatus);
+        handleClashing(player, mapLevel)
         player.drawCharacter(context);
       })
 
