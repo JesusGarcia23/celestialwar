@@ -144,9 +144,9 @@ export const moveCharacters = () => {
         return player.hitTop(resource, spheres, gameStatus);
       })
       if(touched !== null && touched.indexOf(true) < 0 && Keys.up){
-        if(player.modeWarrior){
+        if(player.modeWarrior && player.y > 5){
           player.y -= 15;
-        }else if(!player.modeWarrior && player.totalJumped <= player.powerJump){
+        }else if(!player.modeWarrior && player.totalJumped <= player.powerJump && player.y > 5){
           player.totalJumped += 1;
           player.y -= 20;
         }

@@ -16,7 +16,7 @@ class General {
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;
-        this.modeWarrior = true;
+        this.modeWarrior = false;
         this.king = false;
         this.jumped = false;
         this.clashing = false;
@@ -111,6 +111,9 @@ class General {
         }
         if(obj.type === "sphere-collector") {
             return false;
+        }
+        if(this.y < 10) {
+            return true;
         }
 
         if( (this.y - 7 < obj.y + obj.height + 7) && (this.x + this.width > obj.x + 4) && (this.x < obj.x + obj.width) && (this.y > obj.y)){
