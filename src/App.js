@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Switch, Route} from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Battlefield from './components/Battlefield';
 import LandingPage from './pages/LandingPage';
 import Lobby from './pages/Lobby';
 
 function App() {
+
+  const [ user, setUser ] = useState(null);
+  
   return (
     <div className="App">
       <Switch>
