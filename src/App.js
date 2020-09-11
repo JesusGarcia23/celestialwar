@@ -12,8 +12,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
-      <Route exact path='/' component={LandingPage}/>
+      <Route exact path='/' render={(props) => <LandingPage  {...props} user={user} setUser={setUser}/>}/>
       <Route exact path='/lobby' component={Lobby}/>
+      <Route exact path='/battlefield' render={(props) => <Battlefield {...props} user={user} setUser={setUser}/>}/>
       <Route exact path='/test' component={Battlefield}/>
       </Switch>
     </div>

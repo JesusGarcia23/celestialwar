@@ -14,6 +14,8 @@ const testSphere2 = new Sphere(5, 680, 0, 'cyan');
 const testGameStatus = new GameStatus();
 const Battlefield = (props) => {
 
+
+  const { user } = props;
   const modeDevelop = true;
   const [ gameOn, setGameOn ] = useState(false);
   const [ players, setPlayers ] = useState([]);
@@ -102,7 +104,12 @@ const Battlefield = (props) => {
   update();
   moveCharacters();
 
-  return (<><canvas id='battlefield' ref={canvasRef}></canvas><button onClick={e => startGame()}>Start game</button></>)
+  console.log(user)
+
+  return (<>
+  <canvas id='battlefield' ref={canvasRef}></canvas>
+  <div>Hello {user}</div>
+  <button onClick={e => startGame()}>Start game</button></>)
 }
 
 export default Battlefield;
