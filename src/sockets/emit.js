@@ -4,6 +4,6 @@ export const testFunction = () => {
     socket.emit('hellosocket');
 }
 
-export const addPlayer = () => {
-    socket.emit('addNewPlayer');
+export const addPlayer = (username) => {
+    socket.emit('addNewPlayer', username);
 }

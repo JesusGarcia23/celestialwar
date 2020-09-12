@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { addPlayer } from '../../sockets/emit';
 
 import { Link } from 'react-router-dom';
+
+import Context from '../../Context/Context';
 
 const LandingPage = (props) => {
 
     const { user, setUser } = props;
+
+    const myContext = useContext(Context);
 
     const [ formInput, setFormInput ] = useState({username: ""});
 
@@ -13,18 +18,20 @@ const LandingPage = (props) => {
       setFormInput((oldValues) => ({...oldValues, [name]: value }));
     } 
 
+    console.log(myContext)
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        setUser(formInput.username);
-        props.history.push('/battlefield')
+        addPlayer(formInput.username);
+        props.history.push('/lobby')
     }
-    console.log(formInput)
+
     return (
         <div>
         <h1>Celestial War</h1>
         <h3>Enter your username</h3>
         <input name="username" type="text" onChange={e => handleChange(e) } value={formInput.username}></input>
-        <button onClick={e => handleSubmit(e)}>Go to Battlefield</button>
+        <button onClick={e => handleSubmit(e)}>Go to Lobby</button>
         <div>{user}</div>
         </div>
     )

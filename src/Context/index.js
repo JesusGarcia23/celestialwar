@@ -4,10 +4,18 @@ import { initSockets } from '../sockets';
 
 const ContextProvider = (props) => {
     const [ gameStatus, setGameStatus ] = useState({});
+    const [ user, setUser ] = useState(null);
 
-    useEffect(() => initSockets({ setGameStatus }), [initSockets]);
+    const store = {
+        gameStatus,
+        setGameStatus,
+        user,
+        setUser
+    }
+
+    useEffect(() => initSockets({ store }), [initSockets]);
     return (
-        <Context.Provider value={gameStatus}>
+        <Context.Provider value={store}>
             {props.children}
         </Context.Provider>
     )
