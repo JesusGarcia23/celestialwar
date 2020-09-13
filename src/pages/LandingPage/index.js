@@ -7,7 +7,7 @@ import Context from '../../Context/Context';
 
 const LandingPage = (props) => {
 
-    const { user, setUser } = props;
+    const { user } = props;
 
     const myContext = useContext(Context);
 
@@ -17,8 +17,6 @@ const LandingPage = (props) => {
       const { value, name } = event.target;
       setFormInput((oldValues) => ({...oldValues, [name]: value }));
     } 
-
-    console.log(myContext)
 
     const handleSubmit = (event) => {
         event.preventDefault();

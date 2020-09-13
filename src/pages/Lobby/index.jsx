@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Context from '../../Context/Context';
-import {testFunction} from '../../sockets/emit';
+import {testFunction, getAllRooms} from '../../sockets/emit';
 
 const Lobby = (props) => {
 
     const myContext = useContext(Context);
+
+    const { rooms, setRooms } = myContext;
 
     console.log(myContext)
     
@@ -13,12 +15,15 @@ const Lobby = (props) => {
     const testCallToSocket = () => {
         testFunction();
     }
+    useEffect(() => {
+        getAllRooms();
+    }, [])
 
     return (
         <div>
             <h2>Lobby</h2>
             <div>{user}</div>
-            <button onClick={e => testCallToSocket(e)}>Click me to call Server</button>
+            <button onClick={e => testCallToSocket(e)}>Create game</button>
         </div>
     )
 }

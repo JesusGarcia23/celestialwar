@@ -5,12 +5,15 @@ import { initSockets } from '../sockets';
 const ContextProvider = (props) => {
     const [ gameStatus, setGameStatus ] = useState({});
     const [ user, setUser ] = useState(null);
+    const [ rooms, setRooms ] = useState({});
 
     const store = {
         gameStatus,
         setGameStatus,
         user,
-        setUser
+        setUser,
+        rooms,
+        setRooms
     }
 
     useEffect(() => initSockets({ store }), [initSockets]);

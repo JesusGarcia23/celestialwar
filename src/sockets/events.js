@@ -1,6 +1,6 @@
 import { socket } from './index';
 
-export const socketEvents = ({ setGameStatus, setUser }) => {
+export const socketEvents = ({ setGameStatus, setUser, setRooms }) => {
     socket.on('connection', (data) => {
         console.log(data);
     })
@@ -11,6 +11,19 @@ export const socketEvents = ({ setGameStatus, setUser }) => {
             setUser(response.username);
             // localStorage.setItem('user', )
         }
+    })
+
+    socket.on('newRoomCreated', (response) => {
+        console.log(response);
+        if (response.accepted) {
+            // setUser(response.room);
+            // localStorage.setItem('user', )
+        }
+    })
+
+    socket.on('sendAllRooms', (response) => {
+        console.log(response);
+        setRooms(response)
     })
 }
 
