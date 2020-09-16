@@ -1,15 +1,16 @@
 import { socket } from './index';
 
-export const socketEvents = ({ setGameStatus, setUser, setRooms }) => {
+export const socketEvents = ({ setGameStatus, setUser, setRooms, setError }) => {
     socket.on('connection', (data) => {
         console.log(data);
     })
 
     socket.on('newPlayerAccepted', (response) => {
-        console.log(response);
         if (response.accepted) {
-            setUser(response.username);
-            // localStorage.setItem('user', )
+            setUser(response);
+            setError(oldState => ({...oldState, usernameAlreadyExists: false}));
+        } else {
+            setError(oldState => ({...oldState, usernameAlreadyExists: true}));
         }
     })
 

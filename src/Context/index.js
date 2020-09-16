@@ -6,6 +6,7 @@ const ContextProvider = (props) => {
     const [ gameStatus, setGameStatus ] = useState({});
     const [ user, setUser ] = useState(null);
     const [ rooms, setRooms ] = useState({});
+    const [ error, setError ] = useState({})
 
     const store = {
         gameStatus,
@@ -13,7 +14,9 @@ const ContextProvider = (props) => {
         user,
         setUser,
         rooms,
-        setRooms
+        setRooms,
+        error,
+        setError,
     }
 
     useEffect(() => initSockets({ store }), [initSockets]);

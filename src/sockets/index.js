@@ -5,7 +5,7 @@ import { testFunction } from './emit';
 export const socket = io('http://localhost:5000');
 
 export const initSockets = ({ store }) => {
-    const { setGameStatus, user, setUser, gameStatus, rooms, setRooms } = store;
-    socketEvents({ setGameStatus, setUser, setRooms })
+    const { setGameStatus, user, setUser, gameStatus, rooms, setRooms, error, setError } = store;
+    socketEvents({ setGameStatus, setUser, setRooms, setError })
     getGameStatus({ setGameStatus, gameStatus });
 }

@@ -40,7 +40,7 @@ const Lobby = (props) => {
     return (
         <div>
             <h2>Lobby</h2>
-            <div>{user}</div>
+            <div>{user && user.username}</div>
             {showCreateGame && 
                 <form onSubmit={handleCreateRoom}>
                     <label htmlFor="roomName">Room Name</label>
