@@ -17,13 +17,14 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError }) => 
     socket.on('newRoomCreated', (response) => {
         console.log(response);
         if (response.accepted) {
+            setRooms(response)
             // setUser(response.room);
             // localStorage.setItem('user', )
         }
     })
 
     socket.on('sendAllRooms', (response) => {
-        console.log(response);
+        console.log(response)
         setRooms(response)
     })
 }
