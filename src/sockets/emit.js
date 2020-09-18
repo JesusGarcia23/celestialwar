@@ -17,3 +17,8 @@ export const createNewRoom = (newRoom) => {
     console.log(newRoom)
     socket.emit('createNewRoom', newRoom);
 }
+
+export const joinRoom = (roomId) => {
+    console.log("JOINING TO... ", roomId);
+    socket.emit('joinRoom', roomId);
+}

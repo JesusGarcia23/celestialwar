@@ -37,9 +37,9 @@ const Lobby = (props) => {
         setFormInput(oldState => ({...oldState, [name]: value}))
     }
 
-    const showListOfRooms = (roomlist) => {
-        if(roomlist.length > 0) {
-            return roomlist.map(room => <li>{room.name} <button>Join Room</button></li>)
+    const showListOfRooms = () => {
+        if(rooms.length > 0) {
+            return rooms.map(room => <li>{room.name} <button>Join Room</button></li>)
         }
     }
 
@@ -61,7 +61,7 @@ const Lobby = (props) => {
             <div>
                 <h2>List of Rooms</h2>
                 <ul>
-                {showListOfRooms(rooms)}
+                {showListOfRooms()}
                 </ul>
             </div>
         </div>
