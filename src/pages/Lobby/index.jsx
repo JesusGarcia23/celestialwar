@@ -10,7 +10,7 @@ const Lobby = (props) => {
 
     const myContext = useContext(Context);
 
-    const { rooms, setRooms } = myContext;
+    const { rooms } = myContext;
 
     const [ showCreateGame, setShowCreateGame ] = useState(false);
 
@@ -37,6 +37,14 @@ const Lobby = (props) => {
         setFormInput(oldState => ({...oldState, [name]: value}))
     }
 
+    const showListOfRooms = (roomlist) => {
+        if(roomlist.length > 0) {
+            return roomlist.map(room => <li>{room.name} <button>Join Room</button></li>)
+        }
+    }
+
+    console.log(rooms)
+
     return (
         <div>
             <h2>Lobby</h2>
@@ -49,6 +57,13 @@ const Lobby = (props) => {
                 </form>
             }
             <button onClick={e => showCreateGameModal(e)}>Create game</button>
+
+            <div>
+                <h2>List of Rooms</h2>
+                <ul>
+                {showListOfRooms(rooms)}
+                </ul>
+            </div>
         </div>
     )
 }
