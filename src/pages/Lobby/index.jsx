@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Context from '../../Context/Context';
-import {testFunction, getAllRooms, createNewRoom } from '../../sockets/emit';
+import { getAllRooms, createNewRoom, joinRoom } from '../../sockets/emit/roomEmit';
 
 const Lobby = (props) => {
 
@@ -37,9 +37,13 @@ const Lobby = (props) => {
         setFormInput(oldState => ({...oldState, [name]: value}))
     }
 
+    const joinToRoom = (event, roomId) => {
+        joinRoom(user, roomId);
+    }
+
     const showListOfRooms = () => {
         if(rooms.length > 0) {
-            return rooms.map(room => <li key={room.id}>{room.name} <button>Join Room</button></li>)
+            return rooms.map(room => <li key={room.id}>{room.name} <button onClick={e => joinToRoom(e, room.id)}>Join Room</button></li>)
         }
     }
 

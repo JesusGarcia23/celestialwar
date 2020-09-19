@@ -1,12 +1,4 @@
-import { socket } from './index';
-
-export const testFunction = () => {
-    socket.emit('hellosocket');
-}
-
-export const addPlayer = (username) => {
-    socket.emit('addNewPlayer', username);
-}
+import { socket } from '../index';
 
 export const getAllRooms = () => {
     socket.emit('getAllRooms');
@@ -18,7 +10,7 @@ export const createNewRoom = (newRoom) => {
     socket.emit('createNewRoom', newRoom);
 }
 
-export const joinRoom = (roomId) => {
+export const joinRoom = (player, roomId) => {
     console.log("JOINING TO... ", roomId);
-    socket.emit('joinRoom', roomId);
+    socket.emit('joinRoom', {player, roomId});
 }

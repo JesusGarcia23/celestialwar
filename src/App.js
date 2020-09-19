@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <Switch>
       <Route exact path='/' render={(props) => <LandingPage  {...props} />}/>
-      <Route exact path='/lobby' component={Lobby}/>
+      <PrivateRoute exact path='/lobby' component={Lobby}/>
       <Route exact path='/battlefield' render={(props) => <Battlefield {...props} />}/>
       <Route exact path='/test' component={Battlefield}/>
       <PrivateRoute exact path='/test2' component={Lobby}/>

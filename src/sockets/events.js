@@ -1,58 +1,30 @@
 import { socket } from './index';
-import { Redirect } from 'react-router-dom'
+import roomEvents from './events/roomEvents';
+import userEvents from './events/userEvents';
+import { Redirect } from 'react-router-dom';
 
 export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading }) => {
     socket.on('connection', (data) => {
         console.log(data);
     })
 
-    socket.on('loggedIn', (response) => {
-        console.log(response)
-        if(response.accepted) {
-            setUser(response);
-            localStorage.setItem('token', response.username);
-        }else {
-            setUser(response);
-        }
-    })
+    userEvents.loggedIn(socket, setUser);
+    userEvents.newPlayerAccepted(socket, setUser, setError)
 
-    socket.on('newPlayerAccepted', (response) => {
-        if (response.accepted) {
-            setUser(response);
-            localStorage.setItem('token', response.username)
-            setError(oldState => ({...oldState, userAlreadyExists: false, userAlreadyExistsMessage: ""}));
-        }
-    })
+    roomEvents.newRoomCreated(socket, setRooms, setError);
+    roomEvents.goToCreatedRoom(socket, setUser);
+    roomEvents.sendAllRooms(socket, setRooms);
+    roomEvents.enterToRoom(socket, setUser);
 
-    socket.on('newRoomCreated', (response) => {
-        if (response.accepted) {
-            setRooms(response.rooms);
-            setError(oldState => ({...oldState, roomAlreadyExists: false, roomAlreadyExistsMessage: ""}));
-            socket.emit('getAllRooms');
-        }
-    })
-
-    socket.on('goToCreatedRoom', (response) => {
-        console.log(response);
-        if(response.accepted) {
-            setUser(oldState => ({...oldState, location: response.newRoomCreated.id}));
-        }
-    })
-
-    socket.on('sendAllRooms', (response) => {
-        setRooms(response)
-    })
-
+    // ERROR HANDLING
     socket.on('sendError', (data) => {
         console.log(data)
         switch(data.type) {
             case "room": 
-                setError(oldState => ({...oldState, roomAlreadyExistsMessage: data.message}));
-                setError(oldState => ({...oldState, roomAlreadyExists: true}));
+                setError(oldState => ({...oldState, roomAlreadyExistsMessage: data.message, roomAlreadyExists: true}));
                 break;
-            case "user":
-                setError(oldState => ({...oldState, userAlreadyExistsMessage: data.message}));
-                setError(oldState => ({...oldState, userAlreadyExists: true}));
+            case "username":
+                setError(oldState => ({...oldState, userAlreadyExistsMessage: data.message, userAlreadyExists: true}));
                 break;
             default:
                 return;

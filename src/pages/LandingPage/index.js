@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { addPlayer } from '../../sockets/emit';
+import { addPlayer } from '../../sockets/emit/userEmit';
 
 import { Link, Redirect } from 'react-router-dom';
 
