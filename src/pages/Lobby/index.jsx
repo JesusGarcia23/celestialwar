@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Context from '../../Context/Context';
 import {testFunction, getAllRooms, createNewRoom } from '../../sockets/emit';
 
@@ -10,7 +11,7 @@ const Lobby = (props) => {
 
     const myContext = useContext(Context);
 
-    const { rooms } = myContext;
+    const { rooms, error } = myContext;
 
     const [ showCreateGame, setShowCreateGame ] = useState(false);
 
@@ -28,8 +29,8 @@ const Lobby = (props) => {
 
     const handleCreateRoom = (event) => {
         event.preventDefault();
-        setShowCreateGame(false);
-        createNewRoom(formInput)
+        //setShowCreateGame(false);
+        createNewRoom(formInput);
     }
 
     const handleChange = (event) => {
@@ -39,13 +40,18 @@ const Lobby = (props) => {
 
     const showListOfRooms = () => {
         if(rooms.length > 0) {
-            return rooms.map(room => <li>{room.name} <button>Join Room</button></li>)
+            return rooms.map(room => <li key={room.id}>{room.name} <button>Join Room</button></li>)
         }
     }
 
-    console.log(rooms)
+    console.log(user)
 
-    return (
+    if(user && user.accepted && user.location){
+        return (<Redirect to={`/room/${user.location}`} />)
+    }
+
+    else {
+        return (
         <div>
             <h2>Lobby</h2>
             <div>{user && user.username}</div>
@@ -54,6 +60,7 @@ const Lobby = (props) => {
                     <label htmlFor="roomName">Room Name</label>
                     <input id="roomName" type="text" name="roomName" value={formInput.roomName} onChange={e => handleChange(e)}></input>
                     <button type="submit">Create Room</button>
+                    {error.roomAlreadyExists && <p style={{color: 'red'}}>Room already Exists</p>}
                 </form>
             }
             <button onClick={e => showCreateGameModal(e)}>Create game</button>
@@ -66,6 +73,7 @@ const Lobby = (props) => {
             </div>
         </div>
     )
+        }
 }
 
 export default Lobby;
