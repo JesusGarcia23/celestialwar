@@ -12,11 +12,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-      <Route exact path='/' render={(props) => <LandingPage  {...props} />}/>
-      <PrivateRoute exact path='/lobby' component={Lobby}/>
-      <Route exact path='/battlefield' render={(props) => <Battlefield {...props} />}/>
-      <Route exact path='/test' component={Battlefield}/>
-      <PrivateRoute exact path='/test2' component={Lobby}/>
+        <PublicRoute exact path='/' component={LandingPage} />
+        <PrivateRoute exact path='/lobby' component={Lobby}/>
+        <PrivateRoute exact path='/battlefield' component={Battlefield}/>
+        <Route exact path='/test' component={Battlefield}/>
       </Switch>
     </div>
   );

@@ -1,4 +1,5 @@
 export default {
+
     newRoomCreated (socket, setRooms, setError) {
         socket.on('newRoomCreated', (response) => {
             if (response.accepted) {
@@ -9,7 +10,7 @@ export default {
         })
     },
 
-    goToCreatedRoom (socket, setUser) {
+    goToRoom (socket, setUser) {
         socket.on('goToRoom', (response) => {
             console.log(response);
             if(response.accepted) {
@@ -23,13 +24,5 @@ export default {
             setRooms(response)
         })
     },
-
-    enterToRoom (socket, setUser) {
-        socket.on('enterToRoom', (response) => {
-            if(response.accepted) {
-                setUser(oldState => ({...oldState, location: response.roomToJoin.id}));
-            }
-        })
-    }
 
 }

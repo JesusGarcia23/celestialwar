@@ -14,8 +14,8 @@ const LandingPage = (props) => {
     const [ formInput, setFormInput ] = useState({username: ""});
 
     const handleChange = (event) => {
-      const { value, name } = event.target;
-      setFormInput((oldValues) => ({...oldValues, [name]: value }));
+        const { value, name } = event.target;
+        setFormInput((oldValues) => ({...oldValues, [name]: value }));
     } 
 
     const handleSubmit = (event) => {

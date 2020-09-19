@@ -2,7 +2,6 @@ export default {
 
     loggedIn (socket, setUser) {
         socket.on('loggedIn', (response) => {
-            console.log(response)
             if(response.accepted) {
                 setUser(response);
                 localStorage.setItem('token', response.username);

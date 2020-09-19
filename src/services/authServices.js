@@ -1,7 +1,6 @@
 import api from './config';
 
 export const isUserLoggedIn = async (user) => {
-    // const user = localStorage.getItem('token') || localStorage.getItem('token')
 
     return await api.get('/isUserLoggedIn', 
     {
