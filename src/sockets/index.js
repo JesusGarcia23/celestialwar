@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
-import { socketEvents, getGameStatus } from './events';
+import { socketEvents, getGameStatus, getErrors } from './events';
 
-export const socket = io('http://localhost:5000');
+export const socket = io(process.env.REACT_APP_API_URL);
 
 export const initSockets = ({ store }) => {
     const { setGameStatus, user, setUser, gameStatus, rooms, setRooms, error, setError, setIsLoading } = store;

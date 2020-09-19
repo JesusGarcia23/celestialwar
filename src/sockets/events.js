@@ -20,19 +20,15 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
         if (response.accepted) {
             setUser(response);
             localStorage.setItem('token', response.username)
-            setError(oldState => ({...oldState, usernameAlreadyExists: false}));
-        } else {
-            setError(oldState => ({...oldState, usernameAlreadyExists: true}));
+            setError(oldState => ({...oldState, userAlreadyExists: false, userAlreadyExistsMessage: ""}));
         }
     })
 
     socket.on('newRoomCreated', (response) => {
         if (response.accepted) {
             setRooms(response.rooms);
-            setError(oldState => ({...oldState, roomAlreadyExists: false}));
+            setError(oldState => ({...oldState, roomAlreadyExists: false, roomAlreadyExistsMessage: ""}));
             socket.emit('getAllRooms');
-        } else {
-            setError(oldState => ({...oldState, roomAlreadyExists: true}));
         }
     })
 
@@ -44,8 +40,23 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
     })
 
     socket.on('sendAllRooms', (response) => {
-        console.log(response)
         setRooms(response)
+    })
+
+    socket.on('sendError', (data) => {
+        console.log(data)
+        switch(data.type) {
+            case "room": 
+                setError(oldState => ({...oldState, roomAlreadyExistsMessage: data.message}));
+                setError(oldState => ({...oldState, roomAlreadyExists: true}));
+                break;
+            case "user":
+                setError(oldState => ({...oldState, userAlreadyExistsMessage: data.message}));
+                setError(oldState => ({...oldState, userAlreadyExists: true}));
+                break;
+            default:
+                return;
+        }
     })
 }
 

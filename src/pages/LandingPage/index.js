@@ -24,7 +24,7 @@ const LandingPage = (props) => {
     }
 
     if(user && user.accepted) {
-        return <Redirect to='/test2'/>
+        return <Redirect to='/lobby'/>
     }
     else {
     return (
@@ -32,7 +32,7 @@ const LandingPage = (props) => {
         <h1>Celestial War</h1>
         <h3>Enter your username</h3>
         <input name="username" type="text" onChange={e => handleChange(e) } value={formInput.username}></input>
-        {error.usernameAlreadyExists && <p style={{color: 'red'}}>Username already Exists</p>}
+        {error.userAlreadyExists && <p style={{color: 'red'}}>{error.userAlreadyExistsMessage}</p>}
         <button onClick={e => handleSubmit(e)}>Go to Lobby</button>
         <div>{user && user.username}</div>
         </div>

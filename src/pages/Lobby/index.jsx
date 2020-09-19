@@ -29,7 +29,6 @@ const Lobby = (props) => {
 
     const handleCreateRoom = (event) => {
         event.preventDefault();
-        //setShowCreateGame(false);
         createNewRoom(formInput);
     }
 
@@ -43,8 +42,6 @@ const Lobby = (props) => {
             return rooms.map(room => <li key={room.id}>{room.name} <button>Join Room</button></li>)
         }
     }
-
-    console.log(user)
 
     if(user && user.accepted && user.location){
         return (<Redirect to={`/room/${user.location}`} />)
@@ -60,7 +57,7 @@ const Lobby = (props) => {
                     <label htmlFor="roomName">Room Name</label>
                     <input id="roomName" type="text" name="roomName" value={formInput.roomName} onChange={e => handleChange(e)}></input>
                     <button type="submit">Create Room</button>
-                    {error.roomAlreadyExists && <p style={{color: 'red'}}>Room already Exists</p>}
+                    {error.roomAlreadyExists && <p style={{color: 'red'}}>{error.roomAlreadyExistsMessage}</p>}
                 </form>
             }
             <button onClick={e => showCreateGameModal(e)}>Create game</button>
