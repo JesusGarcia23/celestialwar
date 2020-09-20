@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import {Switch, Route} from 'react-router-dom';
 import './App.css';
 import Battlefield from './components/Battlefield';
-import LandingPage from './pages/LandingPage';
-import Lobby from './pages/Lobby';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import LandingPage from './pages/LandingPage';
+import Room from './pages/Room';
+import Lobby from './pages/Lobby';
+import ServerDown from './pages/ServerDown';
+
 
 function App() {
   
@@ -16,6 +19,8 @@ function App() {
         <PrivateRoute exact path='/lobby' component={Lobby}/>
         <PrivateRoute exact path='/battlefield' component={Battlefield}/>
         <Route exact path='/test' component={Battlefield}/>
+        <Route exact path='/room/:id' component={Room}/>
+        <Route exact path='/error500' component={ServerDown}/>
       </Switch>
     </div>
   );

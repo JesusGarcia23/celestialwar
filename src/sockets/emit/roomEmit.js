@@ -5,8 +5,6 @@ export const getAllRooms = () => {
 }
 
 export const createNewRoom = (newRoom) => {
-    console.log("SUBMITTING!", newRoom)
-    console.log(newRoom)
     socket.emit('createNewRoom', newRoom);
 }
 

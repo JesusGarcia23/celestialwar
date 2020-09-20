@@ -1,0 +1,5 @@
+.chat-container {
+    border: 1px solid red;
+    height: 500px;
+    flex-grow: 4;
+}

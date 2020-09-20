@@ -3,7 +3,6 @@ import Context from '../../Context/Context';
 import Loading from '../Loading';
 import { Redirect, Route} from 'react-router-dom';
 import { userLogIn } from '../../sockets/emit/userEmit';
-import { isUserLoggedIn } from '../../services/authServices';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 

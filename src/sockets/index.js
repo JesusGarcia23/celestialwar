@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import { socketEvents, getGameStatus, getErrors } from './events';
+import { socketEvents, getGameStatus } from './events/index';
 
 export const socket = io(process.env.REACT_APP_API_URL);
 
