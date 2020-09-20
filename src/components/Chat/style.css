@@ -1,5 +1,11 @@
 .chat-container {
-    border: 1px solid red;
-    height: 500px;
+    border: 1px solid purple;
+    height: 750px;
     flex-grow: 4;
+}
+
+@media screen and (max-width: 1200px) {
+    .chat-container {
+        height: 400px;
+    }
 }

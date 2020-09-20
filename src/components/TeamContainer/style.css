@@ -1,5 +1,48 @@
 .team-container {
-    border: 1px solid blue;
-    height: 500px;
+    border: 1px solid green;
+    height: 750px;
     flex-grow: 4;
+    display: flex;
+}
+
+.angel-team-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+.demon-team-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+}
+
+.angel-team-socket {
+    border: 1px solid blue;
+    width: 45%;
+    height: 17%;
+}
+
+.demon-team-socket {
+    border: 1px solid red;
+    width: 45%;
+    height: 17%;
+}
+
+.demon-team-socket:hover, .angel-team-socket:hover {
+    border-color: yellow;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .team-container {
+        margin: 20px 0px;
+        height: 400px;
+    }
 }
