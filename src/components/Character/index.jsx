@@ -12,7 +12,6 @@ class General {
         this.alive = true;
         this.side = side;
         this.sphereGrabbed = false;
-        this.sphereInserted = false;
         this.direction = direction;
         this.deployX = deployX;
         this.deployY = deployY;

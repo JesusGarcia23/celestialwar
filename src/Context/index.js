@@ -8,12 +8,14 @@ const ContextProvider = (props) => {
     const [ listPlayers, setListPlayers] = useState({});
     const [ user, setUser ] = useState(null);
     const [ rooms, setRooms ] = useState({});
+    const [ actualRoom, setActualRoom ] = useState({});
     const [ error, setError ] = useState({});
 
     const store = {
         gameStatus, setGameStatus,
         user, setUser,
         rooms, setRooms,
+        actualRoom, setActualRoom,
         error, setError,
         listPlayers, setListPlayers
     }

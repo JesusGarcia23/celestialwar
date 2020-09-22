@@ -4,7 +4,7 @@ import userEvents from './userEvents';
 import gameEvents from './gameEvents'; 
 import errorHandling from './errorEvents';
 
-export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading }) => {
+export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom }) => {
     socket.on('connection', (data) => {
         console.log(data);
     })
@@ -17,6 +17,7 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
     roomEvents.newRoomCreated(socket, setRooms, setError);
     roomEvents.goToRoom(socket, setUser);
     roomEvents.sendAllRooms(socket, setRooms);
+    roomEvents.sendRoomData(socket, setActualRoom);
 
     // ERROR HANDLING
     errorHandling.serverError(socket);

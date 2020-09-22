@@ -25,4 +25,10 @@ export default {
         })
     },
 
+    sendRoomData (socket, setActualRoom) {
+        socket.on('sendRoomData', (response) => {
+            setActualRoom(response);
+        })
+    }
+
 }
