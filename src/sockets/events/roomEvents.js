@@ -5,7 +5,6 @@ export default {
             if (response.accepted) {
                 setRooms(response.rooms);
                 setError(oldState => ({...oldState, roomAlreadyExists: false, roomAlreadyExistsMessage: ""}));
-                socket.emit('getAllRooms');
             }
         })
     },
