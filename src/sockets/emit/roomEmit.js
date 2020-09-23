@@ -11,9 +11,4 @@ export const createNewRoom = (newRoom) => {
 export const joinRoom = (player, roomId) => {
     console.log("JOINING TO... ", roomId);
     socket.emit('joinRoom', {player, roomId});
-    socket.emit("getRoomData", {player, roomId});
-}
-
-export const getRoomData = (player, roomId) => {
-    socket.emit("getRoomData", {player, roomId});
 }

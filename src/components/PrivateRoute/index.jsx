@@ -8,6 +8,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const MyContext = useContext(Context);
 
+    const token = localStorage.getItem('token');
+
     const { user } = MyContext;
 
     console.log(user);
@@ -19,10 +21,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     }, [])
 
     const ComponentToRender = (props) => {
-        if(user === null) {
+        if(user === null && (token !== null && token !== "" ) ) {
             return <Loading/>
         }
-        else if(!user.accepted) {
+        else if( (user && !user.accepted) || !user) {
             return <Redirect to='/'/>
         }
         return <Component {...props} />

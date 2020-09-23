@@ -18,6 +18,8 @@ export default {
                 setUser(response);
                 localStorage.setItem('token', response.username)
                 setError(oldState => ({...oldState, userAlreadyExists: false, userAlreadyExistsMessage: ""}));
+            }else {
+                setUser(oldState => ({...oldState, accepted: false}));
             }
         })
     }

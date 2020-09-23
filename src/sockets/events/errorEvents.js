@@ -12,6 +12,13 @@ export default {
             // }
           });
     },
+
+    redirectUser (socket, setUser) {
+        socket.on('redirect', (response) => {
+            console.log(response);
+            window.location.href = response.route
+        })
+    },
     
     sendError(socket, setError) {
         socket.on('sendError', (data) => {

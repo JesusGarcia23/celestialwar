@@ -11,14 +11,12 @@ const Lobby = (props) => {
 
     const myContext = useContext(Context);
 
-    const { rooms, error } = myContext;
+    const { rooms, error, user } = myContext;
 
     const [ showCreateGame, setShowCreateGame ] = useState(false);
 
     const [ formInput, setFormInput ] = useState(initialValues);
     
-    const { user } = myContext;
-
     useEffect(() => {
         getAllRooms();
     }, [])

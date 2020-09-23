@@ -9,21 +9,26 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     const MyContext = useContext(Context);
 
+    const token = localStorage.getItem('token');
+
+    console.log(token === "")
+
     const { user } = MyContext;
 
     console.log(user);
 
     useEffect(() => {
         if(user && !user.accepted || !user) {
+            console.log("THIS IS GETTINT CALLED")
             userLogIn();
         }
     }, [])
 
     const ComponentToRender = (props) => {
-        if(user === null) {
+        if(user === null && (token !== null && token !== "" )) {
             return <Loading/>
         }
-        else if(user.accepted) {
+        else if(user && user.accepted) {
             return <Redirect to='/lobby'/>
         }
         return <Component {...props} />

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Chat from '../../components/Chat';
 import TeamContainer from '../../components/TeamContainer';
 import Context from '../../Context/Context';
-import { getRoomData, joinRoom } from '../../sockets/emit/roomEmit';
+import { joinRoom } from '../../sockets/emit/roomEmit';
 import './style.css';
 
 const Room = (props) => {
@@ -11,12 +11,10 @@ const Room = (props) => {
 
     const { id } = props.match.params;
 
-    const { actualRoom, user } = MyContext;
+    const { user, actualRoom } = MyContext;
 
-    console.log(MyContext)
     useEffect(() => {
         joinRoom(user, id);
-        getRoomData(user, id);
     }, [])
 
     return (
