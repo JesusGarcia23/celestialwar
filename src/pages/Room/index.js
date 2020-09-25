@@ -13,13 +13,15 @@ const Room = (props) => {
 
     const { user, actualRoom } = MyContext;
 
+    const { angelTeam, demonTeam} = actualRoom;
+
     useEffect(() => {
         joinRoom(user, id);
     }, [])
 
     return (
         <div className="room-container">
-        <TeamContainer />
+        <TeamContainer angelTeam={angelTeam} demonTeam={demonTeam}/>
         <Chat />
         </div>
     )

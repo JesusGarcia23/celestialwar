@@ -1,6 +1,6 @@
 .chat-container {
     border: 1px solid purple;
-    height: 750px;
+    height: 600px;
     flex-grow: 4;
 }
 

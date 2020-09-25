@@ -1,7 +1,7 @@
 .team-container {
     border: 1px solid green;
-    height: 750px;
-    flex-grow: 4;
+    height: 600px;
+    flex-grow: 5;
     display: flex;
 }
 

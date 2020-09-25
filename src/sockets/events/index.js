@@ -15,9 +15,9 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
 
     // ROOM EVENTS
     roomEvents.newRoomCreated(socket, setRooms, setError);
-    roomEvents.goToRoom(socket, setUser, user);
+    roomEvents.goToRoom(socket, setUser, setActualRoom, user);
     roomEvents.sendAllRooms(socket, setRooms);
-    roomEvents.sendRoomData(socket, setActualRoom);
+    roomEvents.getUpdatedRoom(socket, setActualRoom);
 
     // ERROR HANDLING
     errorHandling.serverError(socket);
