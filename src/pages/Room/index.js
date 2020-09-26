@@ -21,8 +21,13 @@ const Room = (props) => {
 
     return (
         <div className="room-container">
-        <TeamContainer angelTeam={angelTeam} demonTeam={demonTeam}/>
-        <Chat />
+            <div>
+            {user.username === actualRoom.host && <h1>You're host</h1>}
+            </div>
+            <div className="room-team-chat-container">
+                <TeamContainer angelTeam={angelTeam} demonTeam={demonTeam}/>
+                <Chat />
+            </div>
         </div>
     )
 }
