@@ -12,7 +12,7 @@ export default {
     goToRoom (socket, setUser, setActualRoom, user) {
 
         socket.on('goToRoom', (response) => {
-            
+            console.log(response);
             if(response.accepted) {
                 setActualRoom(response.roomInfo);
                 setUser(oldState => ({...oldState, location: response.roomInfo.id}));

@@ -4,8 +4,8 @@ export const getAllRooms = () => {
     socket.emit('getAllRooms');
 }
 
-export const createNewRoom = (newRoom) => {
-    socket.emit('createNewRoom', newRoom);
+export const createNewRoom = (user, newRoom) => {
+    socket.emit('createNewRoom', {user, newRoom});
 }
 
 export const joinRoom = (player, roomId) => {

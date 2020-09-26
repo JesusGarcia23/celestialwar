@@ -27,7 +27,7 @@ const Lobby = (props) => {
 
     const handleCreateRoom = (event) => {
         event.preventDefault();
-        createNewRoom(formInput);
+        createNewRoom(user, formInput);
     }
 
     const handleChange = (event) => {
