@@ -5,7 +5,7 @@ export const MessageContainer = styled.div`
     flex-direction: column;
     align-self: ${props => props.yourMessage ? "flex-end" : "flex-start"};
     align-items: ${props => props.yourMessage ? "flex-end" : "flex-start"};
-    margin: 5px 10px;
+    margin: 2px 10px;
     width: 60%;
     border: 1px solid red;
 `
