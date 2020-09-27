@@ -5,11 +5,7 @@ import './style.css';
 
 const TeamContainer = (props) => {
 
-    const MyContext = useContext(Context);
-
-    const { angelTeam, demonTeam } = props;
-
-    const { user, actualRoom } = MyContext;
+    const { angelTeam, demonTeam, user, actualRoom } = props;
 
     const handleSwapTeam = () => {
         swapTeam(user, actualRoom.id);
