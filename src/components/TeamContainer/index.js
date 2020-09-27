@@ -15,9 +15,6 @@ const TeamContainer = (props) => {
         swapTeam(user, actualRoom.id);
     }
 
-    console.log(actualRoom)
-    console.log(user);
-
     return (
         <div className="team-container">
             <button onClick={e => handleSwapTeam()}>Swap team</button>

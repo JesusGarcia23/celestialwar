@@ -12,6 +12,11 @@
     align-items: center;
 }
 
+.settings-container {
+    display: flex;
+    border: 1px solid red;
+}
+
 
 @media screen and (max-width: 1200px) {
     .room-team-chat-container {

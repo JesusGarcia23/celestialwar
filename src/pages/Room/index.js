@@ -23,11 +23,21 @@ const Room = (props) => {
         <div className="room-container">
             <div>
             {user.username === actualRoom.host && <h1>You're host</h1>}
+
+            <div className="settings-container">
+                <div>Map: {actualRoom && actualRoom.settings && actualRoom.settings.map}</div>
+                <div></div>
+                <div></div>
+                <div></div>
+                {user.username === actualRoom.host && <button>Change Settings</button>}
+            </div>
+
             </div>
             <div className="room-team-chat-container">
                 <TeamContainer angelTeam={angelTeam} demonTeam={demonTeam}/>
                 <Chat />
             </div>
+            {user.username === actualRoom.host && <button>Start Game</button>}
         </div>
     )
 }
