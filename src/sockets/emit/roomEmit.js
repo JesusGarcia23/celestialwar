@@ -12,3 +12,8 @@ export const joinRoom = (player, roomId) => {
     console.log("JOINING TO... ", roomId);
     socket.emit('joinRoom', {player, roomId});
 }
+
+export const swapTeam = (player, roomId) => {
+    console.log("SWAPPING TEAM... ", roomId);
+    socket.emit('swapTeam', {player, roomId});
+}

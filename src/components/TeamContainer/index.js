@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../../Context/Context';
+import { swapTeam } from '../../sockets/emit/roomEmit';
 import './style.css';
 
 const TeamContainer = (props) => {
@@ -10,12 +11,16 @@ const TeamContainer = (props) => {
 
     const { user, actualRoom } = MyContext;
 
+    const handleSwapTeam = () => {
+        swapTeam(user, actualRoom.id);
+    }
+
     console.log(actualRoom)
     console.log(user);
 
     return (
         <div className="team-container">
-            <button>Swap team</button>
+            <button onClick={e => handleSwapTeam()}>Swap team</button>
 
             <div className="teams-container">
                 
@@ -103,7 +108,7 @@ const TeamContainer = (props) => {
                     </div>
 
                 </div>
-                
+
             </div>
         </div>
     )
