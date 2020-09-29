@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { sendMessage } from '../../sockets/emit/roomEmit';
 import './style.css';
 import { MessageContainer, Sender, Message } from './styles';
 
@@ -6,7 +7,21 @@ const Chat = (props) => {
 
     const [ chatInput, setChatInput ] = useState("");
 
-    const { messagesList, user } = props; 
+    const containerRef = useRef(null);
+
+    const { messagesList, user, roomId } = props; 
+
+
+    useEffect(() => {
+        if(containerRef && containerRef.current) {
+            const element = containerRef.current;
+            element.scroll({
+              top: element.scrollHeight,
+              left: 0,
+              behavior: "smooth"
+            })
+          }
+    })
 
     const handleInputChange = (event) => {
         const { value } = event.target;
@@ -14,7 +29,8 @@ const Chat = (props) => {
     }
 
     const handleSendMessage = () => {
-
+        sendMessage(user, chatInput, roomId);
+        setChatInput("");
     }
 
     const displayListMessages = () => {
@@ -22,7 +38,7 @@ const Chat = (props) => {
            return (
                <MessageContainer yourMessage={msg.sender === user.username}>
                     <Sender>{msg.sender}</Sender>
-                    <Message>{msg.message}</Message> 
+                    <Message yourMessage={msg.sender === user.username}>{msg.message}</Message> 
                </MessageContainer>
            )
        })
@@ -30,7 +46,7 @@ const Chat = (props) => {
 
     return (
         <div className="chat-container">
-            <div className="list-messages-container">
+            <div className="list-messages-container" ref={containerRef}>
                 {displayListMessages()}
             </div>
 

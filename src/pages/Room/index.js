@@ -35,7 +35,7 @@ const Room = (props) => {
             </div>
             <div className="room-team-chat-container">
                 <TeamContainer angelTeam={angelTeam} demonTeam={demonTeam} user={user} actualRoom={actualRoom}/>
-                <Chat messagesList={actualRoom.messages} user={user}/>
+                <Chat messagesList={actualRoom.messages} user={user} roomId={actualRoom.id}/>
             </div>
             {user.username === actualRoom.host && <button>Start Game</button>}
         </div>

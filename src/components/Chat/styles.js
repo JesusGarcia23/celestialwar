@@ -20,5 +20,5 @@ export const Message = styled.div`
     margin: 5px 5px;
     padding: 0px 10px;
     border-radius: 5px;
-    background-color: rgb(206, 205, 205);
+    background-color: ${props => props.yourMessage ? "rgba(137, 196, 244, 1)" : "rgb(206, 205, 205)"}; 
 `
