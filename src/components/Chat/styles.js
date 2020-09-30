@@ -14,6 +14,7 @@ export const Sender = styled.div`
     font-size: 12px;
     margin: 5px 5px;
     text-align: right;
+    font-weight: bold;
 `
 
 export const Message = styled.div`

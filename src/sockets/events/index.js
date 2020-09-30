@@ -4,7 +4,7 @@ import userEvents from './userEvents';
 import gameEvents from './gameEvents'; 
 import errorHandling from './errorEvents';
 
-export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom, user }) => {
+export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom, actualRoom, user }) => {
     socket.on('connection', (data) => {
         console.log(data);
     });
@@ -15,7 +15,6 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
 
     // ROOM EVENTS
     roomEvents.newRoomCreated(socket, setRooms, setError);
-    roomEvents.goToRoom(socket, setUser, setActualRoom, user);
     roomEvents.sendAllRooms(socket, setRooms);
     roomEvents.getUpdatedRoom(socket, setActualRoom);
 

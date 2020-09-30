@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Chat from '../../components/Chat';
 import TeamContainer from '../../components/TeamContainer';
 import Context from '../../Context/Context';
 import { joinRoom } from '../../sockets/emit/roomEmit';
+import { Redirect } from 'react-router-dom';
 import './style.css';
 
 const Room = (props) => {
@@ -16,13 +17,19 @@ const Room = (props) => {
     const { angelTeam, demonTeam} = actualRoom;
 
     useEffect(() => {
-        joinRoom(user, id);
-    }, [])
+            joinRoom(user, id);
+    }, []);
+
+    const goBackToLobby = () => {
+        console.log(user);
+        props.history.push('/lobby')
+    }
 
     return (
         <div className="room-container">
             <div>
             {user.username === actualRoom.host && <h1>You're host</h1>}
+            <button onClick={e => goBackToLobby(e)}>Exit room</button>
 
             <div className="settings-container">
                 <div>Map: {actualRoom && actualRoom.settings && actualRoom.settings.map}</div>
@@ -40,6 +47,7 @@ const Room = (props) => {
             {user.username === actualRoom.host && <button>Start Game</button>}
         </div>
     )
+
 }
 
 export default Room;

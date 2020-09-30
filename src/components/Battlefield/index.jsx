@@ -104,8 +104,6 @@ const Battlefield = (props) => {
   update();
   moveCharacters();
 
-  console.log(user)
-
   return (<>
   <canvas id='battlefield' ref={canvasRef}></canvas>
   <div>Hello {user}</div>

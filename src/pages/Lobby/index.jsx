@@ -37,6 +37,7 @@ const Lobby = (props) => {
 
     const joinToRoom = (roomId) => {
         joinRoom(user, roomId);
+        props.history.push(`/room/${roomId}`)
     }
 
     const showListOfRooms = () => {
@@ -44,12 +45,6 @@ const Lobby = (props) => {
             return rooms.map(room => <li key={room.id}>{room.name} <button onClick={e => joinToRoom(room.id)}>Join Room</button></li>)
         }
     }
-
-    if(user && user.accepted && user.location){
-        return (<Redirect to={`/room/${user.location}`} />)
-    }
-
-    else {
         return (
         <div>
             <h2>Lobby</h2>
@@ -72,7 +67,6 @@ const Lobby = (props) => {
             </div>
         </div>
     )
-        }
-}
+    }
 
 export default Lobby;

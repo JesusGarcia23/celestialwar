@@ -11,15 +11,10 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 
     const token = localStorage.getItem('token');
 
-    console.log(token === "")
-
     const { user } = MyContext;
-
-    console.log(user);
 
     useEffect(() => {
         if(user && !user.accepted || !user) {
-            console.log("THIS IS GETTINT CALLED")
             userLogIn();
         }
     }, [])

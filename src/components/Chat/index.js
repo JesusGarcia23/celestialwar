@@ -34,9 +34,9 @@ const Chat = (props) => {
     }
 
     const displayListMessages = () => {
-       return messagesList && messagesList.map(msg => {
+       return messagesList && messagesList.map((msg, index) => {
            return (
-               <MessageContainer yourMessage={msg.sender === user.username}>
+               <MessageContainer yourMessage={msg.sender === user.username} key={index}>
                     <Sender>{msg.sender}</Sender>
                     <Message yourMessage={msg.sender === user.username}>{msg.message}</Message> 
                </MessageContainer>

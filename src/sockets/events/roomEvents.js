@@ -9,17 +9,6 @@ export default {
         })
     },
 
-    goToRoom (socket, setUser, setActualRoom, user) {
-
-        socket.on('goToRoom', (response) => {
-            console.log(response);
-            if(response.accepted) {
-                setActualRoom(response.roomInfo);
-                setUser(oldState => ({...oldState, location: response.roomInfo.id}));
-            }
-        })
-    },
-
     sendAllRooms (socket, setRooms) {
         socket.on('sendAllRooms', (response) => {
             setRooms(response)
@@ -28,7 +17,6 @@ export default {
 
     getUpdatedRoom (socket, setActualRoom) {
         socket.on('getUpdatedRoom', (response) => {
-            console.log(response)
             setActualRoom(response);
         })
     }
