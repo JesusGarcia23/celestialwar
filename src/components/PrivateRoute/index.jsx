@@ -12,8 +12,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const { user } = MyContext;
 
-    console.log(user);
-
     useEffect(() => {
         if(user && !user.accepted || !user) {
             userLogIn();

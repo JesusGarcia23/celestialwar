@@ -21,8 +21,7 @@ const Room = (props) => {
     }, []);
 
     const goBackToLobby = () => {
-        console.log(user);
-        props.history.push('/lobby')
+        props.history.push('/lobby');
     }
 
     return (
