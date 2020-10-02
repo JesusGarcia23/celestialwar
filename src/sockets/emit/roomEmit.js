@@ -17,6 +17,10 @@ export const sendMessage = (player, message, roomId) => {
     socket.emit('sendMessage', {player, message, roomId});
 }
 
+export const kickUser = (player, roomId) => {
+    socket.emit('kickUser', {player, roomId});
+}
+
 export const swapTeam = (player, roomId) => {
     console.log("SWAPPING TEAM... ", roomId);
     socket.emit('swapTeam', {player, roomId});
