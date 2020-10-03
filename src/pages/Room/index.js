@@ -12,7 +12,7 @@ const Room = (props) => {
 
     const { id } = props.match.params;
 
-    const { user, actualRoom } = MyContext;
+    const { user, actualRoom, error } = MyContext;
 
     const { angelTeam, demonTeam} = actualRoom;
 
@@ -23,6 +23,14 @@ const Room = (props) => {
     const goBackToLobby = () => {
         props.history.push('/lobby');
     }
+
+    console.log(id )
+
+    if (error.kicked && (error.kicked.value && error.kicked.room.toString() === id)) {
+
+        return <Redirect to ='/lobby'/>
+        
+    } else {
 
     return (
         <div className="room-container">
@@ -46,6 +54,8 @@ const Room = (props) => {
             {user.username === actualRoom.host && <button>Start Game</button>}
         </div>
     )
+            
+}
 
 }
 

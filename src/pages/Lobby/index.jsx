@@ -11,7 +11,7 @@ const Lobby = (props) => {
 
     const myContext = useContext(Context);
 
-    const { rooms, error, user } = myContext;
+    const { rooms, error, user, setError } = myContext;
 
     const [ showCreateGame, setShowCreateGame ] = useState(false);
 
@@ -19,7 +19,19 @@ const Lobby = (props) => {
     
     useEffect(() => {
         getAllRooms();
+
+        if(error.kicked) {
+            cleanErrors();
+        }
+
     }, [])
+
+    const cleanErrors = () => {
+        
+        setTimeout(() => {
+            setError({})
+        }, 3000)
+    }
 
     const showCreateGameModal = () => {
         setShowCreateGame(true);
@@ -35,20 +47,22 @@ const Lobby = (props) => {
         setFormInput(oldState => ({...oldState, [name]: value}))
     }
 
-    const joinToRoom = (roomId) => {
+    const joinToRoom = (event, roomId) => {
+        event.preventDefault();
         joinRoom(user, roomId);
-        props.history.push(`/room/${roomId}`)
+        props.history.push(`/room/${roomId}`);
     }
 
     const showListOfRooms = () => {
         if(rooms.length > 0) {
-            return rooms.map(room => <li key={room.id}>{room.name} <button onClick={e => joinToRoom(room.id)}>Join Room</button></li>)
+            return rooms.map(room => <li key={room.id}>{room.name} <button onClick={e => joinToRoom(e, room.id)}>Join Room</button></li>)
         }
     }
         return (
         <div>
             <h2>Lobby</h2>
             <div>{user && user.username}</div>
+            {error.kicked && <p style={{color: 'red'}}>{error.kickedMessage}</p>}
             {showCreateGame && 
                 <form onSubmit={handleCreateRoom}>
                     <label htmlFor="roomName">Room Name</label>
