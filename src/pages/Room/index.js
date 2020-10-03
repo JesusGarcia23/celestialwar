@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Chat from '../../components/Chat';
 import TeamContainer from '../../components/TeamContainer';
 import Context from '../../Context/Context';
-import { joinRoom } from '../../sockets/emit/roomEmit';
+import { joinRoom, leaveRoom } from '../../sockets/emit/roomEmit';
 import { Redirect } from 'react-router-dom';
 import './style.css';
 
@@ -21,10 +21,9 @@ const Room = (props) => {
     }, []);
 
     const goBackToLobby = () => {
+        leaveRoom(user, id);
         props.history.push('/lobby');
     }
-
-    console.log(id )
 
     if (error.kicked && (error.kicked.value && error.kicked.room.toString() === id)) {
 

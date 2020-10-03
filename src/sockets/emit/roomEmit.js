@@ -13,6 +13,10 @@ export const joinRoom = (player, roomId) => {
     socket.emit('joinRoom', {player, roomId});
 }
 
+export const leaveRoom = (player, roomId) => {
+    socket.emit('leaveRoom', {player, roomId});
+}
+
 export const sendMessage = (player, message, roomId) => {
     socket.emit('sendMessage', {player, message, roomId});
 }

@@ -25,9 +25,16 @@ export default {
 
     goToRoom (socket) {
         socket.on('goToRoom', (response) => {
-            console.log("THIS HAPPENED")
             window.location.href = `/room/${response}`
         })
+    },
+
+    userLeavingRoom (socket, setActualRoom) {
+        socket.on('exitedRoom', (response) => {
+            if (response) {
+                setActualRoom({});
+            }
+        } ) 
     },
 
     kicked (socket, setError, setActualRoom) {
