@@ -1,6 +1,6 @@
 .team-container {
     border: 1px solid green;
-    height: 600px;
+    height: 550px;
     flex-grow: 5;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
 .teams-container {
     display: flex;
     border: 1px solid red;
-    height: 577px;
+    height: 500px;
 }
 
 .angel-team-container {

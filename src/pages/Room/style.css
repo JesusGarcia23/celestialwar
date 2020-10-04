@@ -12,9 +12,18 @@
     align-items: center;
 }
 
+.room-header {
+    width: 95%;
+    border: 1px solid red;
+}
+
 .settings-container {
     display: flex;
-    border: 1px solid red;
+    justify-content: center;
+}
+
+.settings-container > div {
+    margin: 0px 10px;
 }
 
 
