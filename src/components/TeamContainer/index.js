@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Context from '../../Context/Context';
 import { swapTeam, kickUser } from '../../sockets/emit/roomEmit';
 import './style.css';
+import { TeamSocket, SocketOptions } from './styles';
 
 const TeamContainer = (props) => {
 
@@ -17,6 +18,22 @@ const TeamContainer = (props) => {
         kickUser(userToKick, actualRoom.id);
     }
 
+    const showPlayer = (team, index) => {
+
+        return (
+        <div>
+            {team && team[index] && team[index].username ?
+            <p>{team[index].username}</p> : <p>No Player</p>
+            }
+
+            {team && team[index] && team[index].isReady ?
+            <p>{team[index].username}</p> : null
+            }
+                
+        </div>
+        )
+    }
+
     const displayExtraOptions = (userSocket) => {
         if (userSocket && userSocket.username !== user.username) {
             return (
@@ -27,6 +44,31 @@ const TeamContainer = (props) => {
         }
     }
 
+    const checkPlayerInTeam = (team, user) => {
+        return team.findIndex(userToFind => userToFind.username === user);
+    }
+
+    const handleRequestKing = (side) => {
+
+        let userFound;
+
+        switch(side) {
+            case "angel": 
+                userFound = checkPlayerInTeam(angelTeam, user.username);
+                break;
+            case "demon":
+                userFound = checkPlayerInTeam(demonTeam, user.username);
+                break;
+            default: 
+                return;
+        }
+
+        if (userFound > 0) {
+            console.log("I WANT TO BE KING");
+        } 
+
+    }
+
     return (
         <div className="team-container">
             <button onClick={e => handleSwapTeam()}>Swap team</button>
@@ -35,95 +77,95 @@ const TeamContainer = (props) => {
                 
                 <div className="angel-team-container">
                     <div className="socket-container">
-                        <div className="angel-team-socket">
-                            {angelTeam && angelTeam[0] ? angelTeam[0].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
-                            {angelTeam && displayExtraOptions(angelTeam[0])}
-                        </div>
-                    </div>
-
-                    <div className="socket-container">
-                        <div className="angel-team-socket">
-                            {angelTeam && angelTeam[1] ? angelTeam[1].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel">
+                            {showPlayer(angelTeam, 1)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {angelTeam && displayExtraOptions(angelTeam[1])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                     <div className="socket-container">
-                        <div className="angel-team-socket">
-                            {angelTeam && angelTeam[2] ? angelTeam[2].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel">
+                            {showPlayer(angelTeam, 2)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {angelTeam && displayExtraOptions(angelTeam[2])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                     <div className="socket-container">
-                        <div className="angel-team-socket">
-                            {angelTeam && angelTeam[3] ? angelTeam[3].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel" onClick={() => handleRequestKing("angel")}>
+                            {showPlayer(angelTeam, 0)}
+                        </TeamSocket>
+                        <SocketOptions>
+                            {angelTeam && displayExtraOptions(angelTeam[0])}
+                        </SocketOptions>
+                    </div>
+
+                    <div className="socket-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel">
+                            {showPlayer(angelTeam, 3)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {angelTeam && displayExtraOptions(angelTeam[3])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                     <div className="socket-container">
-                        <div className="angel-team-socket">
-                            {angelTeam && angelTeam[4] ? angelTeam[4].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel">
+                            {showPlayer(angelTeam, 4)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {angelTeam && displayExtraOptions(angelTeam[4])}
-                        </div>
+                        </SocketOptions>
                     </div>
                 </div>
 
                 <div className="demon-team-container">
                     <div className="socket-container">
-                        <div className="demon-team-socket">
-                            {demonTeam && demonTeam[0] ? demonTeam[0].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon">
+                            {showPlayer(demonTeam, 1)}
+                        </TeamSocket>
+                        <SocketOptions>
+                            {demonTeam && displayExtraOptions(demonTeam[1])}
+                        </SocketOptions>
+                    </div>
+
+                    <div className="socket-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon">
+                            {showPlayer(demonTeam, 2)}
+                        </TeamSocket>
+                        <SocketOptions>
+                        {demonTeam && displayExtraOptions(demonTeam[2])}
+                        </SocketOptions>
+                    </div>
+
+                    <div className="socket-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon" onClick={(e) => handleRequestKing("demon")}>
+                            {showPlayer(demonTeam, 0)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {demonTeam && displayExtraOptions(demonTeam[0])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                     <div className="socket-container">
-                        <div className="demon-team-socket">
-                            {demonTeam && demonTeam[1] ? demonTeam[1].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
-                        {demonTeam && displayExtraOptions(demonTeam[1])}
-                        </div>
-                    </div>
-
-                    <div className="socket-container">
-                        <div className="demon-team-socket">
-                            {demonTeam && demonTeam[2] ? demonTeam[2].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
-                            {demonTeam && displayExtraOptions(demonTeam[2])}
-                        </div>
-                    </div>
-
-                    <div className="socket-container">
-                        <div className="demon-team-socket">
-                            {demonTeam && demonTeam[3] ? demonTeam[3].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon">
+                            {showPlayer(demonTeam, 3)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {demonTeam && displayExtraOptions(demonTeam[3])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                     <div className="socket-container">
-                        <div className="demon-team-socket">
-                            {demonTeam && demonTeam[4] ? demonTeam[4].username : "No Player"}
-                        </div>
-                        <div className="socket-options-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon">
+                            {showPlayer(demonTeam, 4)}
+                        </TeamSocket>
+                        <SocketOptions>
                             {demonTeam && displayExtraOptions(demonTeam[4])}
-                        </div>
+                        </SocketOptions>
                     </div>
 
                 </div>

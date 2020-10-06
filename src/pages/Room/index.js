@@ -4,7 +4,6 @@ import TeamContainer from '../../components/TeamContainer';
 import Context from '../../Context/Context';
 import { joinRoom, leaveRoom } from '../../sockets/emit/roomEmit';
 import { Redirect } from 'react-router-dom';
-import PreBattle from '../../components/PreBattle';
 import './style.css';
 
 const Room = (props) => {
@@ -41,8 +40,6 @@ const Room = (props) => {
     return (
         
         <div className="room-container">
-            {!preBattle ?
-                <>
                     <div className="room-header">
                         {user.username === actualRoom.host && <h2>You're host</h2>}
                         <button onClick={e => goBackToLobby(e)}>Exit room</button>
@@ -61,9 +58,6 @@ const Room = (props) => {
                         <Chat messagesList={actualRoom.messages} user={user} roomId={actualRoom.id}/>
                     </div>
                     {user.username === actualRoom.host && <button onClick={() => prepareGame()}>Start Game</button>}
-                </>
-                : <PreBattle angelTeam={angelTeam} demonTeam={demonTeam}/>
-            }
         </div>
     )
             
