@@ -29,3 +29,7 @@ export const swapTeam = (player, roomId) => {
     console.log("SWAPPING TEAM... ", roomId);
     socket.emit('swapTeam', {player, roomId});
 }
+
+export const imReady = (player, roomId) => {
+    socket.emit('imReady', {player, roomId})
+}

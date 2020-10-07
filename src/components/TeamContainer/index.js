@@ -6,9 +6,7 @@ import { TeamSocket, SocketOptions } from './styles';
 
 const TeamContainer = (props) => {
 
-    const { angelTeam, demonTeam, user, actualRoom } = props;
-
-    const isHost = user.username === actualRoom.host;
+    const { angelTeam, demonTeam, user, actualRoom, youreHost } = props;
 
     const handleSwapTeam = () => {
         swapTeam(user, actualRoom.id);
@@ -27,18 +25,19 @@ const TeamContainer = (props) => {
             }
 
             {team && team[index] && team[index].isReady ?
-            <p>{team[index].username}</p> : null
+            <p>I'm Ready!</p> : null
             }
                 
         </div>
         )
     }
 
-    const displayExtraOptions = (userSocket) => {
-        if (userSocket && userSocket.username !== user.username) {
+    const displayExtraOptions = (team, index) => {
+        
+        if (team && team[index] && team[index].username !== user.username) {
             return (
                 <>
-                {isHost && <button onClick={e => handleKickUser(userSocket)}>Kick</button>}
+                {youreHost && <button onClick={e => handleKickUser(team[index])}>Kick</button>}
                 </>)
 
         }
@@ -81,7 +80,7 @@ const TeamContainer = (props) => {
                             {showPlayer(angelTeam, 1)}
                         </TeamSocket>
                         <SocketOptions>
-                            {angelTeam && displayExtraOptions(angelTeam[1])}
+                            {displayExtraOptions(angelTeam, 1)}
                         </SocketOptions>
                     </div>
 
@@ -90,7 +89,7 @@ const TeamContainer = (props) => {
                             {showPlayer(angelTeam, 2)}
                         </TeamSocket>
                         <SocketOptions>
-                            {angelTeam && displayExtraOptions(angelTeam[2])}
+                            {displayExtraOptions(angelTeam, 2)}
                         </SocketOptions>
                     </div>
 
@@ -99,7 +98,7 @@ const TeamContainer = (props) => {
                             {showPlayer(angelTeam, 0)}
                         </TeamSocket>
                         <SocketOptions>
-                            {angelTeam && displayExtraOptions(angelTeam[0])}
+                            {displayExtraOptions(angelTeam, 0)}
                         </SocketOptions>
                     </div>
 
@@ -108,7 +107,7 @@ const TeamContainer = (props) => {
                             {showPlayer(angelTeam, 3)}
                         </TeamSocket>
                         <SocketOptions>
-                            {angelTeam && displayExtraOptions(angelTeam[3])}
+                            {displayExtraOptions(angelTeam, 3)}
                         </SocketOptions>
                     </div>
 
@@ -117,7 +116,7 @@ const TeamContainer = (props) => {
                             {showPlayer(angelTeam, 4)}
                         </TeamSocket>
                         <SocketOptions>
-                            {angelTeam && displayExtraOptions(angelTeam[4])}
+                            {displayExtraOptions(angelTeam, 4)}
                         </SocketOptions>
                     </div>
                 </div>
@@ -128,7 +127,7 @@ const TeamContainer = (props) => {
                             {showPlayer(demonTeam, 1)}
                         </TeamSocket>
                         <SocketOptions>
-                            {demonTeam && displayExtraOptions(demonTeam[1])}
+                            {displayExtraOptions(demonTeam, 1)}
                         </SocketOptions>
                     </div>
 
@@ -137,7 +136,7 @@ const TeamContainer = (props) => {
                             {showPlayer(demonTeam, 2)}
                         </TeamSocket>
                         <SocketOptions>
-                        {demonTeam && displayExtraOptions(demonTeam[2])}
+                            {displayExtraOptions(demonTeam, 2)}
                         </SocketOptions>
                     </div>
 
@@ -146,7 +145,7 @@ const TeamContainer = (props) => {
                             {showPlayer(demonTeam, 0)}
                         </TeamSocket>
                         <SocketOptions>
-                            {demonTeam && displayExtraOptions(demonTeam[0])}
+                            {displayExtraOptions(demonTeam, 0)}
                         </SocketOptions>
                     </div>
 
@@ -155,7 +154,7 @@ const TeamContainer = (props) => {
                             {showPlayer(demonTeam, 3)}
                         </TeamSocket>
                         <SocketOptions>
-                            {demonTeam && displayExtraOptions(demonTeam[3])}
+                            {displayExtraOptions(demonTeam, 3)}
                         </SocketOptions>
                     </div>
 
@@ -164,7 +163,7 @@ const TeamContainer = (props) => {
                             {showPlayer(demonTeam, 4)}
                         </TeamSocket>
                         <SocketOptions>
-                            {demonTeam && displayExtraOptions(demonTeam[4])}
+                            {displayExtraOptions(demonTeam, 4)}
                         </SocketOptions>
                     </div>
 

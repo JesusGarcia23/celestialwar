@@ -26,6 +26,10 @@
     margin: 0px 10px;
 }
 
+.start-ready-button {
+    margin: 20px 0px;
+}
+
 
 @media screen and (max-width: 1200px) {
     .room-team-chat-container {
