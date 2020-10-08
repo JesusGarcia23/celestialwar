@@ -33,3 +33,8 @@ export const swapTeam = (player, roomId) => {
 export const imReady = (player, roomId) => {
     socket.emit('imReady', {player, roomId})
 }
+
+
+export const requestKingPosition = (player, roomId) => {
+    socket.emit('requestKingPosition', {player, roomId})
+}
