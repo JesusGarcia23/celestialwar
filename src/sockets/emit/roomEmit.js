@@ -35,6 +35,6 @@ export const imReady = (player, roomId) => {
 }
 
 
-export const requestKingPosition = (player, roomId) => {
-    socket.emit('requestKingPosition', {player, roomId})
+export const requestKingPosition = (player, roomId, side) => {
+    socket.emit('requestKingPosition', {player, roomId, side})
 }

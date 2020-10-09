@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-import Context from '../../Context/Context';
-import { swapTeam, kickUser } from '../../sockets/emit/roomEmit';
+import React, { useState } from 'react';
+import { swapTeam, kickUser, requestKingPosition } from '../../sockets/emit/roomEmit';
 import './style.css';
 import { TeamSocket, SocketOptions } from './styles';
 
@@ -16,6 +15,24 @@ const TeamContainer = (props) => {
         kickUser(userToKick, actualRoom.id);
     }
 
+    const imTheKing = (team) => {
+        let myIndex = team.findIndex(payerToFind => payerToFind.username === user.username);
+
+        if (myIndex === 0) {
+            return true;
+        }
+        return false;
+    }
+
+    const sameTeam = (team) => {
+        let myIndex = team.findIndex(payerToFind => payerToFind.username === user.username);
+
+        if (myIndex >= 0) {
+            return true;
+        }
+        return false;
+    }
+
     const showPlayer = (team, index) => {
 
         return (
@@ -27,6 +44,13 @@ const TeamContainer = (props) => {
             {team && team[index] && team[index].isReady ?
             <p>I'm Ready!</p> : null
             }
+
+            {team && team[index] && team[index].requestingKingPosition && sameTeam(team) ?
+                <>
+                <p>I want to be King!</p>
+                {imTheKing(team) && <button>Change role</button>}
+                </>
+            : null }
                 
         </div>
         )
@@ -63,6 +87,7 @@ const TeamContainer = (props) => {
         }
 
         if (userFound > 0) {
+            requestKingPosition(user, actualRoom.id, side);
             console.log("I WANT TO BE KING");
         } 
 

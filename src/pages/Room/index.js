@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Chat from '../../components/Chat';
 import TeamContainer from '../../components/TeamContainer';
 import Context from '../../Context/Context';
-import { joinRoom, leaveRoom, imReady, requestKingPosition } from '../../sockets/emit/roomEmit';
+import { joinRoom, leaveRoom, imReady } from '../../sockets/emit/roomEmit';
 import { Redirect } from 'react-router-dom';
 import './style.css';
 
