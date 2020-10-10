@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { swapTeam, kickUser, requestKingPosition } from '../../sockets/emit/roomEmit';
+import { swapTeam, kickUser, requestKingPosition, acceptKingPosition } from '../../sockets/emit/roomEmit';
 import './style.css';
 import { TeamSocket, SocketOptions } from './styles';
 
@@ -33,7 +33,7 @@ const TeamContainer = (props) => {
         return false;
     }
 
-    const showPlayer = (team, index) => {
+    const showPlayer = (team, index, side) => {
 
         return (
         <div>
@@ -48,7 +48,7 @@ const TeamContainer = (props) => {
             {team && team[index] && team[index].requestingKingPosition && sameTeam(team) ?
                 <>
                 <p>I want to be King!</p>
-                {imTheKing(team) && <button>Change role</button>}
+                {imTheKing(team) && <button onClick={e => acceptKingPosition(user.username, team[index].username, actualRoom.id, side)}>Change role</button>}
                 </>
             : null }
                 
@@ -102,7 +102,7 @@ const TeamContainer = (props) => {
                 <div className="angel-team-container">
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
-                            {showPlayer(angelTeam, 1)}
+                            {showPlayer(angelTeam, 1, "angel")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(angelTeam, 1)}
@@ -111,7 +111,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
-                            {showPlayer(angelTeam, 2)}
+                            {showPlayer(angelTeam, 2, "angel")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(angelTeam, 2)}
@@ -120,7 +120,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel" onClick={() => handleRequestKing("angel")}>
-                            {showPlayer(angelTeam, 0)}
+                            {showPlayer(angelTeam, 0, "angel")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(angelTeam, 0)}
@@ -129,7 +129,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
-                            {showPlayer(angelTeam, 3)}
+                            {showPlayer(angelTeam, 3, "angel")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(angelTeam, 3)}
@@ -138,7 +138,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
-                            {showPlayer(angelTeam, 4)}
+                            {showPlayer(angelTeam, 4, "angel")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(angelTeam, 4)}
@@ -149,7 +149,7 @@ const TeamContainer = (props) => {
                 <div className="demon-team-container">
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
-                            {showPlayer(demonTeam, 1)}
+                            {showPlayer(demonTeam, 1, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 1)}
@@ -158,7 +158,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
-                            {showPlayer(demonTeam, 2)}
+                            {showPlayer(demonTeam, 2, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 2)}
@@ -167,7 +167,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon" onClick={(e) => handleRequestKing("demon")}>
-                            {showPlayer(demonTeam, 0)}
+                            {showPlayer(demonTeam, 0, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 0)}
@@ -176,7 +176,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
-                            {showPlayer(demonTeam, 3)}
+                            {showPlayer(demonTeam, 3, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 3)}
@@ -185,7 +185,7 @@ const TeamContainer = (props) => {
 
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
-                            {showPlayer(demonTeam, 4)}
+                            {showPlayer(demonTeam, 4, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 4)}
