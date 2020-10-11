@@ -42,3 +42,7 @@ export const requestKingPosition = (player, roomId, side) => {
 export const acceptKingPosition = (myUser, playerToChange, roomId, side) => {
     socket.emit('acceptNewKing', {myUser, playerToChange, roomId, side});
 }
+
+export const startGame = (player, roomId) => {
+    socket.emit('startGame', {player, roomId});
+}
