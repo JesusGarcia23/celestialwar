@@ -35,12 +35,16 @@ const Room = (props) => {
 
     // Function to start game
     const handleStartGame = () => {
-        startGame( user.username, actualRoom.id)
+        startGame(user.username, actualRoom.id)
     }
 
     if (error.kicked && (error.kicked.value && error.kicked.room.toString() === id)) {
 
         return <Redirect to ='/lobby'/>
+        
+    } else if (actualRoom.gameStarted) {
+
+        return <Redirect to={`/Battlefield/${actualRoom.id}`}/>
         
     } else {
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Switch, Route} from 'react-router-dom';
 import './App.css';
 import Battlefield from './components/Battlefield';
+import NewBattleField from './components/Battlefield/NewBattleField';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import LandingPage from './pages/LandingPage';
@@ -17,7 +18,7 @@ function App() {
       <Switch>
         <PublicRoute exact path='/' component={LandingPage} />
         <PrivateRoute exact path='/lobby' component={Lobby}/>
-        <PrivateRoute exact path='/battlefield' component={Battlefield}/>
+        <PrivateRoute exact path='/battlefield/:id' component={NewBattleField}/>
         <Route exact path='/test' component={Battlefield}/>
         <PrivateRoute exact path='/room/:id' component={Room}/>
         <Route exact path='/error500' component={ServerDown}/>
