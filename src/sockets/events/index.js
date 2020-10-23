@@ -21,12 +21,11 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
     roomEvents.userLeavingRoom(socket, setActualRoom);
     roomEvents.kicked(socket, setError, setActualRoom);
 
+    // GAME EVENTS
+    gameEvents.getGameStatus(socket, setGameStatus);
+
     // ERROR HANDLING
     errorHandling.serverError(socket);
     errorHandling.sendError(socket, setError);
     errorHandling.redirectUser(socket);
-}
-
-export const getGameStatus = ({ setGameStatus }) => {
-    gameEvents.getGameStatus(socket, setGameStatus)
 }

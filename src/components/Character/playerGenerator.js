@@ -2,6 +2,7 @@ import { Angel, Demon, King } from '../Character';
 import { resizeDimension, resizeCoor } from '../../utils/resizer';
 
 export const generatePlayer = (canvas, listOfPlayers) => {
+    console.log("THIS HAPPENS")
     return listOfPlayers.map(player => {
         switch(player.type){
             case "Angel": {
