@@ -17,27 +17,27 @@ const NewBattleField = (props) => {
 
     const [ gameOn, setGameOn ] = useState(actualRoom.gameStarted);
 
-    const startGame = () => {
-        setGameOn(!gameOn);
-      }
-
     useEffect(() => {
+        window.addEventListener("resize", updateCanvasSize);
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
-
-        requestGameStatus(user, id);
         update(canvasRef.current);
 
     },[]);
 
-    const drawMap = (context) => {
+    const updateCanvasSize = () => {
+        canvasRef.current.width = window.innerWidth - 50;
+        canvasRef.current.height = window.innerHeight - 50;
+    }
+
+    const drawMap = (context, canvas) => {
 
         if(actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.map.length > 0) {
           return actualRoom.gameStatus.map.map(resource => {
 
             switch(resource.type) {
                 case 'platform': {
-                   return drawPlatform(context, resource)
+                   return drawPlatform(context, resource, canvas)
                 }
                 default:
                     return;
@@ -68,8 +68,7 @@ const NewBattleField = (props) => {
       }
 
     const update = (myCanvas) => {
-        console.log(myCanvas)
-        console.log(gameStatus)
+
         if (gameOn) {
 
             if (myCanvas) {
@@ -79,7 +78,7 @@ const NewBattleField = (props) => {
                 const loop = () => {
   
                     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-                    drawMap(context, gameStatus);
+                    drawMap(context, myCanvas);
             
                     // players.filter(player => player.alive === true).map(player => {
                     //   handleGravity(player, mapLevel);
@@ -108,7 +107,6 @@ const NewBattleField = (props) => {
     return (
         <>
             <canvas id='battlefield' ref={canvasRef}></canvas>
-            <button onClick={e => startGame()}>Start game</button>
         </>)
     
 }
