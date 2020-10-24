@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import Context from '../../Context/Context';
 import { playersCreator } from '../Character/playerGenerator';
 import { requestGameStatus } from '../../sockets/emit/gameEmit';
-import { drawPlatform } from './utils/resourceUtils';
+import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
 
 const NewBattleField = (props) => {
 
@@ -32,40 +32,38 @@ const NewBattleField = (props) => {
 
     const drawMap = (context, canvas) => {
 
-        if(actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.map.length > 0) {
+        if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.map.length > 0) {
           return actualRoom.gameStatus.map.map(resource => {
 
             switch(resource.type) {
                 case 'platform': {
-                   return drawPlatform(context, resource, canvas)
+                   return drawPlatform(context, resource, canvas);
+                }
+                case 'warrior-pedestal': {
+                    return drawWarriorPedestal(context, resource, canvas);
+                }
+                case 'sphere-collector': {
+                    return drawSphereCollector(context, resource, canvas);
+                }
+                case 'sphere-socket': {
+                    return drawSphereCollectorSocket(context, resource, canvas)
                 }
                 default:
                     return;
             }
-            //   console.log(resource)
-            // switch(resource.type) {
-            //   case 'platform': {
-            //     return resource.drawPlatform(context, false);
-            //   }
-            //   case 'sphere-generator': {
-            //     return resource.drawContainer(context);
-            //   }
-            //   case 'warrior-pedestal': {
-            //     return resource.drawPedestal(context);
-            //   }
-            //   case 'sphere-collector': {
-            //     return resource.drawSphereCollector(context);
-            //   }
-            //   case 'sphere-socket': {
-            //     return resource.drawSphereCollectorSocket(context);
-            //   }
-            //   default:
-            //     return null;
-            // }
           
           })
         }
       }
+
+    const drawAllPlayers = (context, canvas) => {
+
+        if (actualRoom.gameStatus && actualRoom.gameStatus.players && actualRoom.gameStatus.players.length > 0) {
+            return actualRoom.gameStatus.players.map(player => {
+                return drawPlayers(context, player, canvas);
+            })
+        }
+    }
 
     const update = (myCanvas) => {
 
@@ -79,6 +77,7 @@ const NewBattleField = (props) => {
   
                     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
                     drawMap(context, myCanvas);
+                    drawAllPlayers(context, myCanvas);
             
                     // players.filter(player => player.alive === true).map(player => {
                     //   handleGravity(player, mapLevel);
