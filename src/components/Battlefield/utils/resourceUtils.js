@@ -23,7 +23,7 @@ export const drawPlayers = (ctx, player, canvas) => {
 
         ctx.fillStyle = 'orange';
         ctx.font = 'bold 12px serif';
-        ctx.fillText(`${player.name}`, resizeCoor(player.x + 12, canvas.width), resizeCoor(player.y - 10, canvas.height));
+        ctx.fillText(`${player.name}`, resizeCoor(player.x + 0.6, canvas.width), resizeCoor(player.y - 0.5, canvas.height));
         ctx.textAlign = "center";
 }
 
