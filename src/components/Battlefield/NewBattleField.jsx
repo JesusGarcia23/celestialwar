@@ -4,6 +4,7 @@ import Context from '../../Context/Context';
 import { playersCreator } from '../Character/playerGenerator';
 import { requestGameStatus } from '../../sockets/emit/gameEmit';
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
+import { handleMovement, moveCharacters } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
 
@@ -24,6 +25,18 @@ const NewBattleField = (props) => {
         update(canvasRef.current);
 
     },[]);
+
+    const getMyPlayer = () => {
+        if (actualRoom.gameStatus && actualRoom.gameStatus.players && actualRoom.gameStatus.players.length > 0) {
+
+            let userIndex = actualRoom.gameStatus.players.findIndex(playerToFind => playerToFind.name === user.username);
+
+            if (userIndex >= 0) {
+                return actualRoom.gameStatus.players[userIndex];
+            } 
+        }
+        return null;
+    }
 
     const updateCanvasSize = () => {
         canvasRef.current.width = window.innerWidth - 50;
@@ -74,10 +87,16 @@ const NewBattleField = (props) => {
                 let context = myCanvas.getContext('2d');
 
                 const loop = () => {
-  
+
+                    let myPlayer = getMyPlayer();
+
                     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
                     drawMap(context, myCanvas);
                     drawAllPlayers(context, myCanvas);
+
+                    if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.players) {
+                        handleMovement(myPlayer, actualRoom.gameStatus.players,  actualRoom.gameStatus.map, canvasRef.current);
+                    }
             
                     // players.filter(player => player.alive === true).map(player => {
                     //   handleGravity(player, mapLevel);
@@ -96,6 +115,7 @@ const NewBattleField = (props) => {
                 }
     
                 loop();
+                moveCharacters();
             
             }
     
