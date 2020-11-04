@@ -1,4 +1,4 @@
-
+import { checkCollision } from './gamePhysics';
   var Keys = {
     up: false,
     down: false,
@@ -7,7 +7,7 @@
     action: false
   };
 
-  export const moveCharacters = () => {
+  export const moveCharacter = () => {
     window.onkeydown = function(e){
       
       var kc = e.keyCode;
@@ -34,7 +34,29 @@
 
 export const handleMovement = (myPlayer, otherPlayers, spheres, mapLevel, canvasRef) => {
     const globalMap = [...mapLevel, ...otherPlayers, ...spheres];
-    
+    let touched = null;
+
+    if(mapLevel.length > 0) {
+
+      if(Keys.up && (myPlayer.y > 0)){
+        myPlayer.direction = 'UP';
+        myPlayer.jumped = true;            
+        }
+
+      if(Keys.left && (myPlayer.x > 4)) {
+        myPlayer.direction = "LEFT";
+        touched = globalMap.map(resource => {
+          return checkCollision(myPlayer, resource, spheres);
+        })
+
+        if(touched.indexOf(true) >= 0){
+          myPlayer.x += 6;
+        }
+        myPlayer.x -= 6;
+      }
+
+    }
+
     if (Keys.up) {
         console.log("UP!");
     }

@@ -4,7 +4,7 @@ import Context from '../../Context/Context';
 import { playersCreator } from '../Character/playerGenerator';
 import { requestGameStatus } from '../../sockets/emit/gameEmit';
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
-import { handleMovement, moveCharacters } from './utils/playerUtils';
+import { handleMovement, moveCharacter } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
 
@@ -95,7 +95,7 @@ const NewBattleField = (props) => {
                     drawAllPlayers(context, myCanvas);
 
                     if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.players) {
-                        handleMovement(myPlayer, actualRoom.gameStatus.players,  actualRoom.gameStatus.map, canvasRef.current);
+                        handleMovement(myPlayer, actualRoom.gameStatus.players, actualRoom.gameStatus.spheres, actualRoom.gameStatus.map, canvasRef.current);
                     }
             
                     // players.filter(player => player.alive === true).map(player => {
@@ -115,7 +115,7 @@ const NewBattleField = (props) => {
                 }
     
                 loop();
-                moveCharacters();
+                moveCharacter();
             
             }
     
