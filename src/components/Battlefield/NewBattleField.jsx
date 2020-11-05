@@ -3,12 +3,19 @@ import { useEffect } from 'react';
 import Context from '../../Context/Context';
 import { playersCreator } from '../Character/playerGenerator';
 import { requestGameStatus } from '../../sockets/emit/gameEmit';
+import { socket } from '../../sockets/index';
+import { getUpdatedGameStatus } from '../../sockets/events/gameEvents';
+
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
 import { handleMovement, moveCharacter } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
 
     const canvasRef = useRef(null);
+
+    let actualRoomData = null;
+
+    let myPlayer = null;
 
     const MyContext = useContext(Context);
 
@@ -19,21 +26,53 @@ const NewBattleField = (props) => {
     const [ gameOn, setGameOn ] = useState(actualRoom.gameStarted);
 
     useEffect(() => {
+        // getUpdatedGameStatus(socket, actualRoom.id)
+        socket.emit('requestGameStatus', {user, roomId: actualRoom.id} );
         window.addEventListener("resize", updateCanvasSize);
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
-        update(canvasRef.current);
+        socket.on('updateGameStatus', (data) => {
+            actualRoomData = data;
+            myPlayer = getMyPlayer(actualRoomData);
+            handleGameState(data);
+        });
+    },[actualRoom]);
 
-    },[]);
+    const handleGameState = (dataToDisplay) => {
+        
+        if (gameOn && canvasRef && canvasRef.current) {
 
-    const getMyPlayer = () => {
-        if (actualRoom.gameStatus && actualRoom.gameStatus.players && actualRoom.gameStatus.players.length > 0) {
+            requestAnimationFrame(() => paintGame(dataToDisplay));
+            
+        }
 
-            let userIndex = actualRoom.gameStatus.players.findIndex(playerToFind => playerToFind.name === user.username);
+    }
 
-            if (userIndex >= 0) {
-                return actualRoom.gameStatus.players[userIndex];
-            } 
+    const paintGame = (gameState) => {
+        
+        const myCanvas = canvasRef.current;
+        let context = myCanvas.getContext('2d');
+
+        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        drawMap(context, myCanvas);
+
+        if (gameState && gameState.gameStatus && gameState.gameStatus.map && gameState.gameStatus.players) {
+            moveCharacter(myPlayer, gameState);
+            drawAllPlayers(context, myCanvas);
+        }
+    }
+
+    const getMyPlayer = (actualRoomData) => {
+
+        if (actualRoomData.gameStatus && actualRoomData.gameStatus.players && actualRoomData.gameStatus.players.length > 0) {
+            
+            for (let i = 0; i <= actualRoomData.gameStatus.players.length - 1; i++) {
+                
+                if (actualRoomData.gameStatus.players[i].name === user.username) {
+                    return actualRoomData.gameStatus.players[i];
+                }
+            }
+
         }
         return null;
     }
@@ -71,31 +110,29 @@ const NewBattleField = (props) => {
 
     const drawAllPlayers = (context, canvas) => {
 
-        if (actualRoom.gameStatus && actualRoom.gameStatus.players && actualRoom.gameStatus.players.length > 0) {
-            return actualRoom.gameStatus.players.map(player => {
+        if (actualRoomData.gameStatus && actualRoomData.gameStatus.players && actualRoomData.gameStatus.players.length > 0) {
+            return actualRoomData.gameStatus.players.map(player => {
                 return drawPlayers(context, player, canvas);
             })
         }
     }
 
-    const update = (myCanvas) => {
+    const update = () => {
 
-        if (gameOn) {
+        if (gameOn && canvasRef && canvasRef.current) {
 
-            if (myCanvas) {
-          
+                const myCanvas = canvasRef.current;
                 let context = myCanvas.getContext('2d');
 
                 const loop = () => {
 
                     let myPlayer = getMyPlayer();
 
-                    context.clearRect(0, 0, myCanvas.width, myCanvas.height);
+                    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
                     drawMap(context, myCanvas);
-                    drawAllPlayers(context, myCanvas);
 
                     if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.players) {
-                        handleMovement(myPlayer, actualRoom.gameStatus.players, actualRoom.gameStatus.spheres, actualRoom.gameStatus.map, canvasRef.current);
+                        drawAllPlayers(context, myCanvas);
                     }
             
                     // players.filter(player => player.alive === true).map(player => {
@@ -113,15 +150,16 @@ const NewBattleField = (props) => {
             
                     requestAnimationFrame(loop);
                 }
-    
-                loop();
-                moveCharacter();
-            
-            }
+
+
+                setInterval(loop(), 2000);
+                
     
         }
     
     }
+
+    handleGameState(actualRoomData);
 
     return (
         <>

@@ -1,7 +1,6 @@
 import { socket } from '../index';
 import roomEvents from './roomEvents';
 import userEvents from './userEvents';
-import gameEvents from './gameEvents'; 
 import errorHandling from './errorEvents';
 
 export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom, actualRoom, user }) => {
@@ -20,9 +19,6 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
     roomEvents.goToRoom(socket);
     roomEvents.userLeavingRoom(socket, setActualRoom);
     roomEvents.kicked(socket, setError, setActualRoom);
-
-    // GAME EVENTS
-    gameEvents.getGameStatus(socket, setGameStatus);
 
     // ERROR HANDLING
     errorHandling.serverError(socket);

@@ -18,7 +18,6 @@ export default {
 
     getUpdatedRoom (socket, setActualRoom) {
         socket.on('getUpdatedRoom', (response) => {
-            console.log(response)
             setActualRoom(response);
         })
     },
