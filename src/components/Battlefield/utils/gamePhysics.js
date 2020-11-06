@@ -39,6 +39,8 @@ const sphereCollision = (myPlayer, sphere) => {
 }
 
 export const checkCollision = (myPlayer, obj, spheres) => {
+    console.log(myPlayer)
+    console.log(obj)
     if (obj.radius !== null && obj.type === 'sphere') {
       let touched = sphereCollision(myPlayer, obj);
       if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide) {
@@ -52,16 +54,16 @@ export const checkCollision = (myPlayer, obj, spheres) => {
     }
     
     // RIGHT
-    if ((myPlayer.x + myPlayer.width + 2 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'RIGHT'){
+    if ((myPlayer.x + myPlayer.width + 0.58 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'RIGHT'){
         return touchingCheck(myPlayer, obj);
     }// LEFT
-    else if ((myPlayer.x < obj.x + obj.width + 2) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'LEFT'){
+    else if ((myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'LEFT'){
         return touchingCheck(myPlayer, obj);
     }// UP      
     else if ((myPlayer.y - 7 < obj.y + obj.height + 7) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP'){
         return touchingCheck(myPlayer, obj);
     }// BOTTOM
-    else if ((myPlayer.y + myPlayer.height + 2 > obj.y) && (myPlayer.x > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
+    else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
         return touchingCheck(myPlayer, obj);
     }
     return false;

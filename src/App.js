@@ -19,7 +19,7 @@ function App() {
         <PublicRoute exact path='/' component={LandingPage} />
         <PrivateRoute exact path='/lobby' component={Lobby}/>
         <PrivateRoute exact path='/battlefield/:id' component={NewBattleField}/>
-        <Route exact path='/test' component={Battlefield}/>
+        <Route exact path='/test' component={NewBattleField}/>
         <PrivateRoute exact path='/room/:id' component={Room}/>
         <Route exact path='/error500' component={ServerDown}/>
       </Switch>

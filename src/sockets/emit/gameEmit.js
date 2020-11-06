@@ -14,7 +14,7 @@ export const movePlayer = (player, direction, moveAmount, canMove, room) => {
             break;
         case "RIGHT":
             if (canMove) {
-
+                socket.emit('movePlayer', {player, roomId: room.id, direction, moveAmount});
             }
             break;
         default:

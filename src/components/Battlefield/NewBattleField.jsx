@@ -5,6 +5,7 @@ import { playersCreator } from '../Character/playerGenerator';
 import { requestGameStatus } from '../../sockets/emit/gameEmit';
 import { socket } from '../../sockets/index';
 import { getUpdatedGameStatus } from '../../sockets/events/gameEvents';
+import { forestPlatForms } from './utils/mockData';
 
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
 import { handleMovement, moveCharacter } from './utils/playerUtils';
@@ -57,7 +58,7 @@ const NewBattleField = (props) => {
         drawMap(context, myCanvas);
 
         if (gameState && gameState.gameStatus && gameState.gameStatus.map && gameState.gameStatus.players) {
-            moveCharacter(myPlayer, gameState);
+            moveCharacter(myPlayer, gameState, myCanvas);
             drawAllPlayers(context, myCanvas);
         }
     }
@@ -85,6 +86,7 @@ const NewBattleField = (props) => {
     const drawMap = (context, canvas) => {
 
         if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.map.length > 0) {
+            // actualRoom.gameStatus.map
           return actualRoom.gameStatus.map.map(resource => {
 
             switch(resource.type) {
@@ -115,48 +117,6 @@ const NewBattleField = (props) => {
                 return drawPlayers(context, player, canvas);
             })
         }
-    }
-
-    const update = () => {
-
-        if (gameOn && canvasRef && canvasRef.current) {
-
-                const myCanvas = canvasRef.current;
-                let context = myCanvas.getContext('2d');
-
-                const loop = () => {
-
-                    let myPlayer = getMyPlayer();
-
-                    context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-                    drawMap(context, myCanvas);
-
-                    if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.players) {
-                        drawAllPlayers(context, myCanvas);
-                    }
-            
-                    // players.filter(player => player.alive === true).map(player => {
-                    //   handleGravity(player, mapLevel);
-                    //   handleJumping(player, mapLevel, spheres, testGameStatus);
-                    //   handleMovement(player, mapLevel, players, spheres, canvasRef.current, testGameStatus);
-                    //   handleClashing(player, mapLevel)
-                    //   player.drawCharacter(context);
-                    // })
-            
-                    // spheres.length > 0 && spheres.map(sphere => {
-                    //   sphere.drawSphere(context, players);
-                    //   handleSphereGravity(sphere, mapLevel);
-                    // })
-            
-                    requestAnimationFrame(loop);
-                }
-
-
-                setInterval(loop(), 2000);
-                
-    
-        }
-    
     }
 
     handleGameState(actualRoomData);

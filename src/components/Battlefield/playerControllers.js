@@ -202,7 +202,7 @@ export const moveCharacters = () => {
                 player.x -= 6;
               }
             
-              if(Keys.right && (player.x + player.width + 4 < canvas.width)){
+              if(Keys.right && (player.x + player.width + 1 < canvas.width)){
                 player.direction = "RIGHT";
                 touched = globalMap.map(resource => {
                   return player.checkCollision(resource, spheres, gameStatus);
