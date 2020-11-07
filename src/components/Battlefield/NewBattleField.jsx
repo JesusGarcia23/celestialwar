@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import Context from '../../Context/Context';
 import { playersCreator } from '../Character/playerGenerator';
-import { requestGameStatus } from '../../sockets/emit/gameEmit';
+import { joinRoom } from '../../sockets/emit/roomEmit';
 import { socket } from '../../sockets/index';
 import { getUpdatedGameStatus } from '../../sockets/events/gameEvents';
 import { forestPlatForms } from './utils/mockData';
@@ -24,15 +24,14 @@ const NewBattleField = (props) => {
 
     const { user, actualRoom, gameStatus, error } = MyContext;
 
-    const [ gameOn, setGameOn ] = useState(actualRoom.gameStarted);
-
     useEffect(() => {
-        // getUpdatedGameStatus(socket, actualRoom.id)
-        socket.emit('requestGameStatus', {user, roomId: actualRoom.id} );
+        socket.emit('requestGameStatus', {user, roomId: 2} );
         window.addEventListener("resize", updateCanvasSize);
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
         socket.on('updateGameStatus', (data) => {
+            console.log("THIS HAPPENED");
+            console.log(data)
             actualRoomData = data;
             myPlayer = getMyPlayer(actualRoomData);
             handleGameState(data);
@@ -41,7 +40,7 @@ const NewBattleField = (props) => {
 
     const handleGameState = (dataToDisplay) => {
         
-        if (gameOn && canvasRef && canvasRef.current) {
+        if (canvasRef && canvasRef.current) {
 
             requestAnimationFrame(() => paintGame(dataToDisplay));
             
@@ -85,13 +84,13 @@ const NewBattleField = (props) => {
 
     const drawMap = (context, canvas) => {
 
-        if (actualRoom.gameStatus && actualRoom.gameStatus.map && actualRoom.gameStatus.map.length > 0) {
+        if (actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.map.length > 0) {
             // actualRoom.gameStatus.map
-          return actualRoom.gameStatus.map.map(resource => {
+          return forestPlatForms.map(resource => {
 
             switch(resource.type) {
                 case 'platform': {
-                   return drawPlatform(context, resource, canvas);
+                   return drawPlatform(context, resource, canvas, true);
                 }
                 case 'warrior-pedestal': {
                     return drawWarriorPedestal(context, resource, canvas);

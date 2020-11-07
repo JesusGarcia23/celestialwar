@@ -38,7 +38,7 @@ export const drawPlatform = (ctx, resource, canvas, modeDevelop) => {
     if(modeDevelop){
         ctx.fillStyle = 'orange';
         ctx.font = 'bold 12px serif';
-        ctx.fillText(`ID: ${resource.id}`, resource.x + 10, resource.y + 15);
+        ctx.fillText(`ID: ${resource.id}`, resizeCoor(resource.x + 0.1, canvas.width), resizeCoor(resource.y + 0.1, canvas.height));
     }
 }
 
@@ -53,7 +53,7 @@ export const drawWarriorPedestal = (ctx, resource, canvas, modeDevelop) => {
     if(modeDevelop){
         ctx.fillStyle = 'orange';
         ctx.font = 'bold 12px serif';
-        ctx.fillText(`ID: ${resource.id}`, resource.x + 10, resource.y + 15);
+        ctx.fillText(`ID: ${resource.id}`, resizeCoor(resource.x + 10, canvas.width), resizeCoor(resource.y + 15, canvas.height));
     }
 }
 
