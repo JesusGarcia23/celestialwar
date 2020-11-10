@@ -30,8 +30,6 @@ const NewBattleField = (props) => {
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
         socket.on('updateGameStatus', (data) => {
-            console.log("THIS HAPPENED");
-            console.log(data)
             actualRoomData = data;
             myPlayer = getMyPlayer(actualRoomData);
             handleGameState(data);

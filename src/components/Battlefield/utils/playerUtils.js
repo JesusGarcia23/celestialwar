@@ -1,4 +1,4 @@
-import { checkCollision } from './gamePhysics';
+import { checkCollision, hitTop } from './gamePhysics';
 import { movePlayer } from '../../../sockets/emit/gameEmit';
 
   var Keys = {
@@ -18,7 +18,10 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
         Keys.left = true
         handleMovement(player, gameState, canvas)
       };
-      if(kc === 74) Keys.up = true;
+      if(kc === 74) {
+        Keys.up = true;
+        handleMovement(player, gameState, canvas)
+      };
       if(kc === 68) {
         Keys.right = true;
         handleMovement(player, gameState, canvas)
@@ -61,12 +64,11 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
           })
   
           if (touched.indexOf(true) < 0) {
-            // movePlayer(myPlayer, "LEFT", 0.7, false, gameState);
             movePlayer(myPlayer, "LEFT", 0.7, true, gameState);
           }
         }
 
-        if(Keys.right && (myPlayer.x + myPlayer.width + 4 < canvasRef.width)){
+        if (Keys.right && (myPlayer.x + myPlayer.width + 4 < canvasRef.width)) {
           myPlayer.direction = "RIGHT";
           touched = globalMap.map(resource => {
             return checkCollision(myPlayer, resource, spheres);
@@ -74,17 +76,40 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
 
           if (touched.indexOf(true) < 0) {
             movePlayer(myPlayer, "RIGHT", 0.7, true, gameState);
-            // movePlayer(myPlayer, "RIGHT", 0.7, false, gameState);
           }
+        }
+
+        
+        if (Keys.up) {
+          console.log("UP!");
+          handleJumping(myPlayer, globalMap, spheres, gameState)
         }
   
       }
       
     }
+}
 
-    if (Keys.up) {
-        console.log("UP!");
+export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
+  let touched = null;
+  myPlayer.onFloor = false;
+  console.log("JUMPING")
+  if (myPlayer.jumped && Keys.up && mapLevel.length > 0) {
+    touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
+      return hitTop(myPlayer, resource, spheres, gameState);
+    })
+    console.log(myPlayer)
+    if (touched !== null && touched.indexOf(true) < 0 && Keys.up) {
+      if (myPlayer.modeWarrior && myPlayer.y > 0.6) {
+        movePlayer(myPlayer, "UP", 0.7, true, gameState);
+      } else if (!myPlayer.modeWarrior && myPlayer.totalJumped <= myPlayer.powerJump && myPlayer.y > 5) {
+        myPlayer.totalJumped += 1;
+        myPlayer.y -= 20;
+      }
+    } else{
+      myPlayer.totalJumped = 100;
     }
+  }
 }
 
 

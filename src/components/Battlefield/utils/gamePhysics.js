@@ -38,9 +38,24 @@ const sphereCollision = (myPlayer, sphere) => {
     return ( dx*dx+dy*dy <= (sphere.radius*sphere.radius));
 }
 
+const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
+    let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === this.name);
+        let touched =  sphereCollision(myPlayer, socket);
+        if (touched && myPlayer.sphereGrabbed && socket.side === myPlayer.side && socket.empty && sphereGrabbed.length > 0) {
+            if (myPlayer.side === "Angel") {
+                gameStatus.angelSpheresCollected += 1;
+            } else if (myPlayer.side === "Demon") {
+                gameStatus.demonSpheresCollected += 1;
+            }
+            sphereGrabbed[0].grabbedBy = "";
+            this.sphereGrabbed = false;
+            socket.empty = false;
+            socket.color = "blue";
+        }
+}
+
 export const checkCollision = (myPlayer, obj, spheres) => {
-    console.log(myPlayer)
-    console.log(obj)
+
     if (obj.radius !== null && obj.type === 'sphere') {
       let touched = sphereCollision(myPlayer, obj);
       if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide) {
@@ -60,11 +75,28 @@ export const checkCollision = (myPlayer, obj, spheres) => {
     else if ((myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'LEFT'){
         return touchingCheck(myPlayer, obj);
     }// UP      
-    else if ((myPlayer.y - 7 < obj.y + obj.height + 7) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP'){
+    else if ((myPlayer.y - 7 < obj.y + obj.height + 0.58) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP'){
         return touchingCheck(myPlayer, obj);
     }// BOTTOM
     else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
         return touchingCheck(myPlayer, obj);
+    }
+    return false;
+}
+
+export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
+    if(obj.type === "sphere-socket") {
+        handleInsertSphere(myPlayer, obj, spheres, gameStatus)
+    }
+    if(obj.type === "sphere-collector") {
+        return false;
+    }
+    if(myPlayer.y < 0.58) {
+        return true;
+    }
+
+    if( (myPlayer.y - 7 < obj.y + obj.height + 7) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && (myPlayer.y > obj.y)){
+        return true;
     }
     return false;
 }
