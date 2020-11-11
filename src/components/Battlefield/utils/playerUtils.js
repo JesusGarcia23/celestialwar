@@ -10,6 +10,7 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
   };
 
   export const moveCharacter = (player, gameState, canvas) => {
+
     window.onkeydown = function(e) {
       var kc = e.keyCode;
       e.preventDefault();
@@ -112,4 +113,22 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   }
 }
 
+export function handleGravity(player, mapLevel, canvasRef) {
+
+  console.log("GRAVITYY")
+  let touched = null;
+  // if (!player.onFloor && mapLevel.length > 0) {
+  //   touched = mapLevel.map(resource => {
+  //     return player.hitBottom(resource);
+  //   })
+  //   if (touched !== null && touched.indexOf(true) < 0) {
+  //     player.onFloor = false;
+  //     player.y += 10;
+  //   } else {
+  //     player.onFloor = true;
+  //     player.totalJumped = 0;
+  //   }
+  // }
+
+}
 
