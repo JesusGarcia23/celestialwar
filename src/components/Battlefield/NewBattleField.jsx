@@ -14,6 +14,8 @@ const NewBattleField = (props) => {
 
     const canvasRef = useRef(null);
 
+    const requestRef = useRef();
+
     let actualRoomData = null;
 
     let myPlayer = null;
@@ -32,38 +34,29 @@ const NewBattleField = (props) => {
         socket.on('updateGameStatus', (data) => {
             actualRoomData = data;
             myPlayer = getMyPlayer(actualRoomData);
-            handleGameState(data);
         });
 
-    },[]);
+        requestRef.current = requestAnimationFrame(animateGame);
 
-    const handleGameState = (dataToDisplay) => {
-        
-        if (canvasRef && canvasRef.current) {
-            
-            requestAnimationFrame(() => {
-                console.log("HAPPENING")
-                paintGame(dataToDisplay);
-            });
-            
-        }
+    return () => cancelAnimationFrame(requestRef.current);
+    },[actualRoomData]);
 
-    }
+    const animateGame = () => {
 
-    const paintGame = (gameState) => {
-        
         const myCanvas = canvasRef.current;
         let context = myCanvas.getContext('2d');
 
         context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
         drawMap(context, myCanvas);
 
-        if (gameState && gameState.gameStatus && gameState.gameStatus.map && gameState.gameStatus.players) {
-            handleGravity(myPlayer, gameState, myCanvas);
-            moveCharacter(myPlayer, gameState, myCanvas);
+        if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
+            handleGravity(myPlayer, actualRoomData, myCanvas);
+            moveCharacter(myPlayer, actualRoomData, myCanvas);
             drawAllPlayers(context, myCanvas);
         }
-    }
+
+        requestRef.current = requestAnimationFrame(animateGame);
+    };
 
     const getMyPlayer = (actualRoomData) => {
 
@@ -78,16 +71,15 @@ const NewBattleField = (props) => {
 
         }
         return null;
-    }
+    };
 
     const updateCanvasSize = () => {
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
-    }
+    };
 
     const drawMap = (context, canvas) => {
-
-        if (actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.map.length > 0) {
+        if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.map.length > 0) {
             // actualRoom.gameStatus.map
           return forestPlatForms.map(resource => {
 
@@ -105,12 +97,12 @@ const NewBattleField = (props) => {
                     return drawSphereCollectorSocket(context, resource, canvas)
                 }
                 default:
-                    return;
+                    return null;
             }
           
           })
         }
-      }
+    };
 
     const drawAllPlayers = (context, canvas) => {
 
@@ -119,15 +111,13 @@ const NewBattleField = (props) => {
                 return drawPlayers(context, player, canvas);
             })
         }
-    }
-
-    handleGameState(actualRoomData);
+    };
 
     return (
         <>
             <canvas id='battlefield' ref={canvasRef}></canvas>
         </>)
     
-}
+};
 
 export default NewBattleField;
