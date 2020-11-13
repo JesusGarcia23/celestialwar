@@ -1,4 +1,4 @@
-import { checkCollision, hitTop } from './gamePhysics';
+import { checkCollision, hitTop, hitBottom } from './gamePhysics';
 import { movePlayer } from '../../../sockets/emit/gameEmit';
 
   var Keys = {
@@ -99,7 +99,6 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
     touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
       return hitTop(myPlayer, resource, spheres, gameState);
     })
-    console.log(myPlayer)
     if (touched !== null && touched.indexOf(true) < 0 && Keys.up) {
       if (myPlayer.modeWarrior && myPlayer.y > 0.6) {
         movePlayer(myPlayer, "UP", 0.7, true, gameState);
@@ -117,18 +116,19 @@ export function handleGravity(player, mapLevel, canvasRef) {
 
   console.log("GRAVITYY")
   let touched = null;
-  // if (!player.onFloor && mapLevel.length > 0) {
-  //   touched = mapLevel.map(resource => {
-  //     return player.hitBottom(resource);
-  //   })
-  //   if (touched !== null && touched.indexOf(true) < 0) {
-  //     player.onFloor = false;
-  //     player.y += 10;
-  //   } else {
-  //     player.onFloor = true;
-  //     player.totalJumped = 0;
-  //   }
-  // }
+
+  if (mapLevel && mapLevel.gameStatus && mapLevel.gameStatus.map.length > 0) {
+    console.log(mapLevel.gameStatus.map)
+    touched = mapLevel.gameStatus.map.map(resource => {
+      return hitBottom(player, resource);
+    })
+    if (touched !== null && touched.indexOf(true) < 0) {
+      player.y += 1;
+    } else {
+      player.onFloor = true;
+      player.totalJumped = 0;
+    }
+  }
 
 }
 

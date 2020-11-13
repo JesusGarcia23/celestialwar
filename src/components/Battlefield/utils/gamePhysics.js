@@ -21,7 +21,7 @@ const touchingCheck = (myPlayer, obj) => {
       return false;
   }
   return true;
-}
+};
 
 const sphereCollision = (myPlayer, sphere) => {
     let distX = Math.abs(sphere.x - myPlayer.x - myPlayer.width / 2);
@@ -36,7 +36,7 @@ const sphereCollision = (myPlayer, sphere) => {
     let dx= distX - myPlayer.width / 2;
     let dy= distY - myPlayer.height / 2;
     return ( dx*dx+dy*dy <= (sphere.radius*sphere.radius));
-}
+};
 
 const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
     let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === this.name);
@@ -52,7 +52,7 @@ const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
             socket.empty = false;
             socket.color = "blue";
         }
-}
+};
 
 export const checkCollision = (myPlayer, obj, spheres) => {
 
@@ -82,7 +82,7 @@ export const checkCollision = (myPlayer, obj, spheres) => {
         return touchingCheck(myPlayer, obj);
     }
     return false;
-}
+};
 
 export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
     if(obj.type === "sphere-socket") {
@@ -99,4 +99,22 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
         return true;
     }
     return false;
-}
+};
+
+export const hitBottom = (myPlayer, obj) => {
+    if(obj.type === 'warrior-pedestal'){
+        return false;
+    }
+    if(obj.type === "sphere-collector") {
+        return false;
+    }
+    
+     if((myPlayer.y + myPlayer.height + 0.7 > obj.y) && (myPlayer.x + 0.7 > obj.x) && (myPlayer.y < obj.y) && ( (myPlayer.x + myPlayer.width - 0.7) < obj.x + obj.width )){
+        myPlayer.onFloor = true;
+        myPlayer.totalJumped = 0;
+        return true;
+    }else{
+        myPlayer.onFloor = false;
+    }
+    return false;
+};
