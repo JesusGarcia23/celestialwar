@@ -9,26 +9,16 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
     action: false
   };
 
-  export const moveCharacter = (player, gameState, canvas) => {
+  export const moveControls = () => {
 
     window.onkeydown = function(e) {
       var kc = e.keyCode;
       e.preventDefault();
       if(kc === 87) Keys.action = true;
-      if(kc === 65) {
-        Keys.left = true
-        handleMovement(player, gameState, canvas)
-      };
-      if(kc === 74) {
-        Keys.up = true;
-        handleMovement(player, gameState, canvas)
-      };
-      if(kc === 68) {
-        Keys.right = true;
-        handleMovement(player, gameState, canvas)
-      }
+      if(kc === 65) Keys.left = true;
+      if(kc === 74) Keys.up = true;
+      if(kc === 68) Keys.right = true;
       if(kc === 83) Keys.down = true;
-
     };
     
     window.onkeyup = function(e){
@@ -53,13 +43,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
   
       if (map.length > 0) {
   
-        if (Keys.up && (myPlayer.y > 0)) {
-          myPlayer.direction = 'UP';
-          myPlayer.jumped = true;            
-          }
-  
-        if (Keys.left && (myPlayer.x > 4)) {
-          myPlayer.direction = "LEFT";
+        if (Keys.left && (myPlayer.x > 0.7)) {
           touched = globalMap.map(resource => {
             return checkCollision(myPlayer, resource, spheres);
           })
@@ -69,8 +53,10 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
           }
         }
 
-        if (Keys.right && (myPlayer.x + myPlayer.width + 4 < canvasRef.width)) {
-          myPlayer.direction = "RIGHT";
+        if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
+          console.log("Player X: ", myPlayer.x)
+          console.log("Player Width: ", myPlayer.width);
+          console.log(canvasRef.width)
           touched = globalMap.map(resource => {
             return checkCollision(myPlayer, resource, spheres);
           })
@@ -80,7 +66,6 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
           }
         }
 
-        
         if (Keys.up) {
           console.log("UP!");
           handleJumping(myPlayer, globalMap, spheres, gameState)
@@ -95,13 +80,14 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   let touched = null;
   myPlayer.onFloor = false;
   console.log("JUMPING")
-  if (myPlayer.jumped && Keys.up && mapLevel.length > 0) {
+  if (Keys.up && mapLevel.length > 0) {
     touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
       return hitTop(myPlayer, resource, spheres, gameState);
     })
+    console.log(touched)
     if (touched !== null && touched.indexOf(true) < 0 && Keys.up) {
       if (myPlayer.modeWarrior && myPlayer.y > 0.6) {
-        movePlayer(myPlayer, "UP", 0.7, true, gameState);
+        movePlayer(myPlayer, "UP", 3, true, gameState);
       } else if (!myPlayer.modeWarrior && myPlayer.totalJumped <= myPlayer.powerJump && myPlayer.y > 5) {
         myPlayer.totalJumped += 1;
         myPlayer.y -= 20;
@@ -112,21 +98,20 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   }
 }
 
-export function handleGravity(player, mapLevel, canvasRef) {
+export function handleGravity(myPlayer, mapLevel, canvasRef) {
 
-  console.log("GRAVITYY")
   let touched = null;
 
-  if (mapLevel && mapLevel.gameStatus && mapLevel.gameStatus.map.length > 0) {
-    console.log(mapLevel.gameStatus.map)
+  if ((mapLevel && mapLevel.gameStatus && mapLevel.gameStatus.map.length > 0)) {
+
     touched = mapLevel.gameStatus.map.map(resource => {
-      return hitBottom(player, resource);
+      return hitBottom(myPlayer, resource);
     })
     if (touched !== null && touched.indexOf(true) < 0) {
-      player.y += 1;
+      movePlayer(myPlayer, "DOWN", 1, true, mapLevel);
     } else {
-      player.onFloor = true;
-      player.totalJumped = 0;
+      myPlayer.onFloor = true;
+      myPlayer.totalJumped = 0;
     }
   }
 

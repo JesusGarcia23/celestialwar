@@ -129,7 +129,7 @@ class General {
             return false;
         }
         
-         if((this.y + this.height + 4 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
+         if((this.y + this.height + 3.5 > obj.y) && (this.x + 5 > obj.x) && (this.y < obj.y) && ( (this.x + this.width - 5) < obj.x + obj.width )){
             this.onFloor = true;
             this.totalJumped = 0;
             return true;

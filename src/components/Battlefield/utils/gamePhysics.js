@@ -95,13 +95,17 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
         return true;
     }
 
-    if( (myPlayer.y - 7 < obj.y + obj.height + 7) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && (myPlayer.y > obj.y)){
+    if( (myPlayer.y - 2 < obj.y + obj.height + 0.7) && (myPlayer.x + myPlayer.width > obj.x + 0.7) && (myPlayer.x < obj.x + obj.width) && (myPlayer.y > obj.y)){
         return true;
     }
     return false;
 };
 
 export const hitBottom = (myPlayer, obj) => {
+
+    if (obj.id === 6) {
+        console.log(obj)
+    }
     if(obj.type === 'warrior-pedestal'){
         return false;
     }
@@ -109,9 +113,8 @@ export const hitBottom = (myPlayer, obj) => {
         return false;
     }
     
-     if((myPlayer.y + myPlayer.height + 0.7 > obj.y) && (myPlayer.x + 0.7 > obj.x) && (myPlayer.y < obj.y) && ( (myPlayer.x + myPlayer.width - 0.7) < obj.x + obj.width )){
+     if((myPlayer.y + myPlayer.height + 0.5 > obj.y) && (myPlayer.x + 0.2 > obj.x) && (myPlayer.y < obj.y) && ( (myPlayer.x + myPlayer.width - 0.2) < obj.x + obj.width )){
         myPlayer.onFloor = true;
-        myPlayer.totalJumped = 0;
         return true;
     }else{
         myPlayer.onFloor = false;

@@ -8,7 +8,7 @@ import { getUpdatedGameStatus } from '../../sockets/events/gameEvents';
 import { forestPlatForms } from './utils/mockData';
 
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
-import { handleMovement, moveCharacter, handleGravity } from './utils/playerUtils';
+import { handleMovement, moveControls, handleGravity } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
 
@@ -51,7 +51,7 @@ const NewBattleField = (props) => {
 
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
             handleGravity(myPlayer, actualRoomData, myCanvas);
-            moveCharacter(myPlayer, actualRoomData, myCanvas);
+            handleMovement(myPlayer, actualRoomData, myCanvas);
             drawAllPlayers(context, myCanvas);
         }
 
@@ -112,6 +112,8 @@ const NewBattleField = (props) => {
             })
         }
     };
+
+    moveControls();
 
     return (
         <>

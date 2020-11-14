@@ -5,6 +5,8 @@ export const requestGameStatus = (player, roomId) => {
 }
 
 export const movePlayer = (player, direction, moveAmount, canMove, room) => {
+
+    console.log(room)
     
     switch (direction) {
         case "LEFT": 
@@ -18,6 +20,11 @@ export const movePlayer = (player, direction, moveAmount, canMove, room) => {
             }
             break;
         case "UP":
+            if (canMove) {
+                socket.emit('movePlayer', {player, roomId: room.id, direction, moveAmount});
+            }
+            break;
+        case "DOWN":
             if (canMove) {
                 socket.emit('movePlayer', {player, roomId: room.id, direction, moveAmount});
             }
