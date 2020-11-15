@@ -5,8 +5,6 @@ export const requestGameStatus = (player, roomId) => {
 }
 
 export const movePlayer = (player, direction, moveAmount, canMove, room) => {
-
-    console.log(room)
     
     switch (direction) {
         case "LEFT": 

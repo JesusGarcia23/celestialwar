@@ -54,7 +54,7 @@ const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
         }
 };
 
-export const checkCollision = (myPlayer, obj, spheres) => {
+export const checkCollision = (myPlayer, obj, spheres, myDirection) => {
 
     if (obj.radius !== null && obj.type === 'sphere') {
       let touched = sphereCollision(myPlayer, obj);
@@ -69,16 +69,16 @@ export const checkCollision = (myPlayer, obj, spheres) => {
     }
     
     // RIGHT
-    if ((myPlayer.x + myPlayer.width + 0.58 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'RIGHT'){
+    if ((myPlayer.x + myPlayer.width + 0.58 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y + 0.7) && (myPlayer.y < obj.y + obj.height + 4) && myDirection === 'RIGHT'){
         return touchingCheck(myPlayer, obj);
     }// LEFT
-    else if ((myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height) && myPlayer.direction === 'LEFT'){
+    else if ((myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 0.7) && (myPlayer.y < obj.y + obj.height) && myDirection === 'LEFT'){
         return touchingCheck(myPlayer, obj);
     }// UP      
     else if ((myPlayer.y - 7 < obj.y + obj.height + 0.58) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP'){
         return touchingCheck(myPlayer, obj);
     }// BOTTOM
-    else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
+    else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x + 0.58 > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
         return touchingCheck(myPlayer, obj);
     }
     return false;
@@ -103,9 +103,6 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
 
 export const hitBottom = (myPlayer, obj) => {
 
-    if (obj.id === 6) {
-        console.log(obj)
-    }
     if(obj.type === 'warrior-pedestal'){
         return false;
     }
