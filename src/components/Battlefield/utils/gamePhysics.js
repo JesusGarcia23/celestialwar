@@ -69,10 +69,18 @@ export const checkCollision = (myPlayer, obj, spheres, myDirection) => {
     }
     
     // RIGHT
-    if ((myPlayer.x + myPlayer.width + 0.58 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y + 0.7) && (myPlayer.y < obj.y + obj.height + 4) && myDirection === 'RIGHT'){
+    if ((myPlayer.x + myPlayer.width + 0.7 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 2) && (myDirection === 'RIGHT' || myDirection === 'UP')) {
+                
+        if (obj.id === 6) {
+            console.log("HAPPENING RIGHT")
+        }
         return touchingCheck(myPlayer, obj);
     }// LEFT
-    else if ((myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 0.7) && (myPlayer.y < obj.y + obj.height) && myDirection === 'LEFT'){
+    else if ((myPlayer.x < obj.x + obj.width + 0.7) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 2) && (myDirection === 'LEFT' || myDirection === 'UP')) {
+                
+        if (obj.id === 6) {
+            console.log("HAPPENING LEFT")
+        }
         return touchingCheck(myPlayer, obj);
     }// UP      
     else if ((myPlayer.y - 7 < obj.y + obj.height + 0.58) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP'){
@@ -88,14 +96,14 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
     if(obj.type === "sphere-socket") {
         handleInsertSphere(myPlayer, obj, spheres, gameStatus)
     }
-    if(obj.type === "sphere-collector") {
+    if (obj.type === "sphere-collector") {
         return false;
     }
-    if(myPlayer.y < 0.58) {
+    if (myPlayer.y < 0.58) {
         return true;
     }
 
-    if( (myPlayer.y - 2 < obj.y + obj.height + 0.7) && (myPlayer.x + myPlayer.width > obj.x + 0.7) && (myPlayer.x < obj.x + obj.width) && (myPlayer.y > obj.y)){
+    if ( (myPlayer.y > obj.y) && (myPlayer.y - 2 < obj.y + obj.height + 0.7) && (myPlayer.x + myPlayer.width > obj.x + 0.2) && (myPlayer.x < obj.x + obj.width + 0.5) && ( (myPlayer.x + myPlayer.width - 0.9) < obj.x + obj.width + 0.5 )) {
         return true;
     }
     return false;
@@ -103,17 +111,17 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
 
 export const hitBottom = (myPlayer, obj) => {
 
-    if(obj.type === 'warrior-pedestal'){
+    if (obj.type === 'warrior-pedestal') {
         return false;
     }
-    if(obj.type === "sphere-collector") {
+    if (obj.type === "sphere-collector") {
         return false;
     }
     
-     if((myPlayer.y + myPlayer.height + 0.5 > obj.y) && (myPlayer.x + 0.2 > obj.x) && (myPlayer.y < obj.y) && ( (myPlayer.x + myPlayer.width - 0.2) < obj.x + obj.width )){
+    if ( (myPlayer.y < obj.y) && (myPlayer.y + myPlayer.height + 0.7 > obj.y - 0.3) && (myPlayer.x + myPlayer.width > obj.x + 0.2) && (myPlayer.x < obj.x + obj.width + 0.5) && ( (myPlayer.x + myPlayer.width - 0.9) < obj.x + obj.width + 0.5 )) {
         myPlayer.onFloor = true;
         return true;
-    }else{
+    } else {
         myPlayer.onFloor = false;
     }
     return false;

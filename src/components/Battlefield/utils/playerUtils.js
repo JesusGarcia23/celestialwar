@@ -21,7 +21,10 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
         myDirection = "LEFT";
         Keys.left = true;
       };
-      if(kc === 74) Keys.up = true;
+      if(kc === 74) {
+        myDirection = "UP";
+        Keys.up = true;
+      }
       if(kc === 68) {
         myDirection = "RIGHT";
         Keys.right = true
@@ -57,7 +60,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
           })
   
           if (touched.indexOf(true) < 0) {
-            movePlayer(myPlayer, "LEFT", 0.5, true, gameState);
+            movePlayer(myPlayer, "LEFT", 0.4, true, gameState);
           }
         }
 
@@ -67,13 +70,12 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
           })
 
           if (touched.indexOf(true) < 0) {
-            movePlayer(myPlayer, "RIGHT", 0.5, true, gameState);
+            movePlayer(myPlayer, "RIGHT", 0.4, true, gameState);
           }
         }
 
         if (Keys.up) {
-          console.log("UP!");
-          handleJumping(myPlayer, globalMap, spheres, gameState)
+          handleJumping(myPlayer, globalMap, spheres, gameState, myDirection)
         }
   
       }

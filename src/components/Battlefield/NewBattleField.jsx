@@ -1,10 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import Context from '../../Context/Context';
-import { playersCreator } from '../Character/playerGenerator';
-import { joinRoom } from '../../sockets/emit/roomEmit';
 import { socket } from '../../sockets/index';
-import { getUpdatedGameStatus } from '../../sockets/events/gameEvents';
 import { forestPlatForms } from './utils/mockData';
 
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
@@ -24,10 +21,10 @@ const NewBattleField = (props) => {
 
     const { id } = props.match.params;
 
-    const { user, actualRoom, gameStatus, error } = MyContext;
+    const { user, error } = MyContext;
 
     useEffect(() => {
-        socket.emit('requestGameStatus', {user, roomId: 2} );
+        socket.emit('requestGameStatus', {user, roomId: id} );
         window.addEventListener("resize", updateCanvasSize);
         canvasRef.current.width = window.innerWidth - 50;
         canvasRef.current.height = window.innerHeight - 50;
@@ -81,7 +78,7 @@ const NewBattleField = (props) => {
     const drawMap = (context, canvas) => {
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.map.length > 0) {
             // actualRoom.gameStatus.map
-          return forestPlatForms.map(resource => {
+          return actualRoomData.gameStatus.map.map(resource => {
 
             switch(resource.type) {
                 case 'platform': {
@@ -94,7 +91,7 @@ const NewBattleField = (props) => {
                     return drawSphereCollector(context, resource, canvas);
                 }
                 case 'sphere-socket': {
-                    return drawSphereCollectorSocket(context, resource, canvas)
+                    return drawSphereCollectorSocket(context, resource, canvas);
                 }
                 default:
                     return null;
