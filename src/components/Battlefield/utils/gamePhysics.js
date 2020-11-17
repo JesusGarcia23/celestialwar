@@ -69,14 +69,15 @@ export const checkCollision = (myPlayer, obj, spheres, myDirection) => {
     }
     
     // RIGHT
-    if ((myPlayer.x + myPlayer.width + 0.7 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 2) && (myDirection === 'RIGHT' || myDirection === 'UP')) {
+    if ((myPlayer.x + myPlayer.width + 0.6 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 0.5) && (myDirection === 'RIGHT' || myDirection === 'UP')) {
                 
         if (obj.id === 6) {
+            console.log(myDirection)
             console.log("HAPPENING RIGHT")
         }
         return touchingCheck(myPlayer, obj);
     }// LEFT
-    else if ((myPlayer.x < obj.x + obj.width + 0.7) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 2) && (myDirection === 'LEFT' || myDirection === 'UP')) {
+    else if ((myPlayer.x < obj.x + obj.width + 0.5) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 0.5) && (myDirection === 'LEFT' || myDirection === 'UP')) {
                 
         if (obj.id === 6) {
             console.log("HAPPENING LEFT")
@@ -87,6 +88,7 @@ export const checkCollision = (myPlayer, obj, spheres, myDirection) => {
         return touchingCheck(myPlayer, obj);
     }// BOTTOM
     else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x + 0.58 > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN'){
+        console.log("HAPPENING BOTTOM")
         return touchingCheck(myPlayer, obj);
     }
     return false;
@@ -118,8 +120,9 @@ export const hitBottom = (myPlayer, obj) => {
         return false;
     }
     
-    if ( (myPlayer.y < obj.y) && (myPlayer.y + myPlayer.height + 0.7 > obj.y - 0.3) && (myPlayer.x + myPlayer.width > obj.x + 0.2) && (myPlayer.x < obj.x + obj.width + 0.5) && ( (myPlayer.x + myPlayer.width - 0.9) < obj.x + obj.width + 0.5 )) {
+    if ( (myPlayer.y < obj.y) && (myPlayer.y + myPlayer.height + 0.5 > obj.y - 0.4) && (myPlayer.x + myPlayer.width > obj.x + 0.2) && (myPlayer.x < obj.x + obj.width + 0.5) && ( (myPlayer.x + myPlayer.width - 0.5) < obj.x + obj.width + 0.5 )) {
         myPlayer.onFloor = true;
+
         return true;
     } else {
         myPlayer.onFloor = false;

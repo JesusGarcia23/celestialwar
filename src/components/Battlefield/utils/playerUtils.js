@@ -22,7 +22,6 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
         Keys.left = true;
       };
       if(kc === 74) {
-        myDirection = "UP";
         Keys.up = true;
       }
       if(kc === 68) {
@@ -51,6 +50,8 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
       const {players, spheres, map } = gameState.gameStatus;
       const globalMap = [...map, ...players, ...spheres];
       let touched = null;
+
+      console.log(myDirection)
   
       if (map.length > 0) {
   
