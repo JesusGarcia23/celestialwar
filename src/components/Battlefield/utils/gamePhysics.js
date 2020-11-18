@@ -122,8 +122,8 @@ export const hitBottom = (myPlayer, obj) => {
     
     if ( (myPlayer.y < obj.y) && (myPlayer.y + myPlayer.height + 0.5 > obj.y - 0.4) && (myPlayer.x + myPlayer.width > obj.x + 0.2) && (myPlayer.x < obj.x + obj.width + 0.5) && ( (myPlayer.x + myPlayer.width - 0.5) < obj.x + obj.width + 0.5 )) {
         myPlayer.onFloor = true;
-
         return true;
+        
     } else {
         myPlayer.onFloor = false;
     }
