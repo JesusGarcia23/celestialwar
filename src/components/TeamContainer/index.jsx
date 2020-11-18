@@ -100,6 +100,16 @@ const TeamContainer = (props) => {
             <div className="teams-container">
                 
                 <div className="angel-team-container">
+
+                    <div className="socket-container">
+                        <TeamSocket team={angelTeam} username={user.username} side="angel" onClick={() => handleRequestKing("angel")}>
+                            {showPlayer(angelTeam, 0, "angel")}
+                        </TeamSocket>
+                        <SocketOptions>
+                            {displayExtraOptions(angelTeam, 0)}
+                        </SocketOptions>
+                    </div>
+
                     <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
                             {showPlayer(angelTeam, 1, "angel")}
@@ -119,15 +129,6 @@ const TeamContainer = (props) => {
                     </div>
 
                     <div className="socket-container">
-                        <TeamSocket team={angelTeam} username={user.username} side="angel" onClick={() => handleRequestKing("angel")}>
-                            {showPlayer(angelTeam, 0, "angel")}
-                        </TeamSocket>
-                        <SocketOptions>
-                            {displayExtraOptions(angelTeam, 0)}
-                        </SocketOptions>
-                    </div>
-
-                    <div className="socket-container">
                         <TeamSocket team={angelTeam} username={user.username} side="angel">
                             {showPlayer(angelTeam, 3, "angel")}
                         </TeamSocket>
@@ -136,17 +137,19 @@ const TeamContainer = (props) => {
                         </SocketOptions>
                     </div>
 
-                    <div className="socket-container">
-                        <TeamSocket team={angelTeam} username={user.username} side="angel">
-                            {showPlayer(angelTeam, 4, "angel")}
-                        </TeamSocket>
-                        <SocketOptions>
-                            {displayExtraOptions(angelTeam, 4)}
-                        </SocketOptions>
-                    </div>
                 </div>
 
                 <div className="demon-team-container">
+
+                    <div className="socket-container">
+                        <TeamSocket team={demonTeam} username={user.username} side="demon" onClick={(e) => handleRequestKing("demon")}>
+                            {showPlayer(demonTeam, 0, "demon")}
+                        </TeamSocket>
+                        <SocketOptions>
+                            {displayExtraOptions(demonTeam, 0)}
+                        </SocketOptions>
+                    </div>
+
                     <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
                             {showPlayer(demonTeam, 1, "demon")}
@@ -166,29 +169,11 @@ const TeamContainer = (props) => {
                     </div>
 
                     <div className="socket-container">
-                        <TeamSocket team={demonTeam} username={user.username} side="demon" onClick={(e) => handleRequestKing("demon")}>
-                            {showPlayer(demonTeam, 0, "demon")}
-                        </TeamSocket>
-                        <SocketOptions>
-                            {displayExtraOptions(demonTeam, 0)}
-                        </SocketOptions>
-                    </div>
-
-                    <div className="socket-container">
                         <TeamSocket team={demonTeam} username={user.username} side="demon">
                             {showPlayer(demonTeam, 3, "demon")}
                         </TeamSocket>
                         <SocketOptions>
                             {displayExtraOptions(demonTeam, 3)}
-                        </SocketOptions>
-                    </div>
-
-                    <div className="socket-container">
-                        <TeamSocket team={demonTeam} username={user.username} side="demon">
-                            {showPlayer(demonTeam, 4, "demon")}
-                        </TeamSocket>
-                        <SocketOptions>
-                            {displayExtraOptions(demonTeam, 4)}
                         </SocketOptions>
                     </div>
 
