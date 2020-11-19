@@ -4,7 +4,7 @@ import Context from '../../Context/Context';
 import { socket } from '../../sockets/index';
 import { forestPlatForms } from './utils/mockData';
 
-import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers } from './utils/resourceUtils';
+import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers, drawSpheres } from './utils/resourceUtils';
 import { handleMovement, moveControls, handleGravity } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
@@ -50,6 +50,7 @@ const NewBattleField = (props) => {
             handleGravity(myPlayer, actualRoomData, myCanvas);
             handleMovement(myPlayer, actualRoomData, myCanvas);
             drawAllPlayers(context, myCanvas);
+            drawAllSpheres(context, myCanvas);
         }
 
         requestRef.current = requestAnimationFrame(animateGame);
@@ -100,6 +101,15 @@ const NewBattleField = (props) => {
           })
         }
     };
+
+    const drawAllSpheres = (context, canvas) => {
+
+        if (actualRoomData.gameStatus && actualRoomData.gameStatus.spheres) {
+            return actualRoomData.gameStatus.spheres.map(sphere => {
+                return drawSpheres(sphere, actualRoomData.gameStatus.players,  context, canvas)
+            }) 
+        }
+    }
 
     const drawAllPlayers = (context, canvas) => {
 

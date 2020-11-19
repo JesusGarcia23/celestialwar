@@ -57,6 +57,28 @@ export const drawWarriorPedestal = (ctx, resource, canvas, modeDevelop) => {
     }
 }
 
+export const drawSpheres = (resource, players, ctx, canvas) => {
+    if(resource.grabbedBy !== '' && players.length > 0) {
+        const ownerIndex = players.findIndex(player => player.name === this.grabbedBy)
+        const owner = players[ownerIndex];
+        if(owner.alive){
+            resource.x = owner.x;
+            resource.y = owner.y;
+            resource.color = 'transparent';
+        }else{
+            resource.grabbedBy = '';
+            resource.color = 'blue';
+        }
+    }
+    ctx.beginPath();
+      ctx.arc(resource.x, resource.y,resource.radius, 0, Math.PI * 2);
+      ctx.fillStyle = resource.color;
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = resource.color;
+      ctx.stroke();
+}
+
 export const drawSphereCollector = (ctx, resource, canvas, modeDevelop) => {
 
     ctx.fillStyle = resource.side === "Demon" ? "#753040" : "#326996";
