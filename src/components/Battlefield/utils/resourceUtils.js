@@ -71,7 +71,7 @@ export const drawSpheres = (resource, players, ctx, canvas) => {
         }
     }
     ctx.beginPath();
-      ctx.arc(resource.x, resource.y,resource.radius, 0, Math.PI * 2);
+      ctx.arc(resizeCoor(resource.x, canvas.width),resizeCoor(resource.y, canvas.height), resizeRadius(resource.radius, canvas), 0, Math.PI * 2);
       ctx.fillStyle = resource.color;
       ctx.fill();
       ctx.lineWidth = 3;
