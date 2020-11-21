@@ -481,5 +481,274 @@ export const forestPlatForms = [
 ];
 
 export const forestSpheres = [
-    
+    {
+        radius: 0.5,
+        x: 1.5,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 2.2,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 2.9,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 1.85,
+        y: 58,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 2.55,
+        y: 58,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 2.2,
+        y: 56.8,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 98.5,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 97.8,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 97.1,
+        y: 59.2,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 98.15,
+        y: 58,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 97.45,
+        y: 58,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 97.8,
+        y: 56.8,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
+    {
+        radius: 0.5,
+        x: 10,
+        y: 11,
+        hide: false,
+        grabbedBy: '',
+        type: "sphere",
+        color: "blue"
+    },
 ]

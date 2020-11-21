@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import Context from '../../Context/Context';
 import { socket } from '../../sockets/index';
-import { forestPlatForms } from './utils/mockData';
+import { forestPlatForms, forestSpheres } from './utils/mockData';
 
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers, drawSpheres } from './utils/resourceUtils';
 import { handleMovement, moveControls, handleGravity } from './utils/playerUtils';
@@ -105,7 +105,8 @@ const NewBattleField = (props) => {
     const drawAllSpheres = (context, canvas) => {
 
         if (actualRoomData.gameStatus && actualRoomData.gameStatus.spheres) {
-            return actualRoomData.gameStatus.spheres.map(sphere => {
+            // actualRoomData.gameStatus.spheres
+            return forestSpheres.map(sphere => {
                 return drawSpheres(sphere, actualRoomData.gameStatus.players,  context, canvas)
             }) 
         }
