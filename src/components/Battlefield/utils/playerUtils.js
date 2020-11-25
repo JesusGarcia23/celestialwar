@@ -50,14 +50,12 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
       const {players, spheres, map } = gameState.gameStatus;
       const globalMap = [...map, ...players, ...spheres];
       let touched = null;
-
-      console.log(myDirection)
-  
+ 
       if (map.length > 0) {
   
         if (Keys.left && (myPlayer.x > 0.7)) {
           touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, spheres, myDirection);
+            return checkCollision(myPlayer, resource, myDirection);
           })
   
           if (touched.indexOf(true) < 0) {
@@ -67,7 +65,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
 
         if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
           touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, spheres, myDirection);
+            return checkCollision(myPlayer, resource, myDirection);
           })
 
           if (touched.indexOf(true) < 0) {
