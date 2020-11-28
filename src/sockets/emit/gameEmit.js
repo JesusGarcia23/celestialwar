@@ -4,9 +4,10 @@ export const requestGameStatus = (player, roomId) => {
     socket.emit('requestGameStatus', {player, roomId});
 }
 
-export const grabSphere = (player, sphere ) => {
+export const grabSphere = (player, sphere, room) => {
     console.log(player);
     console.log(sphere);
+    socket.emit('playerGrabbedSphere', {player, sphere, roomId: room.id})
 }
 
 export const movePlayer = (player, direction, moveAmount, canMove, room) => {

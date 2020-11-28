@@ -56,13 +56,13 @@ const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
         }
 };
 
-export const checkCollision = (myPlayer, obj, myDirection) => {
+export const checkCollision = (myPlayer, obj, myDirection, room) => {
 
     if (obj.radius !== null && obj.type === 'sphere') {
 
         let touched = sphereCollision(myPlayer, obj);
         if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide) {
-            grabSphere(myPlayer, obj)
+            grabSphere(myPlayer, obj, room);
         }
     }
     if (obj.type === "sphere-collector") {
