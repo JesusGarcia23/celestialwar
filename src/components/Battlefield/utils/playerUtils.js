@@ -87,16 +87,18 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   myPlayer.onFloor = false;
 
   if (Keys.up && mapLevel.length > 0) {
+
     touched = mapLevel.filter(resource => resource.type !== "warrior-pedestal").map(resource => {
       return hitTop(myPlayer, resource, spheres, gameState);
-    })
+    });
 
     if (touched !== null && touched.indexOf(true) < 0 && Keys.up) {
       if (myPlayer.modeWarrior && myPlayer.y > 0.6) {
         movePlayer(myPlayer, "UP", 3, true, gameState);
-      } else if (!myPlayer.modeWarrior && myPlayer.totalJumped <= myPlayer.powerJump && myPlayer.y > 5) {
-        myPlayer.totalJumped += 1;
-        myPlayer.y -= 20;
+      } else if (!myPlayer.modeWarrio && myPlayer.y > 5) {
+        movePlayer(myPlayer, "UP", 3, true, gameState);
+        // myPlayer.totalJumped += 1;
+        // myPlayer.y -= 20;
       }
     } else{
       myPlayer.totalJumped = 100;

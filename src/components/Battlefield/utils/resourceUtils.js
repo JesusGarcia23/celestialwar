@@ -59,16 +59,11 @@ export const drawWarriorPedestal = (ctx, resource, canvas, modeDevelop) => {
 
 export const drawSpheres = (resource, players, ctx, canvas) => {
     if(resource.grabbedBy !== '' && players.length > 0) {
-        const ownerIndex = players.findIndex(player => player.name === this.grabbedBy)
+        const ownerIndex = players.findIndex(player => player.name === resource.grabbedBy)
         const owner = players[ownerIndex];
-        if(owner.alive){
-            resource.x = owner.x;
-            resource.y = owner.y;
+        if (owner && owner.alive) {
             resource.color = 'transparent';
-        }else{
-            resource.grabbedBy = '';
-            resource.color = 'blue';
-        }
+        } 
     }
     ctx.beginPath();
       ctx.arc(resizeCoor(resource.x, canvas.width),resizeCoor(resource.y, canvas.height), resizeRadius(resource.radius, canvas), 0, Math.PI * 2);

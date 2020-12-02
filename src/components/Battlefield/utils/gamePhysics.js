@@ -1,5 +1,7 @@
 import { grabSphere } from '../../../sockets/emit/gameEmit';
 
+let sphereAlreadyGrabbed = false;
+
 const handleAttack = () => {
 
 }
@@ -41,7 +43,7 @@ const sphereCollision = (myPlayer, sphere) => {
 };
 
 const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
-    let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === this.name);
+    let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === myPlayer.name);
         let touched =  sphereCollision(myPlayer, socket);
         if (touched && myPlayer.sphereGrabbed && socket.side === myPlayer.side && socket.empty && sphereGrabbed.length > 0) {
             if (myPlayer.side === "Angel") {
@@ -61,7 +63,8 @@ export const checkCollision = (myPlayer, obj, myDirection, room) => {
     if (obj.radius !== null && obj.type === 'sphere') {
 
         let touched = sphereCollision(myPlayer, obj);
-        if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide) {
+        if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide && !sphereAlreadyGrabbed) {
+            sphereAlreadyGrabbed = true;
             grabSphere(myPlayer, obj, room);
         }
     }
