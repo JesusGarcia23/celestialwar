@@ -2,8 +2,30 @@ import { grabSphere } from '../../../sockets/emit/gameEmit';
 
 let sphereAlreadyGrabbed = false;
 
-const handleAttack = () => {
-
+const handleAttack = (myPlayer, otherPlayer, gameStatus) => {
+    if (!otherPlayer.alive) {
+        return false;
+    }
+    if (!otherPlayer.modeWarrior) {
+        handleDamage();
+    }
+    else if (otherPlayer.modeWarrior) {
+        if (otherPlayer.direction !== myPlayer.direction) {
+            return true;
+        } 
+        else {
+            if (otherPlayer.king) {
+                if (myPlayer.side === "Angel") {
+                    gameStatus.demonDeath += 1;
+                }
+                else if (myPlayer.side === "Demon") {
+                    gameStatus.archangelDeath += 1;
+                }
+                myPlayer.kills += 1;
+            }
+            handleDamage();
+        }
+    } 
 }
 
 const handleDamage = () => {
