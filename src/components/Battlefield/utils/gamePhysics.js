@@ -2,43 +2,49 @@ import { grabSphere } from '../../../sockets/emit/gameEmit';
 
 let sphereAlreadyGrabbed = false;
 
-const handleAttack = (myPlayer, otherPlayer, gameStatus) => {
+const handleAttack = (myPlayer, otherPlayer, room) => {
+    console.log("ATTACK!!");
+    console.log(otherPlayer);
+    let addPoint = 0;
     if (!otherPlayer.alive) {
         return false;
     }
+
     if (!otherPlayer.modeWarrior) {
-        handleDamage();
+         // socket for attack below here
+
+         return false;
     }
-    else if (otherPlayer.modeWarrior) {
-        if (otherPlayer.direction !== myPlayer.direction) {
-            return true;
-        } 
-        else {
-            if (otherPlayer.king) {
-                if (myPlayer.side === "Angel") {
-                    gameStatus.demonDeath += 1;
-                }
-                else if (myPlayer.side === "Demon") {
-                    gameStatus.archangelDeath += 1;
-                }
-                myPlayer.kills += 1;
-            }
-            handleDamage();
+
+    if (otherPlayer.modeWarrior && (otherPlayer.direction !== myPlayer.direction)) {
+        
+        if (otherPlayer.king) {
+            addPoint = 1;
         }
+        // socket for attack below here
+
+        return false;
+        
     } 
+    else {
+        // bouncing logic here
+
+        return true;
+    }
+
 }
 
-const handleDamage = () => {
+const handleDamage = (myPlayer, otherPlayer, room) => {
 
 }
 
-const touchingCheck = (myPlayer, obj) => {
+const touchingCheck = (myPlayer, obj, gameStatus) => {
     // CHECK TOUCHING OTHER PLAYERS
   if (!obj.type) {
       if(myPlayer.modeWarrior) {
-          handleAttack(myPlayer, obj);
+          handleAttack(myPlayer, obj, gameStatus);
       }else if(obj.modeWarrior === true){
-          handleDamage(myPlayer);
+          handleDamage(myPlayer, obj, gameStatus);
       }
       return false;
   }
@@ -96,16 +102,16 @@ export const checkCollision = (myPlayer, obj, myDirection, room) => {
     
     // RIGHT
     if ((myPlayer.x + myPlayer.width + 0.6 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 0.5) && (myDirection === 'RIGHT' || myDirection === 'UP')) {
-        return touchingCheck(myPlayer, obj);
+        return touchingCheck(myPlayer, obj, room);
     }// LEFT
     else if ((myPlayer.x < obj.x + obj.width + 0.5) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height + 0.5) && (myDirection === 'LEFT' || myDirection === 'UP')) {
-        return touchingCheck(myPlayer, obj);
+        return touchingCheck(myPlayer, obj, room);
     }// UP      
     else if ((myPlayer.y - 7 < obj.y + obj.height + 0.58) && (myPlayer.x + myPlayer.width > obj.x + 4) && (myPlayer.x < obj.x + obj.width) && myPlayer.direction === 'UP') {
-        return touchingCheck(myPlayer, obj);
+        return touchingCheck(myPlayer, obj, room);
     }// BOTTOM
     else if ((myPlayer.y + myPlayer.height + 0.58 > obj.y) && (myPlayer.x + 0.58 > obj.x) && (myPlayer.y < obj.y) && (myPlayer.x + myPlayer.width < obj.x + obj.width) && myPlayer.direction === 'DOWN') {
-        return touchingCheck(myPlayer, obj);
+        return touchingCheck(myPlayer, obj, room);
     }
     return false;
 };
