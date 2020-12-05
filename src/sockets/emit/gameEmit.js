@@ -8,6 +8,10 @@ export const grabSphere = (player, sphere, room) => {
     socket.emit('playerGrabbedSphere', {player, sphere, roomId: room.id})
 }
 
+export const attackPlayer = (myPlayer, otherPlayer, action, points, room) => {
+    socket.emit('attackPlayer', {myPlayer, otherPlayer, action, points, roomId: room.id})
+}
+
 export const movePlayer = (player, direction, moveAmount, canMove, room) => {
     
     switch (direction) {

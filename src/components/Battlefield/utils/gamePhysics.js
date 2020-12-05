@@ -1,4 +1,4 @@
-import { grabSphere } from '../../../sockets/emit/gameEmit';
+import { grabSphere, attackPlayer } from '../../../sockets/emit/gameEmit';
 
 let sphereAlreadyGrabbed = false;
 
@@ -11,8 +11,7 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
     }
 
     if (!otherPlayer.modeWarrior) {
-         // socket for attack below here
-
+         attackPlayer(myPlayer, otherPlayer, "ATTACK", addPoint, room);
          return false;
     }
 
@@ -21,8 +20,7 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
         if (otherPlayer.king) {
             addPoint = 1;
         }
-        // socket for attack below here
-
+        attackPlayer(myPlayer, otherPlayer, "ATTACK", addPoint, room);
         return false;
         
     } 
