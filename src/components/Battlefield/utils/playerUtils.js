@@ -65,7 +65,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
 
         if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
           touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection);
+            return checkCollision(myPlayer, resource, myDirection, gameState);
           })
 
           if (touched.indexOf(true) < 0) {

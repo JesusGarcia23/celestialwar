@@ -36,13 +36,14 @@ const handleDamage = (myPlayer, otherPlayer, room) => {
 
 }
 
-const touchingCheck = (myPlayer, obj, gameStatus) => {
+const touchingCheck = (myPlayer, obj, room) => {
+    console.log(room)
     // CHECK TOUCHING OTHER PLAYERS
   if (!obj.type) {
       if(myPlayer.modeWarrior) {
-          handleAttack(myPlayer, obj, gameStatus);
+          handleAttack(myPlayer, obj, room);
       }else if(obj.modeWarrior === true){
-          handleDamage(myPlayer, obj, gameStatus);
+          handleDamage(myPlayer, obj, room);
       }
       return false;
   }
