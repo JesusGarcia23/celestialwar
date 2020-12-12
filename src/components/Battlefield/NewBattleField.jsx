@@ -115,7 +115,7 @@ const NewBattleField = (props) => {
     const drawAllPlayers = (context, canvas) => {
 
         if (actualRoomData.gameStatus && actualRoomData.gameStatus.players && actualRoomData.gameStatus.players.length > 0) {
-            return actualRoomData.gameStatus.players.map(player => {
+            return actualRoomData.gameStatus.players.filter(player => player.alive).map(player => {
                 return drawPlayers(context, player, canvas);
             })
         }

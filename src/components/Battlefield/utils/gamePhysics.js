@@ -5,22 +5,19 @@ let sphereAlreadyGrabbed = false;
 const handleAttack = (myPlayer, otherPlayer, room) => {
     console.log("ATTACK!!");
     console.log(otherPlayer);
-    let addPoint = 0;
+
     if (!otherPlayer.alive) {
         return false;
     }
 
     if (!otherPlayer.modeWarrior) {
-         attackPlayer(myPlayer, otherPlayer, "ATTACK", addPoint, room);
+         attackPlayer(myPlayer, otherPlayer, "ATTACK", room);
          return false;
     }
 
     if (otherPlayer.modeWarrior && (otherPlayer.direction !== myPlayer.direction)) {
         
-        if (otherPlayer.king) {
-            addPoint = 1;
-        }
-        attackPlayer(myPlayer, otherPlayer, "ATTACK", addPoint, room);
+        attackPlayer(myPlayer, otherPlayer, "ATTACK", room);
         return false;
         
     } 
