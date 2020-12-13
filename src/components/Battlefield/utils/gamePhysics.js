@@ -1,6 +1,13 @@
 import { grabSphere, attackPlayer } from '../../../sockets/emit/gameEmit';
 
 let sphereAlreadyGrabbed = false;
+let playerAttacked = false;
+
+const resetPlayerAttack = () => {
+    setTimeout(() => {
+        playerAttacked = true;
+    }, 1000)
+}
 
 const handleAttack = (myPlayer, otherPlayer, room) => {
     console.log("ATTACK!!");
@@ -10,14 +17,17 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
         return false;
     }
 
-    if (!otherPlayer.modeWarrior) {
-         attackPlayer(myPlayer, otherPlayer, "ATTACK", room);
-         return false;
+    if (!otherPlayer.modeWarrior && !playerAttacked) {
+        playerAttacked = true;
+        attackPlayer(myPlayer, otherPlayer, "ATTACK", room);
+        resetPlayerAttack();
+        return false;
     }
 
-    if (otherPlayer.modeWarrior && (otherPlayer.direction !== myPlayer.direction)) {
-        
+    if (otherPlayer.modeWarrior && (otherPlayer.direction !== myPlayer.direction) && !playerAttacked) {
+        playerAttacked = true;
         attackPlayer(myPlayer, otherPlayer, "ATTACK", room);
+        resetPlayerAttack();
         return false;
         
     } 
@@ -27,11 +37,11 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
         return true;
     }
 
-}
+};
 
 const handleDamage = (myPlayer, otherPlayer, room) => {
 
-}
+};
 
 const touchingCheck = (myPlayer, obj, room) => {
     console.log(room)
