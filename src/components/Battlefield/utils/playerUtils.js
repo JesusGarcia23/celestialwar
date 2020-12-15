@@ -1,5 +1,5 @@
 import { checkCollision, hitTop, hitBottom } from './gamePhysics';
-import { movePlayer } from '../../../sockets/emit/gameEmit';
+import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
 
   var Keys = {
     up: false,
@@ -10,6 +10,12 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
   };
 
   let myDirection = "RIGHT";
+
+  export const handleRespawn = (myPlayer, room) => {
+    if (!myPlayer.alive) {
+      respawnPlayer(myPlayer, room);
+    }
+  }
 
   export const moveControls = () => {
 
@@ -45,7 +51,7 @@ import { movePlayer } from '../../../sockets/emit/gameEmit';
 
 export const handleMovement = (myPlayer, gameState, canvasRef) => {
 
-    if (gameState && gameState.gameStatus) {
+    if (gameState && gameState.gameStatus && myPlayer.alive) {
 
       const {players, spheres, map } = gameState.gameStatus;
       const globalMap = [...map, ...players, ...spheres];

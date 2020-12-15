@@ -5,7 +5,7 @@ import { socket } from '../../sockets/index';
 import { forestPlatForms, forestSpheres } from './utils/mockData';
 
 import { drawPlatform, drawWarriorPedestal, drawSphereCollector, drawSphereCollectorSocket, drawPlayers, drawSpheres } from './utils/resourceUtils';
-import { handleMovement, moveControls, handleGravity } from './utils/playerUtils';
+import { handleMovement, moveControls, handleGravity, handleRespawn } from './utils/playerUtils';
 
 const NewBattleField = (props) => {
 
@@ -47,6 +47,7 @@ const NewBattleField = (props) => {
         drawMap(context, myCanvas);
 
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
+            handleRespawn(myPlayer, actualRoomData);
             handleGravity(myPlayer, actualRoomData, myCanvas);
             handleMovement(myPlayer, actualRoomData, myCanvas);
             drawAllPlayers(context, myCanvas);
