@@ -34,7 +34,7 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
     else {
         // bouncing logic here
 
-        return true;
+        return false;
     }
 
 };
@@ -44,7 +44,7 @@ const handleDamage = (myPlayer, otherPlayer, room) => {
 };
 
 const touchingCheck = (myPlayer, obj, room) => {
-    console.log(room)
+    
     // CHECK TOUCHING OTHER PLAYERS
   if (!obj.type) {
       if(myPlayer.modeWarrior) {

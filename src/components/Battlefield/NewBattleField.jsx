@@ -47,7 +47,9 @@ const NewBattleField = (props) => {
         drawMap(context, myCanvas);
 
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
-            handleRespawn(myPlayer, actualRoomData);
+            if (!myPlayer.alive) {
+                handleRespawn(myPlayer, actualRoomData);
+            }
             handleGravity(myPlayer, actualRoomData, myCanvas);
             handleMovement(myPlayer, actualRoomData, myCanvas);
             drawAllPlayers(context, myCanvas);

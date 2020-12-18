@@ -43,6 +43,5 @@ export const movePlayer = (player, direction, moveAmount, canMove, room) => {
 }
 
 export const respawnPlayer = (myPlayer, room) => {
-    console.log("ASKING FOR RESPAWN");
-    socket.emit('respawnPlayer', {myPlayer, roomId: room.id})
+        socket.emit('respawnPlayer', {myPlayer, roomId: room.id})
 }
