@@ -13,7 +13,9 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
 
   export const handleRespawn = (myPlayer, room) => {
     if (!myPlayer.alive) {
-      respawnPlayer(myPlayer, room);
+      setTimeout(() => {
+        respawnPlayer(myPlayer, room);
+      }, 10000)
     }
   }
 
