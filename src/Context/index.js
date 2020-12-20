@@ -10,6 +10,7 @@ const ContextProvider = (props) => {
     const [ rooms, setRooms ] = useState({});
     const [ actualRoom, setActualRoom ] = useState({});
     const [ error, setError ] = useState({});
+    const [ respawnRequested, setRespawnRequested ] = useState(false);
 
     const store = {
         gameStatus, setGameStatus,
@@ -17,7 +18,8 @@ const ContextProvider = (props) => {
         rooms, setRooms,
         actualRoom, setActualRoom,
         error, setError,
-        listPlayers, setListPlayers
+        listPlayers, setListPlayers,
+        respawnRequested, setRespawnRequested
     }
 
     useEffect(() => initSockets({ store }), [initSockets]);

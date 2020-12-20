@@ -11,8 +11,8 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
 
   let myDirection = "RIGHT";
 
-  export const handleRespawn = (myPlayer, room) => {
-    if (!myPlayer.alive) {
+  export const handleRespawn = (myPlayer, room, respawnRequest) => {
+    if (!myPlayer.alive && !respawnRequest) {
       setTimeout(() => {
         respawnPlayer(myPlayer, room);
       }, 10000)
@@ -51,7 +51,7 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
     };
   }
 
-export const handleMovement = (myPlayer, gameState, canvasRef) => {
+export const handleMovement = (myPlayer, gameState, attackRequest) => {
 
     if (gameState && gameState.gameStatus && myPlayer.alive) {
 
@@ -63,7 +63,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
   
         if (Keys.left && (myPlayer.x > 0.7)) {
           touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection, gameState);
+            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
           })
   
           if (touched.indexOf(true) < 0) {
@@ -73,7 +73,7 @@ export const handleMovement = (myPlayer, gameState, canvasRef) => {
 
         if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
           touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection, gameState);
+            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
           })
 
           if (touched.indexOf(true) < 0) {

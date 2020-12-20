@@ -21,7 +21,7 @@ const NewBattleField = (props) => {
 
     const { id } = props.match.params;
 
-    const { user, error } = MyContext;
+    const { user, error, respawnRequest, attackRequest } = MyContext;
 
     useEffect(() => {
         socket.emit('requestGameStatus', {user, roomId: id} );
@@ -48,10 +48,10 @@ const NewBattleField = (props) => {
 
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
             if (!myPlayer.alive) {
-                handleRespawn(myPlayer, actualRoomData);
+                handleRespawn(myPlayer, actualRoomData, respawnRequest);
             }
             handleGravity(myPlayer, actualRoomData, myCanvas);
-            handleMovement(myPlayer, actualRoomData, myCanvas);
+            handleMovement(myPlayer, actualRoomData, attackRequest);
             drawAllPlayers(context, myCanvas);
             drawAllSpheres(context, myCanvas);
         }
