@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import Context from '../../Context/Context';
+import { respawnPlayer } from '../../Context/index';
 import { socket } from '../../sockets/index';
 import { forestPlatForms, forestSpheres } from './utils/mockData';
 
@@ -21,7 +22,7 @@ const NewBattleField = (props) => {
 
     const { id } = props.match.params;
 
-    const { user, error, respawnRequest, attackRequest } = MyContext;
+    const { user, error, attackRequest } = MyContext;
 
     useEffect(() => {
         socket.emit('requestGameStatus', {user, roomId: id} );
@@ -47,8 +48,10 @@ const NewBattleField = (props) => {
         drawMap(context, myCanvas);
 
         if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
-            if (!myPlayer.alive) {
-                handleRespawn(myPlayer, actualRoomData, respawnRequest);
+            console.log(respawnPlayer)
+            if (!myPlayer.alive && !respawnPlayer) {
+                handleRespawn(myPlayer, actualRoomData);
+                respawnPlayer = true;
             }
             handleGravity(myPlayer, actualRoomData, myCanvas);
             handleMovement(myPlayer, actualRoomData, attackRequest);

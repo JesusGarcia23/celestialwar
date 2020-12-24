@@ -6,6 +6,6 @@ export const socket = io(process.env.REACT_APP_API_URL);
 export let myTestVariable = false;
 
 export const initSockets = ({ store }) => {
-    const { setGameStatus, user, setUser, gameStatus, rooms, setRooms, error, setError, setIsLoading, setActualRoom, actualRoom } = store;
-    socketEvents({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom, user })
+    const { user, setUser, setRooms, setError, setIsLoading, setActualRoom, setRespawnRequested } = store;
+    socketEvents({ setRespawnRequested, setUser, setRooms, setError, setIsLoading, setActualRoom, user })
 }

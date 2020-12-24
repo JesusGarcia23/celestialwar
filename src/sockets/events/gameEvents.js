@@ -1,11 +1,10 @@
-export const getGameStatus = (socket, setGameStatus) => {
-    socket.on('getGameStatus', (data) => {
-    })
-}
+export default {
 
-export const getUpdatedGameStatus = (socket, setGameStatus) => {
-    // socket.on('updateGameStatus', (data) => {
-    //     console.log(data)
-    //     return data;
-    // })
+    resetRespawnRequest(socket, setRespawnRequested) {
+        socket.on('resetRespawnRequest', (data) => {
+            console.log("REQUEST RECOVERED")
+            console.log(data);
+            // setRespawnRequested(false);
+        })
+    }
 }

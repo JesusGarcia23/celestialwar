@@ -11,12 +11,10 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
 
   let myDirection = "RIGHT";
 
-  export const handleRespawn = (myPlayer, room, respawnRequest) => {
-    if (!myPlayer.alive && !respawnRequest) {
+  export const handleRespawn = (myPlayer, room) => {
       setTimeout(() => {
         respawnPlayer(myPlayer, room);
       }, 10000)
-    }
   }
 
   export const moveControls = () => {

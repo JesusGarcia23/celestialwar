@@ -1,9 +1,10 @@
 import { socket } from '../index';
 import roomEvents from './roomEvents';
 import userEvents from './userEvents';
+import gameEvents from './gameEvents';
 import errorHandling from './errorEvents';
 
-export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIsLoading, setActualRoom, actualRoom, user }) => {
+export const socketEvents = ({ setUser, setRooms, setError, setRespawnRequested, setActualRoom }) => {
     socket.on('connection', (data) => {
         console.log(data);
     });
@@ -19,6 +20,9 @@ export const socketEvents = ({ setGameStatus, setUser, setRooms, setError, setIs
     roomEvents.goToRoom(socket);
     roomEvents.userLeavingRoom(socket, setActualRoom);
     roomEvents.kicked(socket, setError, setActualRoom);
+
+    // GAME EVENTS
+    gameEvents.resetRespawnRequest(socket, setRespawnRequested);
 
     // ERROR HANDLING
     errorHandling.serverError(socket);

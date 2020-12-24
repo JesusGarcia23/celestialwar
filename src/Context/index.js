@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Context from './Context';
 import { initSockets } from '../sockets';
 
+export let respawnPlayer = false;
+
 const ContextProvider = (props) => {
 
     const [ gameStatus, setGameStatus ] = useState({});
