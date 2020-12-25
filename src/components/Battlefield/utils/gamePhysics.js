@@ -9,6 +9,7 @@ const resetPlayerAttack = () => {
     }, 1000)
 }
 
+// user attack when colliding with other players and modeWarrior is true
 const handleAttack = (myPlayer, otherPlayer, room) => {
 
     if (!otherPlayer.alive) {
@@ -41,6 +42,7 @@ const handleDamage = (myPlayer, otherPlayer, room) => {
 
 };
 
+// Checks if user is touching a player
 const touchingCheck = (myPlayer, obj, room, attackRequest) => {
     
     // CHECK TOUCHING OTHER PLAYERS
@@ -59,6 +61,7 @@ const touchingCheck = (myPlayer, obj, room, attackRequest) => {
   return true;
 };
 
+// checks if user touched a sphere
 const sphereCollision = (myPlayer, sphere) => {
     let distX = Math.abs(sphere.x - myPlayer.x - myPlayer.width / 2);
     let distY = Math.abs(sphere.y - myPlayer.y - myPlayer.height / 2);
@@ -74,6 +77,7 @@ const sphereCollision = (myPlayer, sphere) => {
     return ( dx*dx+dy*dy <= (sphere.radius*sphere.radius));
 };
 
+// inserts sphere into sphere socket
 const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
     let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === myPlayer.name);
         let touched =  sphereCollision(myPlayer, socket);
@@ -90,6 +94,7 @@ const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
         }
 };
 
+// Checks for user collision (platforms, other players, spheres)
 export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) => {
 
     if (obj.radius !== null && obj.type === 'sphere') {
@@ -120,6 +125,7 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
     return false;
 };
 
+// check for user top collision
 export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
     if(obj.type === "sphere-socket") {
         handleInsertSphere(myPlayer, obj, spheres, gameStatus)
@@ -137,6 +143,7 @@ export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
     return false;
 };
 
+// Checks for user bottom collision
 export const hitBottom = (myPlayer, obj) => {
 
     if (obj.type === 'warrior-pedestal') {
