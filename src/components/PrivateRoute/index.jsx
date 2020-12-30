@@ -3,7 +3,7 @@ import Context from '../../Context/Context';
 import Loading from '../Loading';
 import { Redirect, Route} from 'react-router-dom';
 import { userLogIn } from '../../sockets/emit/userEmit';
-import { isPlayerAlreadyPlaying } from '../../utils/userUtils';
+import { isPlayerAlreadyPlaying, isPlayerHostAlready } from '../../utils/userUtils';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
@@ -14,19 +14,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     const { user, rooms } = MyContext;
 
     useEffect(() => {
-        if(user && !user.accepted || !user) {
+        if((user && !user.accepted) || !user) {
             userLogIn();
         }
-    }, [])
+    });
 
     const ComponentToRender = (props) => {
+
         if(user === null && (token !== null && token !== "" ) ) {
             return <Loading/>
         }
         else if( (user && !user.accepted) || !user) {
             return <Redirect to='/'/>
         }
-        else if (isPlayerAlreadyPlaying(user, rooms)) {
+        else if ((props.location.pathname === "/" || props.location.pathname === "/lobby") && isPlayerHostAlready(user, rooms)) {
+            return <Redirect to={`/room/2`}/>
+        }
+        else if ((props.location.pathname === "/" || props.location.pathname === "/lobby") && isPlayerAlreadyPlaying(user, rooms)) {
             return <Redirect to={`/Battlefield/${isPlayerAlreadyPlaying(user, rooms)}`}/>
         }
         return <Component {...props} />
