@@ -1,11 +1,19 @@
-import { grabSphere, attackPlayer } from '../../../sockets/emit/gameEmit';
+import { grabSphere, insertSphere, attackPlayer } from '../../../sockets/emit/gameEmit';
 
 let sphereAlreadyGrabbed = false;
+let playerInsertedSphere = false;
 let playerAttacked = false;
 
 const resetPlayerAttack = () => {
     setTimeout(() => {
         playerAttacked = false;
+    }, 1000)
+}
+
+
+const resetInsertSphere = () => {
+    setTimeout(() => {
+        playerInsertedSphere = false;
     }, 1000)
 }
 
@@ -78,20 +86,16 @@ const sphereCollision = (myPlayer, sphere) => {
 };
 
 // inserts sphere into sphere socket
-const handleInsertSphere = (myPlayer, socket, spheres, gameStatus) => {
+const handleInsertSphere = (myPlayer, sphereSocket, spheres, room) => {
     let sphereGrabbed = spheres.filter(sphere => sphere.grabbedBy === myPlayer.name);
-        let touched =  sphereCollision(myPlayer, socket);
-        if (touched && myPlayer.sphereGrabbed && socket.side === myPlayer.side && socket.empty && sphereGrabbed.length > 0) {
-            if (myPlayer.side === "Angel") {
-                gameStatus.angelSpheresCollected += 1;
-            } else if (myPlayer.side === "Demon") {
-                gameStatus.demonSpheresCollected += 1;
-            }
-            sphereGrabbed[0].grabbedBy = "";
-            this.sphereGrabbed = false;
-            socket.empty = false;
-            socket.color = "blue";
-        }
+    let touched =  sphereCollision(myPlayer, sphereSocket);
+
+    if (touched && myPlayer.sphereGrabbed && sphereSocket.empty && 
+        (sphereSocket.side.toLowerCase() === myPlayer.side.toLowerCase()) && sphereGrabbed.length > 0 && !playerInsertedSphere) {
+            playerInsertedSphere = true;
+            insertSphere(myPlayer, sphereGrabbed[0], sphereSocket, room);
+            resetInsertSphere();
+    }
 };
 
 // Checks for user collision (platforms, other players, spheres)
@@ -126,9 +130,9 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
 };
 
 // check for user top collision
-export const hitTop = (myPlayer, obj, spheres, gameStatus) => {
+export const hitTop = (myPlayer, obj, spheres, room) => {
     if(obj.type === "sphere-socket") {
-        handleInsertSphere(myPlayer, obj, spheres, gameStatus)
+        handleInsertSphere(myPlayer, obj, spheres, room)
     }
     if (obj.type === "sphere-collector") {
         return false;

@@ -38,8 +38,6 @@ export default {
 
     kicked (socket, setError, setActualRoom) {
         socket.on('kicked', (response) => {
-            console.log(response)
-            console.log("YOU GOT KICKED!")
             setActualRoom({});
             setError(oldState => ({...oldState, kicked: {value: true, room: response}, kickedMessage: "You were Kicked from the room"}));
         })
