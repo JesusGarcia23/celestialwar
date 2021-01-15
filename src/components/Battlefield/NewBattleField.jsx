@@ -111,7 +111,7 @@ const NewBattleField = (props) => {
 
         if (actualRoomData.gameStatus && actualRoomData.gameStatus.spheres) {
 
-            return actualRoomData.gameStatus.spheres.map(sphere => {
+            return actualRoomData.gameStatus.spheres.filter(sphereToFilter => !sphereToFilter.hide ).map(sphere => {
                 return drawSpheres(sphere, actualRoomData.gameStatus.players,  context, canvas)
             }) 
         }
