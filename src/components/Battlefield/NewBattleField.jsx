@@ -47,7 +47,9 @@ const NewBattleField = (props) => {
         context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
         drawMap(context, myCanvas);
 
-        if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && actualRoomData.gameStatus.players) {
+        if (actualRoomData && actualRoomData.gameStatus && actualRoomData.gameStatus.map && 
+            actualRoomData.gameStatus.players && !actualRoomData.gameStatus.gameFinished) {
+                
             if (!myPlayer.alive && !respawnPlayer) {
                 handleRespawn(myPlayer, actualRoomData);
                 respawnPlayer = true;

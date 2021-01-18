@@ -17,6 +17,12 @@ const resetInsertSphere = () => {
     }, 1000)
 }
 
+const resetGrabSphere = () => {
+    setTimeout(() => {
+        sphereAlreadyGrabbed = false;
+    }, 1000)
+}
+
 // user attack when colliding with other players and modeWarrior is true
 const handleAttack = (myPlayer, otherPlayer, room) => {
 
@@ -107,6 +113,7 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
         if (touched && !myPlayer.sphereGrabbed && !myPlayer.modeWarrior && !obj.hide && !sphereAlreadyGrabbed) {
             sphereAlreadyGrabbed = true;
             grabSphere(myPlayer, obj, room);
+            resetGrabSphere();
         }
     }
     if (obj.type === "sphere-collector") {
