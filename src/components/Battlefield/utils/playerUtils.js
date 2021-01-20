@@ -49,6 +49,7 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
     };
   }
 
+  //  handles user movement
 export const handleMovement = (myPlayer, gameState, attackRequest) => {
 
     if (gameState && gameState.gameStatus && myPlayer.alive) {
@@ -59,6 +60,7 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
  
       if (map.length > 0) {
   
+        //  Moves to Left
         if (Keys.left && (myPlayer.x > 0.7)) {
           touched = globalMap.map(resource => {
             return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
@@ -69,6 +71,7 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
           }
         }
 
+        //  Moves to Right
         if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
           touched = globalMap.map(resource => {
             return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
@@ -79,8 +82,22 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
           }
         }
 
+        // Jumps
         if (Keys.up) {
           handleJumping(myPlayer, globalMap, spheres, gameState, myDirection)
+        }
+
+        //  Request to ransform to warrior
+        if (Keys.action) {
+          
+          touched = map.map(resource => {
+            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
+          })
+
+          if (touched.indexOf(true) < 0) {
+            handleTransformation()
+          }
+          
         }
   
       }
@@ -88,7 +105,28 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
     }
 }
 
-export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
+//  handles user gravity
+export const handleGravity = (myPlayer, mapLevel) => {
+
+  let touched = null;
+
+  if ((mapLevel && mapLevel.gameStatus && mapLevel.gameStatus.map.length > 0)) {
+
+    touched = mapLevel.gameStatus.map.map(resource => {
+      return hitBottom(myPlayer, resource);
+    })
+    if (touched !== null && touched.indexOf(true) < 0) {
+      movePlayer(myPlayer, "DOWN", 1, true, mapLevel);
+    } else {
+      myPlayer.onFloor = true;
+      myPlayer.totalJumped = 0;
+    }
+  }
+
+}
+
+// handles user jumping
+const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   let touched = null;
   myPlayer.onFloor = false;
 
@@ -112,22 +150,7 @@ export const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
   }
 }
 
-export function handleGravity(myPlayer, mapLevel, canvasRef) {
-
-  let touched = null;
-
-  if ((mapLevel && mapLevel.gameStatus && mapLevel.gameStatus.map.length > 0)) {
-
-    touched = mapLevel.gameStatus.map.map(resource => {
-      return hitBottom(myPlayer, resource);
-    })
-    if (touched !== null && touched.indexOf(true) < 0) {
-      movePlayer(myPlayer, "DOWN", 1, true, mapLevel);
-    } else {
-      myPlayer.onFloor = true;
-      myPlayer.totalJumped = 0;
-    }
-  }
+//  handles player transformation to warrior
+const handleTransformation = (myPlayer, warriorPedestal) => {
 
 }
-

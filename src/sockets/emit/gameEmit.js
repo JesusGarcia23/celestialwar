@@ -51,3 +51,9 @@ export const respawnPlayer = (player, room, askedForRespawnAlready) => {
         socket.emit('respawnPlayer', {player, roomId: room.id});
     }
 }
+
+export const transformToWarrior = (player, room, askedForTransformationAlready) => {
+    if (!askedForTransformationAlready) {
+        socket.emit('transformToWarrior', {player, roomId: room.id})
+    }
+}
