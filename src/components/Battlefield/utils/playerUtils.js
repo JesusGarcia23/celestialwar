@@ -1,4 +1,4 @@
-import { checkCollision, hitTop, hitBottom } from './gamePhysics';
+import { checkCollision, checkPedestal, hitTop, hitBottom } from './gamePhysics';
 import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
 
   var Keys = {
@@ -90,12 +90,17 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
         //  Request to ransform to warrior
         if (Keys.action) {
           
-          touched = map.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
-          })
+          touched = map.filter(resource => resource.type === 'warrior-pedestal').map(resource => {
+            return checkPedestal(myPlayer, resource, myDirection, gameState, attackRequest);
+          });
+
+          if(touched.findIndex(pedestal => pedestal.touched) >= 0) {
+            let index = touched.findIndex(pedestal => pedestal.touched);
+            handleTransformation(myPlayer, touched[index].obj, spheres)
+          }
 
           if (touched.indexOf(true) < 0) {
-            handleTransformation()
+            
           }
           
         }

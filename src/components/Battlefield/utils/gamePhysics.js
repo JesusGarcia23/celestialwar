@@ -116,6 +116,7 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
             resetGrabSphere();
         }
     }
+
     if (obj.type === "sphere-collector") {
         return false;
     }
@@ -135,6 +136,17 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
     }
     return false;
 };
+
+// Check if user is inside warrior pedestal to transform
+export const checkPedestal = (myPlayer, obj) => {
+    if( ( myPlayer.x + myPlayer.width + 2 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height)){
+        return {touched: true, obj};
+    }// LEFT
+    else if( (myPlayer.x < obj.x + obj.width + 2) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height)){
+        return {touched: true, obj};
+    }
+    return {touched: false, obj};
+}
 
 // check for user top collision
 export const hitTop = (myPlayer, obj, spheres, room) => {
