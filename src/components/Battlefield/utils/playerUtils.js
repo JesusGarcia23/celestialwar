@@ -1,5 +1,5 @@
 import { checkCollision, checkPedestal, hitTop, hitBottom } from './gamePhysics';
-import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
+import { movePlayer, respawnPlayer, transformToWarrior } from '../../../sockets/emit/gameEmit';
 
   var Keys = {
     up: false,
@@ -10,6 +10,13 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
   };
 
   let myDirection = "RIGHT";
+  let playerRequestedToTransform = false;
+
+  const resetPlayerRequestToTransform = () => {
+    setTimeout(() => {
+      playerRequestedToTransform = false;
+    }, 1000)
+}
 
   export const handleRespawn = (myPlayer, room) => {
       setTimeout(() => {
@@ -22,7 +29,10 @@ import { movePlayer, respawnPlayer } from '../../../sockets/emit/gameEmit';
     window.onkeydown = function(e) {
       var kc = e.keyCode;
       e.preventDefault();
-      if(kc === 87) Keys.action = true;
+      if(kc === 87) {
+        Keys.action = true;
+        console.log("YES")
+      };
       if(kc === 65) {
         myDirection = "LEFT";
         Keys.left = true;
@@ -82,7 +92,7 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
           }
         }
 
-        // Jumps
+        // player Jumps
         if (Keys.up) {
           handleJumping(myPlayer, globalMap, spheres, gameState, myDirection)
         }
@@ -96,11 +106,10 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
 
           if(touched.findIndex(pedestal => pedestal.touched) >= 0) {
             let index = touched.findIndex(pedestal => pedestal.touched);
-            handleTransformation(myPlayer, touched[index].obj, spheres)
-          }
-
-          if (touched.indexOf(true) < 0) {
-            
+            if (!playerRequestedToTransform) {
+              handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
+              resetPlayerRequestToTransform();
+            }
           }
           
         }
@@ -156,6 +165,8 @@ const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
 }
 
 //  handles player transformation to warrior
-const handleTransformation = (myPlayer, warriorPedestal) => {
-
+const handleTransformation = (myPlayer, warriorPedestal, playerRequestedToTransform, room) => {
+  if (!myPlayer.modeWarrior && !playerRequestedToTransform) {
+    transformToWarrior(myPlayer, warriorPedestal, playerRequestedToTransform, room)
+  }
 }

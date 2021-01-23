@@ -8,7 +8,7 @@ const resetPlayerAttack = () => {
     setTimeout(() => {
         playerAttacked = false;
     }, 1000)
-}
+};
 
 
 const resetInsertSphere = () => {
@@ -21,7 +21,7 @@ const resetGrabSphere = () => {
     setTimeout(() => {
         sphereAlreadyGrabbed = false;
     }, 1000)
-}
+};
 
 // user attack when colliding with other players and modeWarrior is true
 const handleAttack = (myPlayer, otherPlayer, room) => {
@@ -104,6 +104,13 @@ const handleInsertSphere = (myPlayer, sphereSocket, spheres, room) => {
     }
 };
 
+
+
+//  handles player transformation to warrior
+export const handleTransformation = (myPlayer, warriorPedestal) => {
+
+}
+
 // Checks for user collision (platforms, other players, spheres)
 export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) => {
 
@@ -139,10 +146,10 @@ export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) 
 
 // Check if user is inside warrior pedestal to transform
 export const checkPedestal = (myPlayer, obj) => {
-    if( ( myPlayer.x + myPlayer.width + 2 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height)){
+    if( ( myPlayer.x + myPlayer.width + 0.58 > obj.x) && myPlayer.x < obj.x && (myPlayer.y + myPlayer.height > obj.y) && (myPlayer.y < obj.y + obj.height)) {
         return {touched: true, obj};
     }// LEFT
-    else if( (myPlayer.x < obj.x + obj.width + 2) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 8) && (myPlayer.y < obj.y + obj.height)){
+    else if( (myPlayer.x < obj.x + obj.width + 0.58) && myPlayer.x > obj.x && (myPlayer.y + myPlayer.height > obj.y + 0.58) && (myPlayer.y < obj.y + obj.height)) {
         return {touched: true, obj};
     }
     return {touched: false, obj};

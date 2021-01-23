@@ -12,8 +12,8 @@ import './style.css';
 const testSphere = new Sphere(5, 700, 0, 'cyan');
 const testSphere2 = new Sphere(5, 680, 0, 'cyan');
 const testGameStatus = new GameStatus();
-const Battlefield = (props) => {
 
+const Battlefield = (props) => {
 
   const { user } = props;
   const modeDevelop = true;
@@ -66,7 +66,7 @@ const Battlefield = (props) => {
 
   const update = () => {
     
-    if(gameOn) {
+    if (gameOn) {
       const myCanvas = canvasRef.current;
       let context = myCanvas.getContext('2d');
       const loop = () => {

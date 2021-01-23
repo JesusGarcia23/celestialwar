@@ -162,14 +162,14 @@ export const moveCharacters = () => {
 
       if(mapLevel.length > 0){
       
-        switch(player.sprite){
+        switch(player.sprite) {
             case 'A':
-              if(Keys.up && (player.y > 0)){
+              if(Keys.up && (player.y > 0)) {
                 player.direction = 'UP';
                 player.jumped = true;              
-                }
+              }
             
-              if(Keys.down){
+              if(Keys.down) {
                 player.direction = "DOWN";
                 touched = globalMap.map(resource => {
                     return player.checkCollision(resource);
@@ -180,7 +180,7 @@ export const moveCharacters = () => {
                 player.y += 6;
               }
 
-              if(Keys.action){
+              if(Keys.action) {
                 touched = globalMap.filter(resource => resource.type === 'warrior-pedestal').map(pedestal => {
                 return player.checkPedestal(pedestal);
                 });
@@ -202,13 +202,13 @@ export const moveCharacters = () => {
                 player.x -= 6;
               }
             
-              if(Keys.right && (player.x + player.width + 1 < canvas.width)){
+              if (Keys.right && (player.x + player.width + 1 < canvas.width)) {
                 player.direction = "RIGHT";
                 touched = globalMap.map(resource => {
                   return player.checkCollision(resource, spheres, gameStatus);
                 })
 
-                if(touched.indexOf(true) >= 0){
+                if (touched.indexOf(true) >= 0) {
                   player.x -= 6;
                 }
                 player.x += 6;
