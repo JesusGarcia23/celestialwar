@@ -104,13 +104,6 @@ const handleInsertSphere = (myPlayer, sphereSocket, spheres, room) => {
     }
 };
 
-
-
-//  handles player transformation to warrior
-export const handleTransformation = (myPlayer, warriorPedestal) => {
-
-}
-
 // Checks for user collision (platforms, other players, spheres)
 export const checkCollision = (myPlayer, obj, myDirection, room, attackRequest) => {
 

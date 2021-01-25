@@ -15,7 +15,7 @@ import { movePlayer, respawnPlayer, transformToWarrior } from '../../../sockets/
   const resetPlayerRequestToTransform = () => {
     setTimeout(() => {
       playerRequestedToTransform = false;
-    }, 1000)
+    }, 10000)
 }
 
   export const handleRespawn = (myPlayer, room) => {
@@ -105,11 +105,12 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
           });
 
           if(touched.findIndex(pedestal => pedestal.touched) >= 0) {
+
             let index = touched.findIndex(pedestal => pedestal.touched);
-            if (!playerRequestedToTransform) {
-              handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
-              resetPlayerRequestToTransform();
-            }
+            handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
+            playerRequestedToTransform = true;
+            resetPlayerRequestToTransform();
+
           }
           
         }
@@ -166,7 +167,7 @@ const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
 
 //  handles player transformation to warrior
 const handleTransformation = (myPlayer, warriorPedestal, playerRequestedToTransform, room) => {
-  if (!myPlayer.modeWarrior && !playerRequestedToTransform) {
-    transformToWarrior(myPlayer, warriorPedestal, playerRequestedToTransform, room)
+  if (!myPlayer.modeWarrior && myPlayer.sphereGrabbed && !playerRequestedToTransform) {
+    transformToWarrior(myPlayer, warriorPedestal, room)
   }
 }
