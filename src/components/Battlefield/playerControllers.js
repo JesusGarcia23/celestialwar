@@ -115,7 +115,7 @@ export const moveCharacters = () => {
 
   export function handleJumpLimit(player, mapLevel){
     let touched = null;
-    console.log(mapLevel)
+
     if(!player.onFloor && mapLevel.length > 0){
       touched = mapLevel.map(resource => {
         return player.hitTop(resource);

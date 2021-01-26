@@ -61,12 +61,13 @@ const touchingCheck = (myPlayer, obj, room, attackRequest) => {
     
     // CHECK TOUCHING OTHER PLAYERS
   if (!obj.type) {
-      if(myPlayer.modeWarrior) {
-          handleAttack(myPlayer, obj, room, attackRequest);
-      }else if(obj.modeWarrior === true){
-          handleDamage(myPlayer, obj, room);
-      }
-      return false;
+      
+    if(myPlayer.modeWarrior) {
+        handleAttack(myPlayer, obj, room, attackRequest);
+    }else if(obj.modeWarrior === true){
+        handleDamage(myPlayer, obj, room);
+    }
+    return false;
   }
   // CHECK FOR WARRIOR PEDESTALS
   if (obj.type === 'warrior-pedestal') {

@@ -16,45 +16,44 @@ import { movePlayer, respawnPlayer, transformToWarrior } from '../../../sockets/
     setTimeout(() => {
       playerRequestedToTransform = false;
     }, 10000)
-}
+  };
 
   export const handleRespawn = (myPlayer, room) => {
       setTimeout(() => {
         respawnPlayer(myPlayer, room);
       }, 10000)
-  }
+  };
 
   export const moveControls = () => {
 
     window.onkeydown = function(e) {
       var kc = e.keyCode;
       e.preventDefault();
-      if(kc === 87) {
+      if (kc === 87) {
         Keys.action = true;
-        console.log("YES")
       };
-      if(kc === 65) {
+      if (kc === 65) {
         myDirection = "LEFT";
         Keys.left = true;
       };
-      if(kc === 74) {
+      if (kc === 74) {
         Keys.up = true;
       }
-      if(kc === 68) {
+      if (kc === 68) {
         myDirection = "RIGHT";
         Keys.right = true
       };
-      if(kc === 83) Keys.down = true;
+      if (kc === 83) Keys.down = true;
     };
     
-    window.onkeyup = function(e){
+    window.onkeyup = function(e) {
       var kc = e.keyCode;
       e.preventDefault();
-      if(kc === 87) Keys.action = false;
-      if(kc === 65) Keys.left = false;
-      if(kc === 74) Keys.up = false;
-      if(kc === 68) Keys.right = false;
-      if(kc === 83) Keys.down = false;
+      if (kc === 87) Keys.action = false;
+      if (kc === 65) Keys.left = false;
+      if (kc === 74) Keys.up = false;
+      if (kc === 68) Keys.right = false;
+      if (kc === 83) Keys.down = false;
 
     };
   }
@@ -94,7 +93,7 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
 
         // player Jumps
         if (Keys.up) {
-          handleJumping(myPlayer, globalMap, spheres, gameState, myDirection)
+          handleJumping(myPlayer, globalMap, spheres, gameState, myDirection);
         }
 
         //  Request to ransform to warrior
@@ -104,7 +103,7 @@ export const handleMovement = (myPlayer, gameState, attackRequest) => {
             return checkPedestal(myPlayer, resource, myDirection, gameState, attackRequest);
           });
 
-          if(touched.findIndex(pedestal => pedestal.touched) >= 0) {
+          if (touched.findIndex(pedestal => pedestal.touched) >= 0) {
 
             let index = touched.findIndex(pedestal => pedestal.touched);
             handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
@@ -159,15 +158,15 @@ const handleJumping = (myPlayer, mapLevel, spheres, gameState) => {
         // myPlayer.totalJumped += 1;
         // myPlayer.y -= 20;
       }
-    } else{
+    } else {
       myPlayer.totalJumped = 100;
     }
   }
-}
+};
 
 //  handles player transformation to warrior
 const handleTransformation = (myPlayer, warriorPedestal, playerRequestedToTransform, room) => {
   if (!myPlayer.modeWarrior && myPlayer.sphereGrabbed && !playerRequestedToTransform) {
     transformToWarrior(myPlayer, warriorPedestal, room)
   }
-}
+};

@@ -46,10 +46,8 @@ export const movePlayer = (player, direction, moveAmount, canMove, room) => {
     socket.emit('movePlayer', {player, roomId: room.id});
 }
 
-export const respawnPlayer = (player, room, askedForRespawnAlready) => {
-    if (!askedForRespawnAlready) {
+export const respawnPlayer = (player, room) => {
         socket.emit('respawnPlayer', {player, roomId: room.id});
-    }
 }
 
 export const transformToWarrior = (player, warriorPedestal, room) => {

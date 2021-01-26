@@ -18,11 +18,19 @@ const NewBattleField = (props) => {
 
     let myPlayer = null;
 
+    let respawnPlayer = false;
+
     const MyContext = useContext(Context);
 
     const { id } = props.match.params;
 
     const { user, error, attackRequest } = MyContext;
+
+    const resetPlayerRequestToTransform = () => {
+        setTimeout(() => {
+            respawnPlayer = false;
+        }, 10000)
+      }
 
     useEffect(() => {
         socket.emit('requestGameStatus', {user, roomId: id} );
@@ -53,6 +61,7 @@ const NewBattleField = (props) => {
             if (!myPlayer.alive && !respawnPlayer) {
                 handleRespawn(myPlayer, actualRoomData);
                 respawnPlayer = true;
+                resetPlayerRequestToTransform();
             }
             handleGravity(myPlayer, actualRoomData, myCanvas);
             handleMovement(myPlayer, actualRoomData, attackRequest);
