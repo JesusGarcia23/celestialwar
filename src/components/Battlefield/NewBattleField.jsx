@@ -1,7 +1,6 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useRef, useContext } from 'react';
 import { useEffect } from 'react';
 import Context from '../../Context/Context';
-import { respawnPlayer } from '../../Context/index';
 import { socket } from '../../sockets/index';
 import { forestPlatForms, forestSpheres } from './utils/mockData';
 

@@ -61,62 +61,62 @@ import { movePlayer, respawnPlayer, transformToWarrior } from '../../../sockets/
   //  handles user movement
 export const handleMovement = (myPlayer, gameState, attackRequest) => {
 
-    if (gameState && gameState.gameStatus && myPlayer.alive) {
+  if (gameState && gameState.gameStatus && myPlayer.alive) {
 
-      const {players, spheres, map } = gameState.gameStatus;
-      const globalMap = [...map, ...players, ...spheres];
-      let touched = null;
- 
-      if (map.length > 0) {
-  
-        //  Moves to Left
-        if (Keys.left && (myPlayer.x > 0.7)) {
-          touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
-          })
-  
-          if (touched.indexOf(true) < 0) {
-            movePlayer(myPlayer, "LEFT", 0.4, true, gameState);
-          }
+    const {players, spheres, map } = gameState.gameStatus;
+    const globalMap = [...map, ...players, ...spheres];
+    let touched = null;
+
+    if (map.length > 0) {
+
+      //  Moves to Left
+      if (Keys.left && (myPlayer.x > 0.7)) {
+        touched = globalMap.map(resource => {
+          return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
+        })
+
+        if (touched.indexOf(true) < 0) {
+          movePlayer(myPlayer, "LEFT", 0.4, true, gameState);
         }
-
-        //  Moves to Right
-        if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
-          touched = globalMap.map(resource => {
-            return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
-          })
-
-          if (touched.indexOf(true) < 0) {
-            movePlayer(myPlayer, "RIGHT", 0.4, true, gameState);
-          }
-        }
-
-        // player Jumps
-        if (Keys.up) {
-          handleJumping(myPlayer, globalMap, spheres, gameState, myDirection);
-        }
-
-        //  Request to ransform to warrior
-        if (Keys.action) {
-          
-          touched = map.filter(resource => resource.type === 'warrior-pedestal').map(resource => {
-            return checkPedestal(myPlayer, resource, myDirection, gameState, attackRequest);
-          });
-
-          if (touched.findIndex(pedestal => pedestal.touched) >= 0) {
-
-            let index = touched.findIndex(pedestal => pedestal.touched);
-            handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
-            playerRequestedToTransform = true;
-            resetPlayerRequestToTransform();
-
-          }
-          
-        }
-  
       }
-      
+
+      //  Moves to Right
+      if (Keys.right && (myPlayer.x + myPlayer.width + 0.3 < 100)) {
+        touched = globalMap.map(resource => {
+          return checkCollision(myPlayer, resource, myDirection, gameState, attackRequest);
+        })
+
+        if (touched.indexOf(true) < 0) {
+          movePlayer(myPlayer, "RIGHT", 0.4, true, gameState);
+        }
+      }
+
+      // player Jumps
+      if (Keys.up) {
+        handleJumping(myPlayer, globalMap, spheres, gameState, myDirection);
+      }
+
+      //  Request to ransform to warrior
+      if (Keys.action) {
+        
+        touched = map.filter(resource => resource.type === 'warrior-pedestal').map(resource => {
+          return checkPedestal(myPlayer, resource, myDirection, gameState, attackRequest);
+        });
+
+        if (touched.findIndex(pedestal => pedestal.touched) >= 0) {
+
+          let index = touched.findIndex(pedestal => pedestal.touched);
+          handleTransformation(myPlayer, touched[index].obj, playerRequestedToTransform, gameState);
+          playerRequestedToTransform = true;
+          resetPlayerRequestToTransform();
+
+        }
+        
+      }
+
     }
+    
+  }
 }
 
 //  handles user gravity
