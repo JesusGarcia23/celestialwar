@@ -64,8 +64,8 @@ const touchingCheck = (myPlayer, obj, room, attackRequest) => {
       
     if(myPlayer.modeWarrior) {
         handleAttack(myPlayer, obj, room, attackRequest);
-    }else if(obj.modeWarrior === true){
-        handleDamage(myPlayer, obj, room);
+    }else if(obj.modeWarrior === true && !myPlayer.modeWarrior) {
+        handleAttack(obj, myPlayer, room, attackRequest);
     }
     return false;
   }
