@@ -52,10 +52,6 @@ const handleAttack = (myPlayer, otherPlayer, room) => {
 
 };
 
-const handleDamage = (myPlayer, otherPlayer, room) => {
-
-};
-
 // Checks if user is touching a player
 const touchingCheck = (myPlayer, obj, room, attackRequest) => {
     
